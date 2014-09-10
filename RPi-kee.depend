@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1395675109 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_contrastdetect.c
+	"llips_includes.h"
+
+1399968288 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_includes.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"llips_cfg.h"
+	"llips_type.h"
+	"llips_functions.h"
+	"llips_io.h"
+	"llips_general.h"
+	"llips_motiondetect.h"
+	"llips_contrastdetect.h"
+
+1400077097 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_cfg.h
+
+1400244431 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_type.h
+
+1400245019 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_functions.h
+
+1400056731 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_io.h
+
+1410273223 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_general.h
+
+1400076737 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_motiondetect.h
+
+1395675109 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_contrastdetect.h
+
+1400245012 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_functions.c
+	"llips_includes.h"
+
+1410273044 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_general.c
+	"llips_includes.h"
+
+1400056912 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_io.c
+	"llips_includes.h"
+
+1400244482 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_motiondetect.c
+	"llips_includes.h"
+
+1410333716 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\main.c
+	"includes.h"
+
+1410334067 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\includes.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<pthread.h>
+	"llips/llips_includes.h"
+	"app_cfg.h"
+
+1410333825 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\app_cfg.h
+
