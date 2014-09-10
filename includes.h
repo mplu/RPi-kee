@@ -17,7 +17,19 @@
 #include <string.h>
 #include <time.h>
 #include <pthread.h>
-#include <wiringPi.h>
+
+#if defined (Win32)
+    #warning "Compile for Windows"
+    #include <windows.h>
+    #define psleep(sec) Sleep ((sec) * 1000)
+#elif defined (Linux)
+    #warning "Compile for Linux"
+    #include <unistd.h>
+    #include <wiringPi.h>
+    #define psleep(sec) sleep ((sec))
+#else
+    #error "No OS defined"
+#endif
 
 /* LLIPS include */
 #include "llips/llips_includes.h"

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1395675109 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_contrastdetect.c
+1410357474 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_contrastdetect.c
 	"llips_includes.h"
 
 1399968288 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_includes.h
@@ -14,43 +14,63 @@
 	"llips_motiondetect.h"
 	"llips_contrastdetect.h"
 
-1400077097 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_cfg.h
+1410358455 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_cfg.h
 
 1400244431 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_type.h
 
-1400245019 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_functions.h
+1410357697 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_functions.h
 
 1400056731 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_io.h
 
-1410273223 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_general.h
+1410357474 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_general.h
 
 1400076737 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_motiondetect.h
 
 1395675109 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_contrastdetect.h
 
-1400245012 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_functions.c
+1410357697 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_functions.c
 	"llips_includes.h"
 
-1410273044 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_general.c
+1410357697 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_general.c
 	"llips_includes.h"
 
-1400056912 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_io.c
+1410357474 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_io.c
 	"llips_includes.h"
 
-1400244482 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_motiondetect.c
+1410357697 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_motiondetect.c
 	"llips_includes.h"
 
-1410333716 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\main.c
+1410358308 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\main.c
 	"includes.h"
 
-1410334067 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\includes.h
+1410359030 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\includes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
 	<pthread.h>
+	<windows.h>
+	<unistd.h>
+	<wiringPi.h>
 	"llips/llips_includes.h"
 	"app_cfg.h"
 
 1410333825 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\app_cfg.h
+
+1410352793 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\lib\pthread.h
+	<windows.h>
+	"config.h"
+	<time.h>
+	<signal.h>
+	<limits.h>
+	"need_errno.h"
+	<errno.h>
+	"sched.h"
+	<sys/types.h>
+
+1309338364 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\lib\sched.h
+	"need_errno.h"
+	<errno.h>
+	<sys/types.h>
+	<time.h>
 
