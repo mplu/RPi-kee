@@ -17,7 +17,7 @@
 #include <string.h>
 #include <time.h>
 #include <pthread.h>
-
+#include <wiringPi.h>
 
 /* LLIPS include */
 #include "llips/llips_includes.h"
