@@ -24,6 +24,11 @@ int main (void)
 {
     pthread_t monThreadCompteur;
     pthread_t monThreadAlarme;
+
+
+    Init_Params();
+
+
     pthread_create (&monThreadCompteur, NULL, threadCompteur, (void*)NULL);
     pthread_create (&monThreadAlarme, NULL, threadAlarme, (void*)NULL); /* Création des threads */
     pthread_join (monThreadCompteur, NULL);

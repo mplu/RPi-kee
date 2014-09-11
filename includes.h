@@ -38,8 +38,11 @@
 /* RPi-kee configuration */
 #include "app_cfg.h"
 
-/* Thread Include */
+/* Global data */
 #include "global_var.h"
+#include "Parameters.h"
+
+/* Thread Include */
 #include "Threads/th_Alarm.h"
 #include "Threads/th_Compteur.h"
 #include "Threads/th_CtrlCmd.h"
