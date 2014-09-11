@@ -2,7 +2,7 @@
 
 
 
-void* threadMotordrive (void* arg)
+void* threadMotorRightdrive (void* arg)
 {
     while(1) /* Boucle infinie */
     {

@@ -1,5 +1,5 @@
 /****************************************************************/
-/* Thread : Motors Driver                                       */
+/* Thread : Left Motor Driver                                   */
 /* Description :                                                */
 /*                                                              */
 /*                                                              */
@@ -7,10 +7,10 @@
 /*                                                              */
 /****************************************************************/
 
-#ifndef __TH_MOTORDRIVE_H
-#define __TH_MOTORDRIVE_H
+#ifndef __TH_MOTORLEFTDRIVE_H
+#define __TH_MOTORLEFTDRIVE_H
 
 
-void* threadMotordrive (void* arg);
+void* threadMotorLeftdrive (void* arg);
 
 #endif
