@@ -7,7 +7,8 @@
 /* Author : MPE                                                 */
 /*                                                              */
 /****************************************************************/
-
+#ifndef __INCLUDES_H
+#define __INCLUDES_H
 /****************************************************************/
 /**           Includes                                          */
 /****************************************************************/
@@ -19,11 +20,11 @@
 #include <pthread.h>
 
 #if defined (Win32)
-    #warning "Compile for Windows"
+    //#warning "Compile for Windows"
     #include <windows.h>
     #define psleep(sec) Sleep ((sec) * 1000)
-#elif defined (Linux)
-    #warning "Compile for Linux"
+#elif defined (RPi)
+    //#warning "Compile for Raspberry Pi"
     #include <unistd.h>
     #include <wiringPi.h>
     #define psleep(sec) sleep ((sec))
@@ -37,3 +38,17 @@
 /* RPi-kee configuration */
 #include "app_cfg.h"
 
+/* Thread Include */
+#include "global_var.h"
+#include "Threads\th_Alarm.h"
+#include "Threads\th_Compteur.h"
+#include "Threads\th_CtrlCmd.h"
+#include "Threads\th_ImgAcq.h"
+#include "Threads\th_ImgHandle.h"
+#include "Threads\th_Motordrive.h"
+#include "Threads\th_SensorAcq.h"
+#include "Threads\th_SensorIRHandle.h"
+#include "Threads\th_SensorOtherHandle.h"
+#include "Threads\th_TCPCom.h"
+
+#endif
