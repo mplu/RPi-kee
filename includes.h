@@ -40,15 +40,15 @@
 
 /* Thread Include */
 #include "global_var.h"
-#include "Threads\th_Alarm.h"
-#include "Threads\th_Compteur.h"
-#include "Threads\th_CtrlCmd.h"
-#include "Threads\th_ImgAcq.h"
-#include "Threads\th_ImgHandle.h"
-#include "Threads\th_Motordrive.h"
-#include "Threads\th_SensorAcq.h"
-#include "Threads\th_SensorIRHandle.h"
-#include "Threads\th_SensorOtherHandle.h"
-#include "Threads\th_TCPCom.h"
+#include "Threads/th_Alarm.h"
+#include "Threads/th_Compteur.h"
+#include "Threads/th_CtrlCmd.h"
+#include "Threads/th_ImgAcq.h"
+#include "Threads/th_ImgHandle.h"
+#include "Threads/th_Motordrive.h"
+#include "Threads/th_SensorAcq.h"
+#include "Threads/th_SensorIRHandle.h"
+#include "Threads/th_SensorOtherHandle.h"
+#include "Threads/th_TCPCom.h"
 
 #endif
