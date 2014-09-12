@@ -2,7 +2,7 @@
 
 
 
-void* threadSensorAcq (void* arg)
+void* threadADCAcq (void* arg)
 {
     while(1) /* Boucle infinie */
     {

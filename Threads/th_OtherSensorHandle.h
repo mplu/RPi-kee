@@ -1,5 +1,5 @@
 /****************************************************************/
-/* Thread : IR Sensors Handle                                   */
+/* Thread : Other Sensor handle                                 */
 /* Description :                                                */
 /*                                                              */
 /*                                                              */
@@ -7,10 +7,10 @@
 /*                                                              */
 /****************************************************************/
 
-#ifndef __TH_SENSORIRHANDLE_H
-#define __TH_SENSORIRHANDLE_H
+#ifndef __TH_OTHERSENSORHANDLE_H
+#define __TH_OTHERSENSORHANDLE_H
 
-void* threadSensorIRHandle (void* arg);
+void* threadOtherSensorHandle (void* arg);
 
 
 

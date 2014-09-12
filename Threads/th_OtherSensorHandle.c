@@ -1,6 +1,6 @@
 #include "../includes.h"
 
-void* threadSensorIRHandle (void* arg)
+void* threadOtherSensorHandle (void* arg)
 {
     while(1) /* Boucle infinie */
     {

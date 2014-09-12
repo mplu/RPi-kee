@@ -7,10 +7,10 @@
 /*                                                              */
 /****************************************************************/
 
-#ifndef __TH_SENSORACQ_H
-#define __TH_SENSORACQ_H
+#ifndef __TH_ADC_ACQ_H
+#define __TH_ADC_ACQ_H
 
 
-void* threadSensorAcq (void* arg);
+void* threadADCAcq (void* arg);
 
 #endif

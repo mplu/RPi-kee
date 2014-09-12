@@ -1,6 +1,6 @@
 #include "../includes.h"
 
-void* threadSensorOtherHandle (void* arg)
+void* threadADCDataHandle (void* arg)
 {
     while(1) /* Boucle infinie */
     {

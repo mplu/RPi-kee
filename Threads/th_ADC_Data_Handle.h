@@ -1,5 +1,5 @@
 /****************************************************************/
-/* Thread : Other Sensor handle                                 */
+/* Thread : ADC DATA Handle                                   */
 /* Description :                                                */
 /*                                                              */
 /*                                                              */
@@ -7,10 +7,10 @@
 /*                                                              */
 /****************************************************************/
 
-#ifndef __TH_SENSOROTHERHANDLE_H
-#define __TH_SENSOROTHERHANDLE_H
+#ifndef __TH_ADC_DATA_HANDLE_H
+#define __TH_ADC_DATA_HANDLE_H
 
-void* threadSensorOtherHandle (void* arg);
+void* threadADCDataHandle (void* arg);
 
 
 
