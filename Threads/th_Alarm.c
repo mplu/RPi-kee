@@ -5,6 +5,7 @@ void* threadAlarme (void* arg)
 {
     while(1) /* Boucle infinie */
     {
+
         printf("\nThAlr : avant lock");
         pthread_mutex_lock(&mutex); /* On verrouille le mutex */
         printf("\nThAlr : apres lock");

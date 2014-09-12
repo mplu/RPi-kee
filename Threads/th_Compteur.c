@@ -4,11 +4,13 @@
 
 void* threadCompteur (void* arg)
 {
+#if 0
     int compteur = 0, nombre = 0;
-
+#endif
     srand(time(NULL));
     while(1) /* Boucle infinie */
     {
+#if 0
         nombre = rand()%10; /* On tire un nombre entre 0 et 10 */
         compteur += nombre; /* On ajoute ce nombre à la variable compteur */
         printf("\n%d", compteur);
@@ -24,6 +26,7 @@ void* threadCompteur (void* arg)
             printf("\nThCpt : apres unlock");
             compteur = 0; /* On remet la variable compteur à 0 */
         }
+#endif
         psleep (1); /* On laisse 1 seconde de repos */
     }
 

@@ -13,3 +13,5 @@
 /*** Mutex and Condition ***/
 pthread_cond_t condition = PTHREAD_COND_INITIALIZER; /* Création de la condition */
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; /* Création du mutex */
+
+sem_t sem_Img_available; // Indicate new image to handle
