@@ -77,6 +77,22 @@
 		<Unit filename="Threads/th_debug.h" />
 		<Unit filename="app_cfg.h" />
 		<Unit filename="build.sh" />
+		<Unit filename="driver/ADC.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="driver/ADC.h" />
+		<Unit filename="driver/IR_100_550.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="driver/IR_100_550.h" />
+		<Unit filename="driver/IR_20_150.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="driver/IR_20_150.h" />
+		<Unit filename="driver/Motor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="driver/Motor.h" />
 		<Unit filename="global_var.c">
 			<Option compilerVar="CC" />
 		</Unit>

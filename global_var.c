@@ -23,4 +23,4 @@ sem_t sem_Img_available; // Indicate new image to handle
 sem_t sem_ADCData_available; // Indicate new IR data to handle
 
 /*** Shared Variable ***/
-CPU_INT16U Raw_AdcValue;
+CPU_INT16U g_Raw_AdcValue[ADC_NUMBER_OF_CHANNEL];

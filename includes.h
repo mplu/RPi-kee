@@ -35,6 +35,12 @@
 /* RPi-kee configuration */
 #include "app_cfg.h"
 
+/* Hardware Layer Drivers */
+#include "driver/ADC.h"
+#include "driver/Motor.h"
+#include "driver/IR_100_550.h"
+#include "driver/IR_20_150.h"
+
 /* Global data */
 #include "global_var.h"
 #include "Parameters.h"

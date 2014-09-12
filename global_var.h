@@ -16,7 +16,7 @@ extern pthread_mutex_t mutex ;      /* Création du mutex */
 extern pthread_mutex_t mtx_AccessRawAnalog ;//Protect Raw Analog data buffer
 extern sem_t sem_Img_available; // Indicate new image to handle
 extern sem_t sem_ADCData_available; // Indicate new IR data to handle
-extern CPU_INT16U Raw_AdcValue;
+extern CPU_INT16U g_Raw_AdcValue[ADC_NUMBER_OF_CHANNEL];
 
 #endif
 

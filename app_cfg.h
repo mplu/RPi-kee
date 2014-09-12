@@ -13,8 +13,13 @@
 /****************************************************************/
 /**           Define                                            */
 /****************************************************************/
+
+/*** Image Processing ***/
 #define GAUSS_SIZE 8
 #define SIGMA 10
+
+/*** RPi Hardware Define ***/
+#define _12V_VOLTAGE_DIVIDER    3
 
 /*********** Semaphore and Thread define *****/
 #define SHARED_ONLY_INSIDE      0

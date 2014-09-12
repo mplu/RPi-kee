@@ -11,7 +11,7 @@
 /*** Macro ***/
 #if defined (Win32)
     #define m_sSleep(sec)   Sleep ((sec) * 1000)
-    #define m_msSleep(ms)   Sleep ((sec) * 1)
+    #define m_msSleep(ms)   Sleep ((ms) * 1)
 #elif defined (RPi)
     #define m_sSleep(sec)   sleep ((sec))
     #define m_msSleep(ms)   msSleepLinux ((ms) * 1)

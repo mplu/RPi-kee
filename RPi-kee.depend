@@ -43,7 +43,7 @@
 1410509233 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\main.c
 	"includes.h"
 
-1410509243 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\includes.h
+1410535333 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\includes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -55,6 +55,10 @@
 	<wiringPi.h>
 	"llips/llips_includes.h"
 	"app_cfg.h"
+	"driver/ADC.h"
+	"driver/Motor.h"
+	"driver/IR_100_550.h"
+	"driver/IR_20_150.h"
 	"global_var.h"
 	"Parameters.h"
 	"Threads/th_ADC_Acq.h"
@@ -70,7 +74,7 @@
 	"Threads/th_TCPCom.h"
 	"Functions/functions.h"
 
-1410506498 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\app_cfg.h
+1410534283 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\app_cfg.h
 
 1410352793 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\lib\pthread.h
 	<windows.h>
@@ -93,10 +97,10 @@
 
 1410422052 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_compteur.h
 
-1410506512 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\global_var.c
+1410529664 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\global_var.c
 	"includes.h"
 
-1410506518 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\global_var.h
+1410529664 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\global_var.h
 
 1410424978 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_alarm.c
 	"../includes.h"
@@ -120,10 +124,10 @@
 
 1410504684 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_tcpcom.h
 
-1410504684 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_ctrlcmd.c
+1410509283 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_ctrlcmd.c
 	"../includes.h"
 
-1410504684 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_imgacq.c
+1410509283 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_imgacq.c
 	"../includes.h"
 
 1410504684 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_imghandle.c
@@ -145,15 +149,15 @@
 
 1410505667 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_motorrightdrive.h
 
-1410504684 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_tcpcom.c
+1410509283 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_tcpcom.c
 	"../includes.h"
 
 1410504680 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\parameters.h
 
-1410504684 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_motorleftdrive.c
+1410509283 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_motorleftdrive.c
 	"../includes.h"
 
-1410504684 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_motorrightdrive.c
+1410509283 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_motorrightdrive.c
 	"../includes.h"
 
 1410504680 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\parameters.c
@@ -302,22 +306,43 @@
 
 1410508676 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_protections.h
 
-1410504681 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_adc_acq.c
+1410530346 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_adc_acq.c
 	"../includes.h"
 
-1410504681 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_adc_data_handle.c
+1410534878 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_adc_data_handle.c
 	"../includes.h"
 
-1410508099 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_debug.c
+1410509283 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_debug.c
 	"../includes.h"
 
-1410504684 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_othersensorhandle.c
+1410509283 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_othersensorhandle.c
 	"../includes.h"
 
-1410508676 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_protections.c
+1410529477 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_protections.c
 	"../includes.h"
 
-1410508853 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\functions\functions.c
+1410530197 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\functions\functions.c
+	"../includes.h"
 
-1410509231 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\functions\functions.h
+1410530288 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\functions\functions.h
+
+1410534129 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\adc.h
+
+1410530084 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\motor.h
+
+1410534116 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\adc.c
+	"../includes.h"
+
+1410530197 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\motor.c
+	"../includes.h"
+
+1410534569 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\ir_100_550.h
+
+1410535233 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\ir_20_150.h
+
+1410535287 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\ir_100_550.c
+	"../includes.h"
+
+1410535235 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\ir_20_150.c
+	"../includes.h"
 
