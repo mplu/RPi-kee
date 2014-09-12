@@ -11,6 +11,6 @@
 #define __TH_MOTORRIGHTDRIVE_H
 
 
-void* threadMotorRigthdrive(void* arg);
+void* threadMotorRightdrive(void* arg);
 
 #endif

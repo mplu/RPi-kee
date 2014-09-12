@@ -1,7 +1,7 @@
 #include "../includes.h"
 
 
-void* threadAlarme (void* arg)
+void* threadProtections (void* arg)
 {
     while(1) /* Boucle infinie */
     {

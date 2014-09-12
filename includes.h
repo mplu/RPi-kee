@@ -18,16 +18,13 @@
 #include <string.h>
 #include <time.h>
 #include <pthread.h>
+#include <semaphore.h>
 
 #if defined (Win32)
-    //#warning "Compile for Windows"
     #include <windows.h>
-    #define psleep(sec) Sleep ((sec) * 1000)
 #elif defined (RPi)
-    //#warning "Compile for Raspberry Pi"
     #include <unistd.h>
     #include <wiringPi.h>
-    #define psleep(sec) sleep ((sec))
 #else
     #error "No OS defined"
 #endif
@@ -43,16 +40,19 @@
 #include "Parameters.h"
 
 /* Thread Include */
-#include "Threads/th_Alarm.h"
-#include "Threads/th_Compteur.h"
+#include "Threads/th_ADC_Acq.h"
+#include "Threads/th_ADC_Data_Handle.h"
 #include "Threads/th_CtrlCmd.h"
+#include "Threads/th_debug.h"
 #include "Threads/th_ImgAcq.h"
 #include "Threads/th_ImgHandle.h"
 #include "Threads/th_MotorLeftdrive.h"
 #include "Threads/th_MotorRightdrive.h"
-#include "Threads/th_SensorAcq.h"
-#include "Threads/th_SensorIRHandle.h"
-#include "Threads/th_SensorOtherHandle.h"
+#include "Threads/th_OtherSensorHandle.h"
+#include "Threads/th_Protections.h"
 #include "Threads/th_TCPCom.h"
+
+/* Sub Functions */
+#include "Functions/functions.h"
 
 #endif

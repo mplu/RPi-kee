@@ -1,5 +1,5 @@
 /****************************************************************/
-/* Thread : Alarm detection                                     */
+/* Thread : Debug and Test Thread                               */
 /* Description :                                                */
 /*                                                              */
 /*                                                              */
@@ -7,11 +7,10 @@
 /*                                                              */
 /****************************************************************/
 
-#ifndef __TH_ALARM_H
-#define __TH_ALARM_H
-
-void* threadAlarme (void* arg);
+#ifndef __TH_DEBUG_H
+#define __TH_DEBUG_H
 
 
+void* threadDebug (void* arg);
 
 #endif

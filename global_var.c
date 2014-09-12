@@ -10,8 +10,17 @@
 #include "includes.h"
 
 
-/*** Mutex and Condition ***/
-pthread_cond_t condition = PTHREAD_COND_INITIALIZER; /* Création de la condition */
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; /* Création du mutex */
+/*** Mutex, Condition, Semaphore ***/
+// Mutex
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mtx_AccessRawAnalog = PTHREAD_MUTEX_INITIALIZER; //Protect Raw Analog data buffer
 
+//Conditions
+pthread_cond_t condition = PTHREAD_COND_INITIALIZER;
+
+//Semaphore
 sem_t sem_Img_available; // Indicate new image to handle
+sem_t sem_ADCData_available; // Indicate new IR data to handle
+
+/*** Shared Variable ***/
+CPU_INT16U Raw_AdcValue;

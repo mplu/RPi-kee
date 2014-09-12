@@ -1,5 +1,5 @@
 /****************************************************************/
-/* Thread : Compteur                                            */
+/* Thread : System Protection and failure detection             */
 /* Description :                                                */
 /*                                                              */
 /*                                                              */
@@ -7,10 +7,11 @@
 /*                                                              */
 /****************************************************************/
 
-#ifndef __TH_COMPTEUR_H
-#define __TH_COMPTEUR_H
+#ifndef __TH_PROTECTION_H
+#define __TH_PROTECTION_H
+
+void* threadProtections (void* arg);
 
 
-void* threadCompteur (void* arg);
 
 #endif

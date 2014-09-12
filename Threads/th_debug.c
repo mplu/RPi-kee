@@ -2,7 +2,7 @@
 
 
 
-void* threadCompteur (void* arg)
+void* threadDebug (void* arg)
 {
 #if 0
     int compteur = 0, nombre = 0;
@@ -27,7 +27,7 @@ void* threadCompteur (void* arg)
             compteur = 0; /* On remet la variable compteur à 0 */
         }
 #endif
-        psleep (1); /* On laisse 1 seconde de repos */
+        m_sSleep (1); /* On laisse 1 seconde de repos */
     }
 
     pthread_exit(NULL); /* Fin du thread */

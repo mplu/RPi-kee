@@ -6,7 +6,7 @@ void* threadMotorRightdrive (void* arg)
 {
     while(1) /* Boucle infinie */
     {
-        psleep(5);
+        m_sSleep(5);
     }
 
     pthread_exit(NULL); /* Fin du thread */

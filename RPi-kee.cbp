@@ -23,7 +23,64 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Functions/functions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Functions/functions.h" />
+		<Unit filename="Parameters.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Parameters.h" />
+		<Unit filename="Threads/th_ADC_Acq.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_ADC_Acq.h" />
+		<Unit filename="Threads/th_ADC_Data_Handle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_ADC_Data_Handle.h" />
+		<Unit filename="Threads/th_CtrlCmd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_CtrlCmd.h" />
+		<Unit filename="Threads/th_ImgAcq.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_ImgAcq.h" />
+		<Unit filename="Threads/th_ImgHandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_ImgHandle.h" />
+		<Unit filename="Threads/th_MotorLeftdrive.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_MotorLeftdrive.h" />
+		<Unit filename="Threads/th_MotorRightdrive.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_MotorRightdrive.h" />
+		<Unit filename="Threads/th_OtherSensorHandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_OtherSensorHandle.h" />
+		<Unit filename="Threads/th_Protections.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_Protections.h" />
+		<Unit filename="Threads/th_TCPCom.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_TCPCom.h" />
+		<Unit filename="Threads/th_debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_debug.h" />
 		<Unit filename="app_cfg.h" />
+		<Unit filename="build.sh" />
+		<Unit filename="global_var.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="global_var.h" />
 		<Unit filename="includes.h" />
 		<Unit filename="llips/llips_cfg.h" />
 		<Unit filename="llips/llips_contrastdetect.c">
