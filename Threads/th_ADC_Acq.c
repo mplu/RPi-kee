@@ -9,6 +9,8 @@ void* threadADCAcq (void* arg)
 
 #if defined (Win32)
     srand(time(NULL));
+#elif defined (RPi)
+	mcp3004Setup (ADCBASE_WIRINGPI, SPI_CHAN); // 3004 and 3008 are the same 4/8 channels
 #endif
 
     while(1) /* Boucle infinie */
@@ -20,7 +22,11 @@ void* threadADCAcq (void* arg)
             SPI_combuffer[i] = rand()%ADC_MAX_VALUE;
         }
 #elif defined (RPi)
-        // ...to do
+        for(i=0;i<ADC_NUMBER_OF_CHANNEL;i++)
+        {
+                SPI_combuffer[i] = analogRead (ADCBASE_WIRINGPI + i) ;
+                printf("%d\n", x);
+        }
 #endif
         // Writing data into shared buffer
         pthread_mutex_lock(&mtx_AccessRawAnalog);

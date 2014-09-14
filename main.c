@@ -34,7 +34,16 @@ int main (void)
     pthread_t desc_ThreadProtections;
     pthread_t desc_ThreadTCPCom;
 
-    // Initialization
+	// Driver Initialization
+#ifdef (RPi)
+	if (wiringPiSetup () == -1)
+	{
+		printf ("wiringPiSetup () failed \n") ;
+		exit (1) ;
+	}
+#endif
+	
+    // Data Initialization
     Init_Params();
     sem_init(&sem_Img_available,SHARED_ONLY_INSIDE,PEND_BEFORE_POST);
     sem_init(&sem_ADCData_available,SHARED_ONLY_INSIDE,PEND_BEFORE_POST);

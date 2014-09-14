@@ -16,6 +16,7 @@
 #define ADC_MAX_VALUE           1024    // ADC precision
 #define ADC_V_REF               5000    // V_ref in millivolt
 
+#define ADCBASE_WIRINGPI 200
 /*** Enum ***/
 enum e_AdcChannel
 {

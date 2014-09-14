@@ -20,6 +20,7 @@
 
 /*** RPi Hardware Define ***/
 #define _12V_VOLTAGE_DIVIDER    3
+#define SPI_CHAN 				0
 
 /*********** Semaphore and Thread define *****/
 #define SHARED_ONLY_INSIDE      0
