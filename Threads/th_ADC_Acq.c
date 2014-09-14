@@ -27,6 +27,7 @@ void* threadADCAcq (void* arg)
         for(i=0;i<ADC_NUMBER_OF_CHANNEL;i++)
         {
             g_Raw_AdcValue[i] = SPI_combuffer[i];
+			printf("adc %d : 0x%04x\n",i,g_Raw_AdcValue[i]);
         }
         pthread_mutex_unlock(&mtx_AccessRawAnalog);
 

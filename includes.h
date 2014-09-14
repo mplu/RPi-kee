@@ -25,6 +25,7 @@
 #elif defined (RPi)
     #include <unistd.h>
     #include <wiringPi.h>
+	#include <mcp3004.h>
 #else
     #error "No OS defined"
 #endif
@@ -40,6 +41,7 @@
 #include "driver/Motor.h"
 #include "driver/IR_100_550.h"
 #include "driver/IR_20_150.h"
+
 
 /* Global data */
 #include "global_var.h"
