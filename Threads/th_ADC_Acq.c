@@ -25,7 +25,7 @@ void* threadADCAcq (void* arg)
         for(i=0;i<ADC_NUMBER_OF_CHANNEL;i++)
         {
                 SPI_combuffer[i] = analogRead (ADCBASE_WIRINGPI + i) ;
-                printf("%d\n", x);
+                printf("%d\n", SPI_combuffer[i]);
         }
 #endif
         // Writing data into shared buffer

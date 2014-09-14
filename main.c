@@ -35,7 +35,7 @@ int main (void)
     pthread_t desc_ThreadTCPCom;
 
 	// Driver Initialization
-#ifdef (RPi)
+#if defined (RPi)
 	if (wiringPiSetup () == -1)
 	{
 		printf ("wiringPiSetup () failed \n") ;
