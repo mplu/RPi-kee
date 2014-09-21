@@ -10,7 +10,7 @@
 #include "../includes.h"
 
 /********** PT100_Interpolation Table for voltage *******/
-static float InterpoVoltageTablefor20_150[] = {
+const CPU_FP32 InterpoVoltageTablefor20_150[] = {
 //1.81,
 //2.65,
 2.72,
@@ -32,10 +32,10 @@ static float InterpoVoltageTablefor20_150[] = {
 
 /****** Distance Interpolation Table *******/
 const CPU_FP32 InterpoDistanceTablefor20_150[] = {
-//5,	
-//10,	
+//5,
+//10,
 15,
-20,	
+20,
 25,
 30,
 40,
@@ -71,9 +71,9 @@ CPU_INT16U GetDistancefromNearIR(CPU_INT16U voltage)
     CPU_INT32U distance;
     CPU_FP32 f_voltage = voltage/100.0;
 
-    if(Dist_Volt_RangeCheck(f_voltage) == RPIKEE_NO_ERR)
+    if(Dist_Volt_RangeCheck(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor20_150) == RPIKEE_NO_ERR)
     {
-        distance = (CPU_INT32U)Dist_Volt_Interpolation(f_voltage,(CPU_FP32*)&InterpoDistanceTablefor20_150);
+        distance = (CPU_INT32U)Dist_Volt_Interpolation(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor20_150,(CPU_FP32*)&InterpoDistanceTablefor20_150);
     }else
     {
         distance = 0xFFFF;

@@ -22,16 +22,16 @@
 /*	OUTPUT:	  	RPIKEE_NO_ERR  	: measure is treatable				        */
 /*				RPIKEE_ERR_OOB 	: measure is out of input range				*/
 /****************************************************************************/
-CPU_INT32S Dist_Volt_RangeCheck(CPU_FP32 x)
+CPU_INT32S Dist_Volt_RangeCheck(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable)
 {
 	CPU_INT16S index_max = 530;
 	CPU_INT32S ret;
 
-	if (x < InterpoVoltageTable[0])
+	if (x < p_InterpoVoltageTable[0])
 	{
 		ret = RPIKEE_ERR_OOB;
 	}
-	else if (x > InterpoVoltageTable[index_max-1])
+	else if (x > p_InterpoVoltageTable[index_max-1])
 	{
 		ret = RPIKEE_ERR_OOB;
 	}
@@ -54,7 +54,7 @@ CPU_INT32S Dist_Volt_RangeCheck(CPU_FP32 x)
 /*							----------------															*/
 /*	OUTPUT:	  	distance																				*/
 /********************************************************************************************************/
-CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoDistanceTable)
+CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable,CPU_FP32 * p_InterpoDistanceTable)
 {
 	CPU_INT16S index_max = 530;
     CPU_FP32 X1, X2, Y1, Y2;
@@ -64,16 +64,16 @@ CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoDistanceTable)
 		while(start_ind <= end_ind)
 		{
 		    median = (start_ind+end_ind)/2;
-		    if((InterpoVoltageTable[median] <= x) && (InterpoVoltageTable[median+1] > x))
+		    if((p_InterpoVoltageTable[median] <= x) && (p_InterpoVoltageTable[median+1] > x))
 		    {
 		    	start_ind = end_ind + 1;
 		    }
-		    else if(InterpoVoltageTable[median] < x)
+		    else if(p_InterpoVoltageTable[median] < x)
 		    {
 		    	start_ind = median+1;
 		    }
 
-		    else if(InterpoVoltageTable[median] >= x)
+		    else if(p_InterpoVoltageTable[median] >= x)
 		    {
 		    	end_ind = median-1;
 		    }
@@ -82,8 +82,8 @@ CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoDistanceTable)
 
     	Y1 = p_InterpoDistanceTable[median];
 		Y2 = p_InterpoDistanceTable[median+1];
-		X1 = InterpoVoltageTable[median];
-		X2 = InterpoVoltageTable[median+1];
+		X1 = p_InterpoVoltageTable[median];
+		X2 = p_InterpoVoltageTable[median+1];
 
 		return ((( x - X1)*(Y2-Y1)/(X2-X1))+Y1);
 	}
