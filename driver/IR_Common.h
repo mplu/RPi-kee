@@ -18,8 +18,8 @@
 
 
 /*** Prototypes ***/
-CPU_INT32S Dist_Volt_RangeCheck(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable);
-CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable,CPU_FP32 * p_InterpoDistanceTable);
+CPU_INT32S Dist_Volt_RangeCheck(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable, CPU_INT16U size);
+CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable,CPU_FP32 * p_InterpoDistanceTable, CPU_INT16U size);
 #endif
 
 

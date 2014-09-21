@@ -22,16 +22,16 @@
 /*	OUTPUT:	  	RPIKEE_NO_ERR  	: measure is treatable				        */
 /*				RPIKEE_ERR_OOB 	: measure is out of input range				*/
 /****************************************************************************/
-CPU_INT32S Dist_Volt_RangeCheck(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable)
+CPU_INT32S Dist_Volt_RangeCheck(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable, CPU_INT16U size)
 {
-	CPU_INT16S index_max = 530;
+	CPU_INT16S index_max = size;
 	CPU_INT32S ret;
 
-	if (x < p_InterpoVoltageTable[0])
+	if (x > p_InterpoVoltageTable[0])
 	{
 		ret = RPIKEE_ERR_OOB;
 	}
-	else if (x > p_InterpoVoltageTable[index_max-1])
+	else if (x < p_InterpoVoltageTable[index_max-1])
 	{
 		ret = RPIKEE_ERR_OOB;
 	}
@@ -54,9 +54,9 @@ CPU_INT32S Dist_Volt_RangeCheck(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable)
 /*							----------------															*/
 /*	OUTPUT:	  	distance																				*/
 /********************************************************************************************************/
-CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable,CPU_FP32 * p_InterpoDistanceTable)
+CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable,CPU_FP32 * p_InterpoDistanceTable,CPU_INT16U size)
 {
-	CPU_INT16S index_max = 530;
+	CPU_INT16S index_max = size;
     CPU_FP32 X1, X2, Y1, Y2;
 	CPU_INT32S median = 0, start_ind = 0, end_ind = index_max - 1;
 

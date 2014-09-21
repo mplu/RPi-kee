@@ -26,7 +26,7 @@ void* threadADCAcq (void* arg)
         {
                 SPI_combuffer[i] = analogRead (ADCBASE_WIRINGPI + i) ;
 #if DEBUG_LOG_EN == DEF_ENABLED
-                printf("%d\n", SPI_combuffer[i]);
+                //printf("%d\n", SPI_combuffer[i]);
 #endif
         }
 #endif
@@ -36,7 +36,7 @@ void* threadADCAcq (void* arg)
         {
             g_Raw_AdcValue[i] = SPI_combuffer[i];
 #if DEBUG_LOG_EN == DEF_ENABLED
-			printf("adc %d : 0x%04x\n",i,g_Raw_AdcValue[i]);
+			//printf("adc %d : 0x%04x\n",i,g_Raw_AdcValue[i]);
 #endif
         }
         pthread_mutex_unlock(&mtx_AccessRawAnalog);

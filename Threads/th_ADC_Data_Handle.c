@@ -20,7 +20,10 @@ void* threadADCDataHandle (void* arg)
         Params.Analog_Values.Voltage12V         = _12V_VOLTAGE_DIVIDER * GetVoltage(LocalRawValue[Ch1_Vmot]);
         Params.Analog_Values.ShortIRDistance    = GetDistancefromNearIR(GetVoltage(LocalRawValue[Ch2_NearIR]));
         Params.Analog_Values.LongIRDistance     = GetDistancefromFarIR(GetVoltage(LocalRawValue[Ch3_FarIR]));
-
+#if DEBUG_LOG_EN == DEF_ENABLED
+			//printf("Short,Long %d %d\n",GetVoltage(LocalRawValue[Ch2_NearIR]),GetVoltage(LocalRawValue[Ch3_FarIR]));
+			printf("Short,Long %d %d\n",Params.Analog_Values.ShortIRDistance,Params.Analog_Values.LongIRDistance);
+#endif
     }
 
     pthread_exit(NULL); /* Fin du thread */
