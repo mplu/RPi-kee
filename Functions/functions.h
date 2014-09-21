@@ -1,4 +1,4 @@
-/****************************************************************/
+/* **************************************************************/
 /* Functions                                                    */
 /* File : functions.h                                           */
 /* Description :                                                */
@@ -6,9 +6,9 @@
 /*                                                              */
 /* Author : MPE                                                 */
 /*                                                              */
-/****************************************************************/
+/* **************************************************************/
 
-/*** Macro ***/
+/* Macro ***/
 #if defined (Win32)
     #define m_sSleep(sec)   Sleep ((sec) * 1000)
     #define m_msSleep(ms)   Sleep ((ms) * 1)
@@ -19,7 +19,7 @@
     #error "No OS defined"
 #endif
 
-/*** Prototypes ***/
+/* Prototypes ***/
 #if defined (Win32)
 
 #elif defined (RPi)
@@ -27,3 +27,4 @@
 #else
     #error "No OS defined"
 #endif
+

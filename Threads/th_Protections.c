@@ -9,7 +9,7 @@ void* threadProtections (void* arg)
 
         pthread_mutex_lock(&mutex); /* On verrouille le mutex */
         pthread_cond_wait (&condition, &mutex); /* On attend que la condition soit remplie */
-        printf("\nLe compteur a depasse 20.");
+        DEBUG_LOG("\nLe compteur a depasse 20.");
         pthread_mutex_unlock(&mutex); /* On déverrouille le mutex */
 
     }

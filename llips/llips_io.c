@@ -115,17 +115,14 @@ CPU_CHAR load_img(CPU_CHAR * imgname, t_img * img)
                             {
                                 for(j=0 ; j< img->wi ;j++)
                                 {
-                                    //printf("offset : %d\n",offset);
                                     fread (&(img->Blue[i][j]),PIXEL_size,1,fichier);
                                     fread (&(img->Green[i][j]),PIXEL_size,1,fichier);
                                     fread (&(img->Red[i][j]),PIXEL_size,1,fichier);
                                     offset ++;
 
                                 }
-                                //printf("offset fin ligne : %d\n",offset);
                                 while(offset%4 != 0)
                                 {
-                                    //printf("dummy read at offset : %d\n",offset);
                                     fread (&dummy,PIXEL_size,1,fichier);
                                     offset ++;
                                 }
@@ -200,10 +197,8 @@ CPU_CHAR write_img(CPU_CHAR * imgname, t_img * img)
                 offset ++;
 
             }
-            //printf("offset fin ligne : %d\n",offset);
             while(offset%4 != 0)
             {
-                //printf("dummy read at offset : %d\n",offset);
                 fputc(0, fichier);
                 offset ++;
             }
@@ -247,7 +242,6 @@ CPU_CHAR copy_img( t_img * imgsrc, t_img * imgdest)
     imgdest->he = imgsrc->he;
     imgdest->FileHeader_size = imgsrc->FileHeader_size;
 
-    //printf("%f\n",tab_filtre[0][0]);
 
     for(i_img=0;i_img< (imgsrc->he ) ;i_img++)
     {

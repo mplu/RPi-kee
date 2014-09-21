@@ -291,8 +291,6 @@ CPU_CHAR search_diff_x(CPU_INT16U tolerance,CPU_INT16U quantity, t_img * img_in1
                         {
                             module = vectormodule(pixels_to_vector(area1,area2));
                             maxmodule = maxi(module,maxmodule);
-                            //printf("module : %d\n",module);
-                            //system("pause");
                             areasize = 2;
                             area_pic2.BotLeft.x   = area2.x - areasize /2 ;
                             area_pic2.BotLeft.y   = area2.y + areasize /2 ;
@@ -374,7 +372,6 @@ t_pixel look_for_match(t_img * img_in1,t_img * img_in2,CPU_INT16U areasize,t_pix
             {
                 for(j=0 ; j< areasize ;j++)
                 {
-                    //printf("diff : %d tol : %d\n",abs(table_dest[i][j] - table_src[i][j]),raw_tolerance);
                     if ((abs(table_dest[i][j] - table_src[i][j]))>(raw_tolerance*3)/2)
                     {
                         match = FALSE;
@@ -383,7 +380,6 @@ t_pixel look_for_match(t_img * img_in1,t_img * img_in2,CPU_INT16U areasize,t_pix
             }
             if(match == TRUE)
             {
-                //printf("something found at x = %d and y = %d !\n",area_from_1.x + offset_j,area_from_1.y + offset_i);
                 area_to_2.x = area_from_1.x + offset_j;
                 area_to_2.y = area_from_1.y + offset_i;
             }else
@@ -394,22 +390,7 @@ t_pixel look_for_match(t_img * img_in1,t_img * img_in2,CPU_INT16U areasize,t_pix
         }
         if(match == TRUE)break;
     }
-    /*
-    for(i=0;i< areasize  ;i++)
-    {
-        for(j=0 ; j< areasize ;j++)
-        {
-            printf("%d\t",table_src[i][j]);
-        }printf("\n");
-    }
-    for(i=0;i< areasize  ;i++)
-    {
-        for(j=0 ; j< areasize ;j++)
-        {
-            printf("%d\t",table_dest[i][j]);
-        }printf("\n");
-    }
-    */
+
     return area_to_2;
 }
 

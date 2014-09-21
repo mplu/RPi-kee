@@ -12,7 +12,7 @@
 #define __ADC_H
 
 /*** Define ***/
-#define ADC_NUMBER_OF_CHANNEL   8
+
 #define ADC_MAX_VALUE           1024    // ADC precision
 #define ADC_V_REF               5000    // V_ref in millivolt
 

@@ -36,16 +36,20 @@
 /* RPi-kee configuration */
 #include "app_cfg.h"
 
-/* Hardware Layer Drivers */
-#include "driver/ADC.h"
-#include "driver/Motor.h"
-#include "driver/IR_100_550.h"
-#include "driver/IR_20_150.h"
-
-
 /* Global data */
 #include "global_var.h"
 #include "Parameters.h"
+
+/* Hardware Layer Drivers */
+#include "driver/ADC.h"
+#include "driver/Motor.h"
+#include "driver/IR_Common.h"
+#include "driver/IR_100_550.h"
+#include "driver/IR_20_150.h"
+
+/* Sub Functions */
+#include "Functions/functions.h"
+#include "Functions/MotorCommands.h"
 
 /* Thread Include */
 #include "Threads/th_ADC_Acq.h"
@@ -60,7 +64,5 @@
 #include "Threads/th_Protections.h"
 #include "Threads/th_TCPCom.h"
 
-/* Sub Functions */
-#include "Functions/functions.h"
 
 #endif

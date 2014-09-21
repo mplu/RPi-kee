@@ -23,6 +23,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Functions/MotorCommands.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Functions/MotorCommands.h" />
 		<Unit filename="Functions/functions.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -89,6 +93,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="driver/IR_20_150.h" />
+		<Unit filename="driver/IR_Common.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="driver/IR_Common.h" />
 		<Unit filename="driver/Motor.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -129,6 +137,15 @@
 			<envvars />
 			<debugger />
 			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="4" line="0" />
+				<doxyfile_project output_directory="docs" />
+				<doxyfile_build extract_all="1" />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

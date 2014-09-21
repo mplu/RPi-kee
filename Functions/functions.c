@@ -1,4 +1,4 @@
-/****************************************************************/
+/* **************************************************************/
 /* Functions                                                    */
 /* File : functions.c                                           */
 /* Description :                                                */
@@ -6,11 +6,19 @@
 /*                                                              */
 /* Author : MPE                                                 */
 /*                                                              */
-/****************************************************************/
+/* **************************************************************/
 
 #include "../includes.h"
 
 #if defined (RPi)
+/********************************************//**
+ * \brief Millisecon capable sleep function
+ *
+ * \param timeout_ms : timeout duration in millisecond
+ *
+ * \return none
+ *	RPi implemented only
+ ***********************************************/
 CPU_INT32S msSleepLinux( CPU_INT32U timeout_ms )
 {
         struct timeval tv;
@@ -20,3 +28,5 @@ CPU_INT32S msSleepLinux( CPU_INT32U timeout_ms )
         return 0;
 }
 #endif
+
+

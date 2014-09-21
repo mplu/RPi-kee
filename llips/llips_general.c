@@ -109,6 +109,7 @@ CPU_VOID display_img_value(t_img * img,CPU_INT16S colors)
                printf("%2x",img->Blue[i][j]);
             }
             printf("\n");
+
         }
         printf("\n");
     }
@@ -651,7 +652,6 @@ CPU_CHAR apply_linfilter(t_img * img_in,CPU_FP64 ** tab_filtre,CPU_INT16S filter
     img_out->he = img_in->he;
     img_out->FileHeader_size = img_in->FileHeader_size;
 
-    //printf("%f\n",tab_filtre[0][0]);
 
     for(i_img=0;i_img< (img_in->he ) ;i_img++)
     {
@@ -664,7 +664,6 @@ CPU_CHAR apply_linfilter(t_img * img_in,CPU_FP64 ** tab_filtre,CPU_INT16S filter
             one_pixel[c_Blue] = 0;
             for (i=0;i<filtersize;i++)
             {
-                //printf("one_pixel[c_Red]1 %f\n",one_pixel[c_Red]);
                 for (j=0;j<filtersize;j++)
                 {
                     if(     ((i_img-filter_range+i )>=0)
@@ -881,7 +880,6 @@ CPU_CHAR apply_median_filter(t_img * img_in,CPU_INT16S filtersize,t_img * img_ou
     img_out->he = img_in->he;
     img_out->FileHeader_size = img_in->FileHeader_size;
 
-    //printf("%f\n",tab_filtre[0][0]);
 
     for(i_img=0;i_img< (img_in->he ) ;i_img++)
     {
@@ -915,10 +913,8 @@ CPU_INT08U get_median(CPU_INT08U ** table2D,CPU_INT16S filter_range,CPU_INT16S i
         for(jj =(0 - filter_range);jj<= filter_range;jj++)
         {
             table[ii+jj] = table2D[i+ii][j+jj];
-            printf("ii %d jj %d i %d j %d\n",ii,jj,i,j);
         }
     }
-    printf("plop\n");
     qsort (table, (filter_range*2+1)*(filter_range*2+1), sizeof(CPU_INT08U), compare);
     median = table[(filter_range*2+1)];
     return median;
