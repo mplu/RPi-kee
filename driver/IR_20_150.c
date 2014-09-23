@@ -70,6 +70,7 @@ CPU_INT16U GetDistancefromNearIR(CPU_INT16U voltage)
 {
     CPU_INT32U distance;
     CPU_FP32 f_voltage = voltage/1000.0;
+    f_voltage = 0.75;
 #if DEBUG_LOG_EN == DEF_ENABLED
 	printf("voltage 20-150 %.2f\n",f_voltage);
 #endif

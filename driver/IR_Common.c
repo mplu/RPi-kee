@@ -63,7 +63,7 @@ CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable,CPU
 	{	// dichotomic research
 		while(start_ind <= end_ind)
 		{
-		    median = (start_ind+end_ind)/2;
+		    /*median = (start_ind+end_ind)/2;
 		    if((p_InterpoVoltageTable[median] <= x) && (p_InterpoVoltageTable[median+1] > x))
 		    {
 		    	start_ind = end_ind + 1;
@@ -76,7 +76,15 @@ CPU_FP32 Dist_Volt_Interpolation(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable,CPU
 		    else if(p_InterpoVoltageTable[median] >= x)
 		    {
 		    	end_ind = median-1;
-		    }
+		    }*/
+		    if( (x<p_InterpoVoltageTable[start_ind]) && (x>p_InterpoVoltageTable[start_ind+1]) )
+            {
+                median = start_ind;
+                start_ind = end_ind + 1;
+            }else
+            {
+                start_ind ++;
+            }
 
     	}
 
