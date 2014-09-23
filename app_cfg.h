@@ -14,32 +14,44 @@
 /**           Define                                            */
 /****************************************************************/
 
-/* ***** DEBUG *****/
+/* DEBUG *****/
 #define DEBUG_LOG_EN    DEF_ENABLED
 
-/*** Image Processing ***/
+/* Image Processing ***/
 #define GAUSS_SIZE      8
 #define SIGMA           10
+
+#define CAPTURE_WARMUP		3	//in second
+#define CAPTURE_PERIOD		500 //in millisecond
+#define IMG_START 			"/usr/bin/raspistill -q 10 -o my_capture.bmp -w 320 -h 240 -s -t 3600000 &"
+#define IMG_STOP			"sudo kill -9 `pgrep raspistill`"
+#define IMG_TEST_DAEMON		"pgrep raspistill"
+#define IMG_CAPTURE			"sudo kill -USR1 `pgrep raspistill`"
+#define ERROR_NOTRUNNING	""
+#define ERROR_START 		"* failed to open vchiq instance"
+#define CAPTURE_OK			""
 
 /* Copy of WiringPi define (for Windows usage) */
 #define HIGH	1
 #define LOW		0
 
 
-/*** RPi Hardware Define ***/
+/* RPi Hardware Define ***/
 #define _12V_VOLTAGE_DIVIDER    3
 #define SPI_CHAN 				0
 #define ADC_NUMBER_OF_CHANNEL   8
 
-/*********** Semaphore and Thread define *****/
+/* Semaphore and Thread define *****/
 #define SHARED_ONLY_INSIDE      0
 #define SHARED_WITH_OUTSIDE     1
 #define PEND_BEFORE_POST        0
 #define POST_BEFORE_PEND        1
 #define SEM_EMPTY				-1
-/*********** Error Management *****/
+/* Error Management *****/
 #define RPIKEE_NO_ERR   0   //  No error
 #define RPIKEE_ERR_OOB  1   //  Error : Out of Bound
+	
+
 
 
 /* Custom type used for portability */

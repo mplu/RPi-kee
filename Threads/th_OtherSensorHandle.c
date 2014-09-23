@@ -4,8 +4,8 @@ void* threadOtherSensorHandle (void* arg)
 {
 	CPU_CHAR tampon[32];
     FILE *sortie;
-	
-	CPU_ i=0;
+
+	CPU_INT08U i=0;
     while(1) /* Boucle infinie */
     {
         m_sSleep(1);
