@@ -50,7 +50,7 @@ static t_paramblock const p_rec_CommandReg =
 {
                         5,  /* Parameter ID */
        &Params.CommandReg,  /* Pointer to parameter value(s) in table 1 */
-                        64, /* Size in bytes */
+                        7, /* Size in bytes */
                         0,  /* Security and storage flags */
 };
 
@@ -58,7 +58,7 @@ static t_paramblock const p_rec_StatusReg =
 {
                         6,  /* Parameter ID */
      &Params.StatusReg,  /* Pointer to parameter value(s) in table 1 */
-                        6,  /* Size in bytes */
+                        7,  /* Size in bytes */
                         0,  /* Security and storage flags */
 };
 
