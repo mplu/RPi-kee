@@ -66,7 +66,9 @@ CPU_INT16U GetDistancefromFarIR(CPU_INT16U voltage)
 {
     CPU_INT32U distance;
     CPU_FP32 f_voltage = voltage/1000.0;
+#if defined (Win32)
     f_voltage = 2.81;
+#endif
 #if DEBUG_LOG_EN == DEF_ENABLED
 	printf("voltage 100-155 %.2f\n",f_voltage);
 #endif
