@@ -73,9 +73,6 @@ CPU_INT16U GetDistancefromNearIR(CPU_INT16U voltage)
 #if defined (Win32)
     f_voltage = 0.75;
 #endif
-#if DEBUG_LOG_EN == DEF_ENABLED
-	printf("voltage 20-150 %.2f\n",f_voltage);
-#endif
     if(Dist_Volt_RangeCheck(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor20_150,15) == RPIKEE_NO_ERR)
     {
         distance = (CPU_INT32U)Dist_Volt_Interpolation(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor20_150,(CPU_FP32*)&InterpoDistanceTablefor20_150,15);

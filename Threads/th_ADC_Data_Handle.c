@@ -8,7 +8,6 @@ void* threadADCDataHandle (void* arg)
     while(1) /* Boucle infinie */
     {
         sem_wait(&sem_ADCData_available);
-        DEBUG_LOG("ADC data treatment\n");
         pthread_mutex_lock(&mtx_AccessRawAnalog);
         for(i=0;i<ADC_NUMBER_OF_CHANNEL;i++)
         {
@@ -20,10 +19,7 @@ void* threadADCDataHandle (void* arg)
         Params.Analog_Values.Voltage12V         = _12V_VOLTAGE_DIVIDER * GetVoltage(LocalRawValue[Ch1_Vmot]);
         Params.Analog_Values.ShortIRDistance    = GetDistancefromNearIR(GetVoltage(LocalRawValue[Ch2_NearIR]));
         Params.Analog_Values.LongIRDistance     = GetDistancefromFarIR(GetVoltage(LocalRawValue[Ch3_FarIR]));
-#if DEBUG_LOG_EN == DEF_ENABLED
-			//printf("Short,Long %d %d\n",GetVoltage(LocalRawValue[Ch2_NearIR]),GetVoltage(LocalRawValue[Ch3_FarIR]));
-			printf("Short,Long %d %d\n",Params.Analog_Values.ShortIRDistance,Params.Analog_Values.LongIRDistance);
-#endif
+
     }
 
     pthread_exit(NULL); /* Fin du thread */

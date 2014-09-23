@@ -25,9 +25,6 @@ void* threadADCAcq (void* arg)
         for(i=0;i<ADC_NUMBER_OF_CHANNEL;i++)
         {
                 SPI_combuffer[i] = analogRead (ADCBASE_WIRINGPI + i) ;
-#if DEBUG_LOG_EN == DEF_ENABLED
-                //printf("%d\n", SPI_combuffer[i]);
-#endif
         }
 #endif
         // Writing data into shared buffer
@@ -35,9 +32,6 @@ void* threadADCAcq (void* arg)
         for(i=0;i<ADC_NUMBER_OF_CHANNEL;i++)
         {
             g_Raw_AdcValue[i] = SPI_combuffer[i];
-#if DEBUG_LOG_EN == DEF_ENABLED
-			//printf("adc %d : 0x%04x\n",i,g_Raw_AdcValue[i]);
-#endif
         }
         pthread_mutex_unlock(&mtx_AccessRawAnalog);
 
