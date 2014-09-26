@@ -18,10 +18,12 @@
 #define DEBUG_LOG_EN    DEF_ENABLED
 
 /* Image Processing ***/
-#define GAUSS_SIZE      8
-#define SIGMA           10
+#define GAUSS_SIZE          7
+#define SIGMA               3.5
+#define NUMBER_OF_SEGMENT   8
+#define CONTRAST_TOLERANCE  2
 
-#define CAPTURE_WARMUP		3	//in second
+#define CAPTURE_WARMUP		2	//in second
 #define CAPTURE_PERIOD		500 //in millisecond
 #define IMG_START 			"/usr/bin/raspistill -q 10 -o my_capture.bmp -w 320 -h 240 -s -t 3600000 &"
 #define IMG_STOP			"sudo kill -9 `pgrep raspistill`"
@@ -50,7 +52,7 @@
 /* Error Management *****/
 #define RPIKEE_NO_ERR   0   //  No error
 #define RPIKEE_ERR_OOB  1   //  Error : Out of Bound
-	
+
 
 
 

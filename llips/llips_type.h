@@ -1,24 +1,21 @@
-/****************************************************************/
-/* Light Library for Image ProcesS                              */
-/* File : llips_type.h                                          */
-/* Description :                                                */
-/*   Configuration varaible and define for LLIPS                */
-/*                                                              */
-/* Author : MPE                                                 */
-/*                                                              */
-/****************************************************************/
+/********************************************//**
+ * \file
+ * \brief Configuration varaible and define for LLIPS
+ * \author MPE
+ *
+ ***********************************************/
 #ifndef __LLIPS_TYPE_H
 #define __LLIPS_TYPE_H
 
-/****************************************************************/
-/**           Define                                            */
-/****************************************************************/
+/* ***************************************************************/
+/* *           Define                                            */
+/* ***************************************************************/
 #define DEF_ENABLED         1
 #define DEF_DISABLED        0
 
-/****************************************************************/
-/**           Typedef                                           */
-/****************************************************************/
+/* ***************************************************************/
+/* *           Typedef                                           */
+/* ***************************************************************/
 /* Custom type used for portability */
 typedef            void      CPU_VOID;
 typedef  unsigned  char      CPU_CHAR;                          /*  8-bit character                                     */
@@ -67,6 +64,12 @@ typedef struct s_area
     t_pixel TopLeft;
     t_pixel TopRight;
 }t_area;
+
+typedef struct s_simplearea
+{
+    t_pixel BotLeft;
+    t_pixel TopRight;
+}t_simplearea;
 
 
 #endif
