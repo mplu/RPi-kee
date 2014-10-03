@@ -19,13 +19,20 @@
 #include <time.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include<unistd.h>    //write
 
 #if defined (Win32)
     #include <windows.h>
+    #include <winsock2.h>
 #elif defined (RPi)
     #include <unistd.h>
     #include <wiringPi.h>
 	#include <mcp3004.h>
+	#include <sys/socket.h>
+    #include <netinet/in.h>
+    #include <arpa/inet.h>
+    #include <unistd.h> /* close */
+    #include <netdb.h> /* gethostbyname */
 #else
     #error "No OS defined"
 #endif
@@ -50,6 +57,7 @@
 /* Sub Functions */
 #include "Functions/functions.h"
 #include "Functions/MotorCommands.h"
+#include "Functions/RPK_Protocole.h"
 
 /* Thread Include */
 #include "Threads/th_ADC_Acq.h"

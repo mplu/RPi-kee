@@ -17,6 +17,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-lpthreadGC2" />
+					<Add library="lib\libws2_32.a" />
 				</Linker>
 			</Target>
 		</Build>
@@ -27,6 +28,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Functions/MotorCommands.h" />
+		<Unit filename="Functions/RPK_Protocole.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Functions/RPK_Protocole.h" />
 		<Unit filename="Functions/functions.c">
 			<Option compilerVar="CC" />
 		</Unit>

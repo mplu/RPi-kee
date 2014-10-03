@@ -33,10 +33,9 @@
 #define ERROR_START 		"* failed to open vchiq instance"
 #define CAPTURE_OK			""
 
-/* Copy of WiringPi define (for Windows usage) */
-#define HIGH	1
-#define LOW		0
-
+/* Motor driving */
+#define ANGLE_COEF          0.2
+#define FLOAT_INT_COEF      100
 
 /* RPi Hardware Define ***/
 #define _12V_VOLTAGE_DIVIDER    3
@@ -53,7 +52,22 @@
 #define RPIKEE_NO_ERR   0   //  No error
 #define RPIKEE_ERR_OOB  1   //  Error : Out of Bound
 
+/* TCP Configuration */
+#define DEF_PORT        6523
+#define MAX_CLIENTS     1
+#define MAX_TCP_DATA    250
 
+#if defined (Win32)
+/* Copy of WiringPi define (for Windows usage) */
+    #define HIGH	        1
+    #define LOW		        0
+#elif defined (RPi)
+/* Copy of WinSock define (for Rpi usage) */
+    #define INVALID_SOCKET  -1
+    #define SOCKET_ERROR    -1
+#else
+    #error "No OS defined"
+#endif
 
 
 /* Custom type used for portability */

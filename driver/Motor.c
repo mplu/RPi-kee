@@ -32,6 +32,7 @@ CPU_VOID setStep(t_Motor M,CPU_INT08U w1, CPU_INT08U w2, CPU_INT08U w3, CPU_INT0
 CPU_VOID turnClockwise(t_Motor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem_Abort)
 {
         CPU_INT16U i;
+
         for (i = 0 ; i < steps; i++)
         {
                 setStep(M,HIGH, LOW, HIGH, LOW);

@@ -31,6 +31,7 @@ typedef struct
 	CPU_INT16S Voltage12V;
 	CPU_INT16S CPUTemperature;
 	CPU_INT16S AuxTemperature;
+	CPU_INT16S ImgMoveDirection;
 }t_ANALOG_VALUES;
 
 typedef struct
@@ -73,27 +74,27 @@ typedef struct
 
 typedef struct
 {
-	unsigned short unused0:1;
-	unsigned short unused1:1;
-	unsigned short unused2:1;
-	unsigned short unused3:1;
-	unsigned short unused4:1;
-	unsigned short unused5:1;
-	unsigned short unused6:1;
-	unsigned short unused7:1;
-	unsigned short unused8:1;
-	unsigned short unused9:1;
-	unsigned short unused10:1;
-	unsigned short unused11:1;
-	unsigned short unused12:1;
-	unsigned short unused13:1;
-	unsigned short unused14:1;
-	unsigned short unused15:1;
+	CPU_INT16U unused0:1;
+	CPU_INT16U unused1:1;
+	CPU_INT16U unused2:1;
+	CPU_INT16U unused3:1;
+	CPU_INT16U unused4:1;
+	CPU_INT16U unused5:1;
+	CPU_INT16U unused6:1;
+	CPU_INT16U unused7:1;
+	CPU_INT16U unused8:1;
+	CPU_INT16U unused9:1;
+	CPU_INT16U unused10:1;
+	CPU_INT16U unused11:1;
+	CPU_INT16U unused12:1;
+	CPU_INT16U unused13:1;
+	CPU_INT16U unused14:1;
+	CPU_INT16U unused15:1;
 }t_GLOBAL1_BITS;
 
 typedef union
 {
-	unsigned short all;
+	CPU_INT16U all;
 	t_GLOBAL1_BITS bit;
 } t_FR_GLOBAL1;
 

@@ -26,7 +26,7 @@ static t_paramblock const p_rec_Analog_Values =
 {
                         2,  /* Parameter ID */
     &Params.Analog_Values,  /* Pointer to parameter value(s) in table 1 */
-                       12,  /* Size in bytes */
+                       14,  /* Size in bytes */
                         0,  /* Security and storage flags */
 };
 
@@ -41,7 +41,7 @@ static t_paramblock const p_rec_LeftMotorCommand =
 static t_paramblock const p_rec_RightMotorCommand =
 {
                         4,  /* Parameter ID */
- &Params.LeftMotorCommand,  /* Pointer to parameter value(s) in table 1 */
+ &Params.RightMotorCommand,  /* Pointer to parameter value(s) in table 1 */
                         4,  /* Size in bytes */
                         0,  /* Security and storage flags */
 };
@@ -158,6 +158,13 @@ CPU_VOID Init_Params()
 
 }
 
+/********************************************//**
+ * \brief
+ *
+ * \param paramID CPU_INT16U
+ * \return CPU_INT16U*
+ *
+ ***********************************************/
 CPU_INT16U* GetPointerFromParamID(CPU_INT16U paramID)
 {
 	const t_paramblock* param = NULL;
@@ -180,6 +187,14 @@ CPU_INT16U* GetPointerFromParamID(CPU_INT16U paramID)
 
 }
 
+/********************************************//**
+ * \brief
+ *
+ * \param paramID CPU_INT16U
+ * \param paramValues const CPU_INT16U*
+ * \return CPU_VOID
+ *
+ ***********************************************/
 CPU_VOID SetValueFromParamID(CPU_INT16U paramID, const CPU_INT16U* paramValues)
 {
 	const t_paramblock* param = NULL;
@@ -199,6 +214,13 @@ CPU_VOID SetValueFromParamID(CPU_INT16U paramID, const CPU_INT16U* paramValues)
 
 }
 
+/********************************************//**
+ * \brief
+ *
+ * \param paramID CPU_INT16U
+ * \return CPU_INT16U
+ *
+ ***********************************************/
 CPU_INT16U GetSizeFromParamID(CPU_INT16U paramID)
 {
   const t_paramblock* param = NULL;

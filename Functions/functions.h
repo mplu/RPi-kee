@@ -27,4 +27,5 @@
 #else
     #error "No OS defined"
 #endif
-
+CPU_FP32 CalculateMotorCommandFromLine(CPU_FP32 angle,CPU_FP32 x);
+CPU_INT16U CalculCRC(CPU_INT08U *ptrMessage, CPU_INT08U NbMessage);
