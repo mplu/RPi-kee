@@ -5,11 +5,21 @@ void* threadTCPCom (void* arg)
 {
     CPU_INT32S port=DEF_PORT;
     typedef CPU_INT32U socklen_t;
-    SOCKET serv_sock,client_sock;
-    socklen_t clilen;
+#if defined (Win32)
+	SOCKET serv_sock,client_sock;
 	SOCKADDR_IN serv_sin,cli_sin;
+#elif defined (RPi)
+	CPU_INT32S serv_sock,client_sock;
+	struct sockaddr_in serv_sin,cli_sin;
+#else
+    #error "No OS defined"
+#endif
+    socklen_t clilen;
+
+#if defined (Win32)
 	WSADATA wsa;
 	WSAStartup(MAKEWORD(2,0),&wsa);
+#endif
 
 	CPU_INT08U data_in[MAX_TCP_DATA];
 	CPU_INT08U data_out[MAX_TCP_DATA];
@@ -29,7 +39,11 @@ void* threadTCPCom (void* arg)
         serv_sin.sin_port = htons(port);
         serv_sin.sin_family = AF_INET;
 
+#if defined (Win32)
         if(bind(serv_sock,(SOCKADDR *) &serv_sin, sizeof serv_sin) == SOCKET_ERROR)
+#elif defined (RPi)
+		if(bind(serv_sock,(struct sockaddr *) &serv_sin, sizeof serv_sin) == SOCKET_ERROR)	
+#endif
         {
             printf("Could not create bind socket\n");
 
@@ -45,7 +59,12 @@ void* threadTCPCom (void* arg)
                     m_sSleep(1);
                     //Accept and incoming connection
                     printf("Waiting for incoming connections...\n");
-                    clilen = sizeof(SOCKADDR_IN);
+                    
+#if defined (Win32)
+					clilen = sizeof(SOCKADDR_IN);
+#elif defined (RPi)
+					clilen = sizeof(struct sockaddr);
+#endif
 
                     //accept connection from an incoming client
                     client_sock = accept(serv_sock, (struct sockaddr *)&cli_sin, (int*)&clilen);
