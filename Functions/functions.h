@@ -18,6 +18,7 @@
 #else
     #error "No OS defined"
 #endif
+#define Word_Inversion(val) (CPU_INT16U)(      (0xFF00&(val<<8))       |   (0x00FF&(val>>8))      )
 
 /* Prototypes ***/
 #if defined (Win32)

@@ -57,7 +57,7 @@ typedef struct
 typedef struct
 {
 	CPU_INT16S DetectionThreshold;
-	CPU_INT16U CompDirection;
+	CPU_INT16S CompDirection;
 	CPU_INT16U TimeWindow;
 	CPU_INT16U ConfThreshold;
 }t_GENERIC_PROTECTION;
@@ -131,9 +131,18 @@ enum e_Params
     e_CommandReg,
     e_StatusReg,
     e_FailureReg,
-    e_ProtectionConf,
+	e_PConfIRDistanceDetect,
+	e_PConfVoltageBatteryDetect,
+	e_PConfVoltage12VDetect,
+	e_PConfCPUTemperatureDetect,
+	e_PConfAuxTemperatureDetect,
     e_NumberOfParam
 };
+
+
+
+
+
 
 typedef struct s_paramblock
 {
@@ -149,7 +158,7 @@ extern const    t_paramblock*   ParamMap[];
 extern          t_Param         Params;
 
 CPU_VOID    Init_Params();
-CPU_INT16U* GetPointerFromParamID(CPU_INT16U paramID);
-CPU_VOID    SetValueFromParamID(CPU_INT16U paramID, const CPU_INT16U* paramValues);
+CPU_INT08U* GetPointerFromParamID(CPU_INT16U paramID);
+CPU_VOID    SetValueFromParamID(CPU_INT16U paramID, const CPU_INT08U* paramValues);
 CPU_INT16U  GetSizeFromParamID(CPU_INT16U paramID);
 #endif

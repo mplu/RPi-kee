@@ -28,10 +28,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Functions/MotorCommands.h" />
-		<Unit filename="Functions/RPK_Protocole.c">
+		<Unit filename="Functions/RPK_Protocol.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Functions/RPK_Protocole.h" />
+		<Unit filename="Functions/RPK_Protocol.h" />
 		<Unit filename="Functions/functions.c">
 			<Option compilerVar="CC" />
 		</Unit>

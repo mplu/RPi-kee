@@ -4,10 +4,31 @@
 
 void* threadDebug (void* arg)
 {
-#if 0
-    int compteur = 0, nombre = 0;
-#endif
-    srand(time(NULL));
+
+    /*e_RPK_Error rpk_err;
+    CPU_INT08U buffer[RPK_MAX_DATA]={0};
+
+    // header
+    buffer[0] = RPK_RASPBERRY_PI_HANDLE;
+    buffer[2] = RPK_VERSION;
+    buffer[4] = 20 ;
+    buffer[6] = 14;
+    buffer[8] = 17;
+    buffer[10] = 0;
+    buffer[12] = 4;
+
+    //data
+    buffer[14] = 31;
+    buffer[15] = 32;
+    buffer[16] = 33;
+    buffer[17] = 34;
+
+    // chekcsum
+    buffer[18] = 0x68;
+    buffer[19] = 0xab;
+
+    rpk_err = RPK_Frame_Manage(buffer, 20, &g_rpkframe_in);*/
+
     while(1) /* Boucle infinie */
     {
 #if DEBUG_LOG_EN == DEF_ENABLED

@@ -17,6 +17,8 @@ void* threadCtrlCmd (void* arg)
 
     while(1) /* Boucle infinie */
     {
+        Params.LeftMotorCommand.Steps ++;
+        Params.LeftMotorCommand.Delay --;
         m_msSleep(100);
         //TODO : Send command to both motors by setting value in Params.*MotorCommand.Delay / Params.*MotorCommand.Steps
         if(Params.CommandReg.MoveDuration > 0)

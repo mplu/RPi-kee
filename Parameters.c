@@ -70,13 +70,47 @@ static t_paramblock const p_rec_FailureReg =
                         0,  /* Security and storage flags */
 };
 
-static t_paramblock const p_rec_ProtectionConf =
+static t_paramblock const p_rec_PConfIRDistanceDetect =
 {
                         8,  /* Parameter ID */
-   &Params.ProtectionConf,  /* Pointer to parameter value(s) in table 1 */
-                       40,  /* Size in bytes */
+   &Params.ProtectionConf.IRDistanceDetect,  /* Pointer to parameter value(s) in table 1 */
+                       8,  /* Size in bytes */
                         0,  /* Security and storage flags */
 };
+
+static t_paramblock const p_rec_PConfVoltageBatteryDetect =
+{
+                        9,  /* Parameter ID */
+   &Params.ProtectionConf.VoltageBatteryDetect,  /* Pointer to parameter value(s) in table 1 */
+                       8,  /* Size in bytes */
+                        0,  /* Security and storage flags */
+};
+
+static t_paramblock const p_rec_PConfVoltage12VDetect =
+{
+                        10,  /* Parameter ID */
+   &Params.ProtectionConf.Voltage12VDetect,  /* Pointer to parameter value(s) in table 1 */
+                       8,  /* Size in bytes */
+                        0,  /* Security and storage flags */
+};
+
+static t_paramblock const p_rec_PConfCPUTemperatureDetect =
+{
+                        11,  /* Parameter ID */
+   &Params.ProtectionConf.CPUTemperatureDetect,  /* Pointer to parameter value(s) in table 1 */
+                       8,  /* Size in bytes */
+                        0,  /* Security and storage flags */
+};
+
+static t_paramblock const p_rec_PConfAuxTemperatureDetect =
+{
+                        12,  /* Parameter ID */
+   &Params.ProtectionConf.AuxTemperatureDetect,  /* Pointer to parameter value(s) in table 1 */
+                       8,  /* Size in bytes */
+                        0,  /* Security and storage flags */
+};
+
+
 
 
 const t_paramblock* ParamMap[] = {
@@ -87,7 +121,11 @@ const t_paramblock* ParamMap[] = {
 	&p_rec_CommandReg,
 	&p_rec_StatusReg,
 	&p_rec_FailureReg,
-	&p_rec_ProtectionConf,
+	&p_rec_PConfIRDistanceDetect,
+	&p_rec_PConfVoltageBatteryDetect,
+	&p_rec_PConfVoltage12VDetect,
+	&p_rec_PConfCPUTemperatureDetect,
+	&p_rec_PConfAuxTemperatureDetect,
     NULL
 };
 
@@ -162,10 +200,10 @@ CPU_VOID Init_Params()
  * \brief
  *
  * \param paramID CPU_INT16U
- * \return CPU_INT16U*
+ * \return CPU_INT08U*
  *
  ***********************************************/
-CPU_INT16U* GetPointerFromParamID(CPU_INT16U paramID)
+CPU_INT08U* GetPointerFromParamID(CPU_INT16U paramID)
 {
 	const t_paramblock* param = NULL;
 	CPU_INT16U  i;
@@ -180,10 +218,7 @@ CPU_INT16U* GetPointerFromParamID(CPU_INT16U paramID)
 		}
 	}
 
-//	AssertE(param != NULL, "Invalid paramID");
-
-
-		return (CPU_INT16U*)param->pValue;
+    return (CPU_INT08U*)param->pValue;
 
 }
 
@@ -195,7 +230,7 @@ CPU_INT16U* GetPointerFromParamID(CPU_INT16U paramID)
  * \return CPU_VOID
  *
  ***********************************************/
-CPU_VOID SetValueFromParamID(CPU_INT16U paramID, const CPU_INT16U* paramValues)
+CPU_VOID SetValueFromParamID(CPU_INT16U paramID, const CPU_INT08U* paramValues)
 {
 	const t_paramblock* param = NULL;
 	CPU_INT16U  i;
@@ -223,19 +258,29 @@ CPU_VOID SetValueFromParamID(CPU_INT16U paramID, const CPU_INT16U* paramValues)
  ***********************************************/
 CPU_INT16U GetSizeFromParamID(CPU_INT16U paramID)
 {
-  const t_paramblock* param = NULL;
-  CPU_INT16U  i;
+    const t_paramblock* param = NULL;
+    CPU_INT16U  i;
+    CPU_INT16U ret = 0;
 
-  // Search for the parameter record
-  for (i = 0; i < e_NumberOfParam; i++)
-  {
-    if (ParamMap[i]->id == paramID)
+    // Search for the parameter record
+    for (i = 0; i < e_NumberOfParam; i++)
     {
-      param = ParamMap[i];
-      break;
+        if (ParamMap[i]->id == paramID)
+        {
+            param = ParamMap[i];
+            break;
+        }
     }
-  }
+    if(param != NULL)
+    {
+        // something has been found
+        ret = param->psize;
+    }else
+    {
+        // nothing found
+        ret = 0;
+    }
 
-  return param->psize;
+    return ret;
 
 }

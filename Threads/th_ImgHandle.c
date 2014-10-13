@@ -115,7 +115,7 @@ void* threadImgHandle (void* arg)
         finish = clock();
         duration = (double)(finish - start) / CLOCKS_PER_SEC;
         //printf( "%d duration : %f seconds\n", number_of_loop,duration );
-
+        (void)duration;
 
         //printf("%d angle %fdeg %.2frad\tav_x %.2f\tN : %.2f\tMovDir %d\n",number_of_loop,av_angle*180.0/PI,av_angle,av_x,MotorCommandRatio,Params.Analog_Values.ImgMoveDirection);
         //sprintf((char *)outputfilename,"imgout_line%d_%.2f_%.2f.bmp",number_of_loop,av_angle,av_x);

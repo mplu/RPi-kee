@@ -49,8 +49,8 @@
 #define POST_BEFORE_PEND        1
 #define SEM_EMPTY				-1
 /* Error Management *****/
-#define RPIKEE_NO_ERR   0   //  No error
-#define RPIKEE_ERR_OOB  1   //  Error : Out of Bound
+#define RPIKEE_NO_ERR           0   //  No error
+#define RPIKEE_ERR_OOB          1   //  Error : Out of Bound
 
 /* TCP Configuration */
 #define DEF_PORT        6523

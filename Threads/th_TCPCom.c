@@ -16,10 +16,7 @@ void* threadTCPCom (void* arg)
 	CPU_INT16S data_in_size;
 	CPU_INT16S data_out_size,ret_send;
 
-	CPU_INT16U i;
-
-	// reception package
-	s_rpk_frame TCP_Frame;
+    e_RPK_Error rpk_err;
 
 	serv_sock = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -52,18 +49,24 @@ void* threadTCPCom (void* arg)
 
                     //accept connection from an incoming client
                     client_sock = accept(serv_sock, (struct sockaddr *)&cli_sin, (int*)&clilen);
-
+                    printf("Client connected\n");
                     do
                     {
                         data_in_size    = recv(client_sock , (char *) data_in , MAX_TCP_DATA , 0);
-                        for(i=0;i<data_in_size;i++)
+
+                        rpk_err = RPK_Frame_Manage(data_in, data_in_size, &g_rpkframe_in);
+
+                        if(rpk_err == rpkerr_NoError)
                         {
-                            data_out[i] = data_in[i] + 1;
-                            TCP_Frame.u.raw[i] = data_in[i];
+                            rpk_err = RPK_Frame_Process(&g_rpkframe_in,&g_rpkframe_out);
                         }
-                        data_out_size = data_in_size;
-                        ret_send        = send(client_sock,(const char *)data_out,data_out_size,0);
+
+                        data_out_size = RPK_SendPrepare(&g_rpkframe_out,data_out);
+
+                        ret_send = send(client_sock,(const char *)data_out,data_out_size,0);
+                        asm("nop");
                     }while((data_in[0]!='q')&&data_in_size>0&&(ret_send>0));
+                    printf("Client disconnected\n");
 
                 }
             }

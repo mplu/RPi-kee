@@ -57,7 +57,7 @@
 /* Sub Functions */
 #include "Functions/functions.h"
 #include "Functions/MotorCommands.h"
-#include "Functions/RPK_Protocole.h"
+#include "Functions/RPK_Protocol.h"
 
 /* Thread Include */
 #include "Threads/th_ADC_Acq.h"
