@@ -23,7 +23,11 @@ void* threadImgHandle (void* arg)
     CPU_INT16U i,j,index;
     CPU_CHAR Luminance = 0;
     CPU_INT08U maxvalue;
+#if defined (Win32)
 	CPU_INT16U number_of_loop=1;
+#elif defined (RPi)
+	CPU_INT16U number_of_loop=1;
+#endif
 	t_pixel tab_pixel[NUMBER_OF_SEGMENT];
 
 	CPU_FP64 MotorCommandRatio = 0;
@@ -32,26 +36,46 @@ void* threadImgHandle (void* arg)
     init_img(&img_out1);
     init_img(&img_inter1);
 
-	//CPU_CHAR outputfilename[32];
+	CPU_CHAR outputfilename[32];
 	CPU_CHAR inputfilename[32];
 
 	filter0 = createTableFP64(GAUSS_SIZE,GAUSS_SIZE);
 	create_gauss_filter(filter0,GAUSS_SIZE,SIGMA);
-
+	for(i=0;i<GAUSS_SIZE;i++)
+	{
+		for(j=0;j<GAUSS_SIZE;j++)
+		{
+			printf("%.2f\t",filter0[i][j]);
+		}
+		printf("\n");
+	}
+#if defined (Win32)
     while(number_of_loop<8) /* Boucle infinie */
+#elif defined (RPi)
+	while(1) /* Boucle infinie */
+#endif
     {
         sem_wait(&sem_Img_available); //waiting for new img to treat
 
         start = clock();
-
-        sprintf((char *)inputfilename,"ligne%d.bmp",number_of_loop);
+#if defined (Win32)
+		sprintf((char *)inputfilename,"ligne%d.bmp",number_of_loop);
+#elif defined (RPi)
+		sprintf((char *)inputfilename,IMG_NAME);
+#endif
+        
 		load_img((CPU_CHAR *)inputfilename, &img_in1);
-
+		
 		apply_linfilter(&img_in1,filter0,GAUSS_SIZE,GREEN|RED,&img_inter1);
+		sprintf((char *)outputfilename,"imgout_gauss%d.bmp",number_of_loop);
+		write_img(outputfilename,&img_inter1);
+		printf("apply_linfilter ok\n");
 		search_contrast(CONTRAST_TOLERANCE,&img_inter1,&img_out1,SetRGB(255,255,255),GREEN|RED,HOR);
-		//sprintf((char *)outputfilename,"imgout_contdetect%d.bmp",number_of_loop);
-		//write_img(outputfilename,&img_out1);
+		printf("search_contrast ok\n");
 
+		sprintf((char *)outputfilename,"imgout_contdetect%d.bmp",number_of_loop);
+		write_img(outputfilename,&img_out1);
+		printf("write_img ok\n");
         //looking for remarquable point
         he_of_segement = img_out1.he / (number_of_segment_max+1);
 
@@ -118,13 +142,18 @@ void* threadImgHandle (void* arg)
         (void)duration;
 
         //printf("%d angle %fdeg %.2frad\tav_x %.2f\tN : %.2f\tMovDir %d\n",number_of_loop,av_angle*180.0/PI,av_angle,av_x,MotorCommandRatio,Params.Analog_Values.ImgMoveDirection);
-        //sprintf((char *)outputfilename,"imgout_line%d_%.2f_%.2f.bmp",number_of_loop,av_angle,av_x);
-        //write_img(outputfilename,&img_in1);
-        //printf("Img treated\n");
+        sprintf((char *)outputfilename,"imgout_line%d_%.2f_%.2f.bmp",number_of_loop,av_angle,av_x);
+        write_img(outputfilename,&img_in1);
+        printf("Img treated\n");
 
+		
+#if defined (Win32)
 		number_of_loop++;
         number_of_loop = number_of_loop % 8;
         if(number_of_loop == 0)number_of_loop++;
+#elif defined (RPi)
+		
+#endif
 
     }
     printf("fin tache\n");

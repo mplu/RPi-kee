@@ -21,7 +21,7 @@ void* threadOtherSensorHandle (void* arg)
 		{
                 fprintf (stderr, "erreur");
         }
-		while (fgets (tampon, sizeof tampon, sortie) != NULL){}
+		while (fgets ((char *)tampon, sizeof tampon, sortie) != NULL){}
 #endif
 
 		Params.Analog_Values.CPUTemperature =

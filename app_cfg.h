@@ -26,6 +26,7 @@
 #define CAPTURE_WARMUP		2	//in second
 #define CAPTURE_PERIOD		500 //in millisecond
 #define IMG_START 			"/usr/bin/raspistill -q 10 -o my_capture.bmp -w 320 -h 240 -s -t 3600000 &"
+#define IMG_NAME 			"my_capture_1.bmp"
 #define IMG_STOP			"sudo kill -9 `pgrep raspistill`"
 #define IMG_TEST_DAEMON		"pgrep raspistill"
 #define IMG_CAPTURE			"sudo kill -USR1 `pgrep raspistill`"

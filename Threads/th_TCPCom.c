@@ -67,7 +67,11 @@ void* threadTCPCom (void* arg)
 #endif
 
                     //accept connection from an incoming client
-                    client_sock = accept(serv_sock, (struct sockaddr *)&cli_sin, (int*)&clilen);
+#if defined (Win32)
+					client_sock = accept(serv_sock, (struct sockaddr *)&cli_sin, (int*)&clilen);
+#elif defined (RPi)
+					client_sock = accept(serv_sock, (struct sockaddr *)&cli_sin, (socklen_t *)&clilen);
+#endif
                     printf("Client connected\n");
                     do
                     {

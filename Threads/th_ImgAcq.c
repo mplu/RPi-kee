@@ -48,6 +48,7 @@ void* threadImgAcq (void* arg)
 			}
 #endif // defined
 			//printf("capture ok\n");
+			system("cp my_capture.bmp my_capture_1.bmp");
 			sem_post(&sem_Img_available);
 		}
     }
