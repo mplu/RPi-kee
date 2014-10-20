@@ -24,8 +24,8 @@
 #define CONTRAST_TOLERANCE  2
 
 #define CAPTURE_WARMUP		2	//in second
-#define CAPTURE_PERIOD		500 //in millisecond
-#define IMG_START 			"/usr/bin/raspistill -q 10 -o capture_.bmp -w 320 -h 240 -s -t 3600000 &"
+#define CAPTURE_PERIOD		1000 //in millisecond
+#define IMG_START 			"/usr/bin/raspistill -q 10 -o capture_.bmp -e bmp -w 320 -h 240 -s -t 3600000 &"
 #define IMG_NAME 			"capture_"
 #define IMG_NAME_EXT        ".bmp"
 #define IMG_FILENAME_SIZE	32

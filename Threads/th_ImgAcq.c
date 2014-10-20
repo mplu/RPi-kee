@@ -46,12 +46,14 @@ void* threadImgAcq (void* arg)
 #if defined (Win32)
             sprintf((char *)copy_img_cmd,"copy ligne%d.bmp %s",number_of_loop,g_nextIMGfilename);
 #elif defined (RPi)
-            sprintf((char *)copy_img_cmd,"copy %s%s %s",IMG_NAME,IMG_NAME_EXT,g_nextIMGfilename);
+            sprintf((char *)copy_img_cmd,"cp %s%s %s",IMG_NAME,IMG_NAME_EXT,g_nextIMGfilename);
             if ((sortie = popen (IMG_CAPTURE, "r")) == NULL)
 			{
 				fprintf (stderr, "erreur");
+			}else
+			{
+				sprintf((char *)copy_img_cmd,"cp %s%s %s",IMG_NAME,IMG_NAME_EXT,g_nextIMGfilename);
 			}
-			system("cp my_capture.bmp my_capture_1.bmp");
 #endif // defined
             system((const char *)copy_img_cmd);
 			sem_post(&sem_Img_available);

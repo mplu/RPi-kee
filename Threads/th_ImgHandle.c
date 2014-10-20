@@ -8,6 +8,7 @@ void* threadImgHandle (void* arg)
     t_img img_out1;
 	CPU_FP64 ** filter0;
 	clock_t start, finish;
+	CPU_INT32U number_of_loop = 0;
     double duration;
     CPU_FP64 angle;
     CPU_FP64 av_angle = 0;
@@ -45,98 +46,110 @@ void* threadImgHandle (void* arg)
 
         start = clock();
 
-		load_img((CPU_CHAR *)g_nextIMGfilename, &img_in1);
+		if (load_img((CPU_CHAR *)g_nextIMGfilename, &img_in1) != ERR_NONE)
+		{	
+			//printf("erreur ouverture\n");
+		}else
+		{
+			apply_linfilter(&img_in1,filter0,GAUSS_SIZE,GREEN|RED,&img_inter1);
+			//sprintf((char *)outputfilename,"out__gauss_%s",g_nextIMGfilename);
+			//write_img(outputfilename,&img_inter1);
+			//printf("apply_linfilter ok\n");
+			
+			search_contrast(CONTRAST_TOLERANCE,&img_inter1,&img_out1,SetRGB(255,255,255),GREEN|RED,HOR);
+			//printf("search_contrast ok\n");
+			//sprintf((char *)outputfilename,"out_contdetec_%s",g_nextIMGfilename);
+			//write_img(outputfilename,&img_out1);
+			//printf("write_img ok\n");
+			
+			//looking for remarquable point
+			he_of_segement = img_out1.he / (number_of_segment_max+1);
 
-		apply_linfilter(&img_in1,filter0,GAUSS_SIZE,GREEN|RED,&img_inter1);
-		sprintf((char *)outputfilename,"out__gauss_%s.bmp",g_nextIMGfilename);
-		write_img(outputfilename,&img_inter1);
-		printf("apply_linfilter ok\n");
-		search_contrast(CONTRAST_TOLERANCE,&img_inter1,&img_out1,SetRGB(255,255,255),GREEN|RED,HOR);
-		printf("search_contrast ok\n");
+			//for each segment
+			av_angle_weight = 0;
+			av_x_weight = 0;
+			number_of_segment_found = 0;
+			for(index = 0 ; index <= number_of_segment_max ; index++)
+			{
+				i= (index + 1) * he_of_segement;
+				tab_pixel[index].y = i;
+				tab_pixel[index].x = 0;
+				maxvalue = 0;
+				for(j=0+margin;j<(img_out1.wi - margin);j++)
+				{
 
-		sprintf((char *)outputfilename,"out_contdetec_%s.bmp",g_nextIMGfilename);
-		write_img(outputfilename,&img_out1);
-		printf("write_img ok\n");
-        //looking for remarquable point
-        he_of_segement = img_out1.he / (number_of_segment_max+1);
-
-        //for each segment
-        av_angle_weight = 0;
-        av_x_weight = 0;
-        number_of_segment_found = 0;
-        for(index = 0 ; index <= number_of_segment_max ; index++)
-        {
-            i= (index + 1) * he_of_segement;
-            tab_pixel[index].y = i;
-            tab_pixel[index].x = 0;
-            maxvalue = 0;
-            for(j=0+margin;j<(img_out1.wi - margin);j++)
-            {
-
-                //calcultate luminance Y = 0,299 R + 0,587 G + 0,114 B
-                Luminance = (CPU_CHAR)(  (CPU_FP32)img_out1.Red[i][j]   * 0.299
-                                        + (CPU_FP32)img_out1.Green[i][j] * 0.587
-                                        + (CPU_FP32)img_out1.Blue[i][j]  * 0.114 );
-                if(maxi(maxvalue,Luminance) > maxvalue)
-                {
-                    tab_pixel[index].x = j;
-                }
+					//calcultate luminance Y = 0,299 R + 0,587 G + 0,114 B
+					Luminance = (CPU_CHAR)(  (CPU_FP32)img_out1.Red[i][j]   * 0.299
+											+ (CPU_FP32)img_out1.Green[i][j] * 0.587
+											+ (CPU_FP32)img_out1.Blue[i][j]  * 0.114 );
+					if(maxi(maxvalue,Luminance) > maxvalue)
+					{
+						tab_pixel[index].x = j;
+					}
 
 
-            }
-            if((index >= 1)&&(tab_pixel[index-1].x!=0)&&(tab_pixel[index].x!=0))
-            {
-                highlight_line(&img_in1,tab_pixel[index-1],tab_pixel[index],SetRGB(0,255,0));
-                if((tab_pixel[index].x-tab_pixel[index-1].x)!=0)
-                {
-                    angle=atan((CPU_FP32)(tab_pixel[index].y-tab_pixel[index-1].y)/(CPU_FP32)(tab_pixel[index].x-tab_pixel[index-1].x));
-                }else
-                {
-                    angle = PI / 2.0;
-                }
-                av_angle = (angle + (av_angle * av_angle_weight))/(CPU_FP64)(av_angle_weight + 1.0);
-                av_angle_weight ++;
-                if(index > number_of_segment_max/2)
-                {
-                    av_x = ((tab_pixel[index].x + tab_pixel[index-1].x)/2.0   +  (av_x * av_x_weight)   ) / (CPU_FP64)(av_x_weight + 1.0);
-                    av_x_weight ++ ;
-                }
-                number_of_segment_found ++;
+				}
+				if((index >= 1)&&(tab_pixel[index-1].x!=0)&&(tab_pixel[index].x!=0))
+				{
+					highlight_line(&img_in1,tab_pixel[index-1],tab_pixel[index],SetRGB(0,255,0));
+					if((tab_pixel[index].x-tab_pixel[index-1].x)!=0)
+					{
+						angle=atan((CPU_FP32)(tab_pixel[index].y-tab_pixel[index-1].y)/(CPU_FP32)(tab_pixel[index].x-tab_pixel[index-1].x));
+					}else
+					{
+						angle = PI / 2.0;
+					}
+					av_angle = (angle + (av_angle * av_angle_weight))/(CPU_FP64)(av_angle_weight + 1.0);
+					av_angle_weight ++;
+					if(index > number_of_segment_max/2)
+					{
+						av_x = ((tab_pixel[index].x + tab_pixel[index-1].x)/2.0   +  (av_x * av_x_weight)   ) / (CPU_FP64)(av_x_weight + 1.0);
+						av_x_weight ++ ;
+					}
+					number_of_segment_found ++;
 
-            }
-        }
-        // Normalize angle and position from vertical center of image
-        if(av_angle>=0)
-        {
-            av_angle = av_angle - PI/2.0 ;
-        }else
-        {
-            av_angle = PI/2.0 + av_angle;
-        }
-        av_x = av_x - img_out1.wi/2 ;
+				}
+			}
+			// Normalize angle and position from vertical center of image
+			if(av_angle>=0)
+			{
+				av_angle = av_angle - PI/2.0 ;
+			}else
+			{
+				av_angle = PI/2.0 + av_angle;
+			}
+			av_x = av_x - img_out1.wi/2 ;
 
-        MotorCommandRatio = CalculateMotorCommandFromLine(av_angle,(CPU_FP32)av_x/(CPU_FP32)img_out1.wi);
-        Params.Analog_Values.ImgMoveDirection = ratioTOangle(MotorCommandRatio) ;
-        finish = clock();
-        duration = (double)(finish - start) / CLOCKS_PER_SEC;
+			MotorCommandRatio = CalculateMotorCommandFromLine(av_angle,(CPU_FP32)av_x/(CPU_FP32)img_out1.wi);
+			Params.Analog_Values.ImgMoveDirection = ratioTOangle(MotorCommandRatio) ;
+			finish = clock();
+			duration = (double)(finish - start) / CLOCKS_PER_SEC;
 
-        //printf( "%d duration : %f seconds\n", number_of_loop,duration );
-        (void)duration;
-        sprintf((char *)outputfilename,"out_process_%s_%.2f_%.2f_%d.bmp",g_nextIMGfilename
-                                                                        ,av_angle
-                                                                        ,av_x
-                                                                        ,Params.Analog_Values.ImgMoveDirection);
-        write_img(outputfilename,&img_in1);
-        printf("Img treated %d\n",Params.Analog_Values.ImgMoveDirection);
+			//printf( "%d duration : %f seconds\n", number_of_loop,duration );
+			(void)duration;
+			/*if (Params.Analog_Values.ImgMoveDirection != -43)
+			{
+				sprintf((char *)outputfilename,"out%05lu_process_%s_%.2f_%.2f_%d.bmp",number_of_loop
+																				,g_nextIMGfilename
+																				,av_angle
+																				,av_x
+																				,Params.Analog_Values.ImgMoveDirection);
+				write_img(outputfilename,&img_in1);
+			}*/
+			printf("Img treated %d\n",Params.Analog_Values.ImgMoveDirection);
 
-        // suppress file
-#if defined (Win32)
-        sprintf((char *)delele_img_cmd,"del %s",g_nextIMGfilename);
-#elif defined (RPi)
-        sprintf((char *)delele_img_cmd,"rm %s -rf",g_nextIMGfilename);
-#endif
-        system((const char *)delele_img_cmd);
-        asm("nop");
+			// suppress file
+	#if defined (Win32)
+			sprintf((char *)delele_img_cmd,"del %s",g_nextIMGfilename);
+	#elif defined (RPi)
+			sprintf((char *)delele_img_cmd,"rm %s -rf",g_nextIMGfilename);
+	#endif
+			system((const char *)delele_img_cmd);
+			asm("nop");
+
+		}
+		number_of_loop ++;
+
     }
     printf("fin tache\n");
 
