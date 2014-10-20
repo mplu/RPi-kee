@@ -9,7 +9,8 @@ void* threadImgAcq (void* arg)
 #elif defined (RPi)
     FILE *sortie;
 #endif // defined
-
+    CPU_INT08S number_of_loop = 0;
+    CPU_CHAR copy_img_cmd[IMG_FILENAME_SIZE + 10];
 
 	while(1) /* Boucle infinie */
     {
@@ -41,16 +42,22 @@ void* threadImgAcq (void* arg)
 		}else
 		{
 			//printf("daemon running\n");
-#if defined (RPi)
+			sprintf((char *)g_nextIMGfilename,"%s%d%s",IMG_NAME,number_of_loop,IMG_NAME_EXT);
+#if defined (Win32)
+            sprintf((char *)copy_img_cmd,"copy ligne%d.bmp %s",number_of_loop,g_nextIMGfilename);
+#elif defined (RPi)
+            sprintf((char *)copy_img_cmd,"copy %s%s %s",IMG_NAME,IMG_NAME_EXT,g_nextIMGfilename);
             if ((sortie = popen (IMG_CAPTURE, "r")) == NULL)
 			{
 				fprintf (stderr, "erreur");
 			}
-#endif // defined
-			//printf("capture ok\n");
 			system("cp my_capture.bmp my_capture_1.bmp");
+#endif // defined
+            system((const char *)copy_img_cmd);
 			sem_post(&sem_Img_available);
 		}
+		number_of_loop ++;
+		number_of_loop = number_of_loop % 7;
     }
     pthread_exit(NULL); /* Fin du thread */
 }
