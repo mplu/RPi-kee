@@ -17,18 +17,74 @@ void* threadCtrlCmd (void* arg)
 
     while(1) /* Boucle infinie */
     {
-        Params.LeftMotorCommand.Steps ++;
-        Params.LeftMotorCommand.Delay --;
-        m_msSleep(100);
-        //TODO : Send command to both motors by setting value in Params.*MotorCommand.Delay / Params.*MotorCommand.Steps
-        if(Params.CommandReg.MoveDuration > 0)
+        if(Params.CommandReg.MotorPSEnable == 1)
         {
-            MotorInputCommand(&Params.CommandReg,&Params.LeftMotorCommand,&Params.RightMotorCommand);
-            Params.CommandReg.MoveDuration -= 100;
+            Params.StatusReg.MotorPSEnable = 1;
+            // Enable pin driving 12V
+        }else
+        {
+            Params.StatusReg.MotorPSEnable = 0;
+            // Disable pin driving 12V
+        }
+
+        if(Params.CommandReg.UDPLiveFeed != 0)
+        {
+            Params.StatusReg.UDPLiveFeed = 1;
+        }else
+        {
+            Params.StatusReg.UDPLiveFeed = 0;
+        }
+
+        if(Params.CommandReg.Manual == 1)
+        {
+            Params.StatusReg.Manual = 1;
+            Params.StatusReg.Auto = 0;
+        }else
+        {
+            Params.StatusReg.Manual = 0;
+        }
+
+        if((Params.CommandReg.Auto == 1) && (Params.StatusReg.Manual == 0))
+        {
+            Params.StatusReg.Auto = 1;
+        }else
+        {
+            Params.StatusReg.Auto = 0;
+        }
+
+
+        // Manage Manual command case
+        if(Params.StatusReg.Manual == 1)
+        {
+            if(Params.CommandReg.MoveDuration > 0)
+            {
+                MotorInputCommand(&Params.CommandReg,&Params.LeftMotorCommand,&Params.RightMotorCommand);
+                Params.CommandReg.MoveDuration -= 100;
+            }else
+            {
+                MotorFullStop();
+            }
+        }else if(Params.StatusReg.Auto == 1)
+        {
+            Params.CommandReg.MoveDirection = Params.Analog_Values.ImgMoveDirection;
+            if(Params.Analog_Values.ShortIRDistance > 20)
+            {
+                Params.CommandReg.MoveDuration = 500;
+            }
+            if(Params.CommandReg.MoveDuration > 0)
+            {
+                MotorInputCommand(&Params.CommandReg,&Params.LeftMotorCommand,&Params.RightMotorCommand);
+                Params.CommandReg.MoveDuration -= 100;
+            }else
+            {
+                MotorFullStop();
+            }
         }else
         {
             MotorFullStop();
         }
+
+        m_msSleep(100);
     }
 
     pthread_exit(NULL); /* Fin du thread */

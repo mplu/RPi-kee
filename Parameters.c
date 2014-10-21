@@ -10,7 +10,7 @@
 #include "includes.h"
 
 const char SOFT_VER[]   = "0.1.0";
-const char PARAM_VER[]  = "1";
+const char PARAM_VER[]  = "1.1";
 
 t_Param Params;
 
@@ -50,7 +50,7 @@ static t_paramblock const p_rec_CommandReg =
 {
                         5,  /* Parameter ID */
        &Params.CommandReg,  /* Pointer to parameter value(s) in table 1 */
-                        7, /* Size in bytes */
+                        8, /* Size in bytes */
                         0,  /* Security and storage flags */
 };
 
@@ -58,7 +58,7 @@ static t_paramblock const p_rec_StatusReg =
 {
                         6,  /* Parameter ID */
      &Params.StatusReg,  /* Pointer to parameter value(s) in table 1 */
-                        7,  /* Size in bytes */
+                        8,  /* Size in bytes */
                         0,  /* Security and storage flags */
 };
 

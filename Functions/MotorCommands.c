@@ -69,11 +69,11 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
     {
         direction = direction + 360;
         steps = 32;
-    }else if((direction > -270)&&(direction <= -90))
+    }else if((direction > -270)&&(direction < -90))
     {
         direction = direction + 180;
         steps = -32;
-    }else if((direction > -90)&&(direction <= 90))
+    }else if((direction > -90)&&(direction < 90))
     {
         steps = 32;
     }else if((direction > 90)&&(direction <= 270))
@@ -90,25 +90,43 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
     }
 
 
-
-
-	_ratio = angleTOratio((CPU_FP32)direction  );
-    if(_ratio < 1)
+    if(direction == 90)
     {
-        left.Delay = 4;
-        left.Steps = steps;
+            left.Delay = 4;
+            left.Steps = -32;
 
-        right.Delay = (CPU_FP32)((CPU_FP32)left.Delay/_ratio);
-        right.Steps = left.Delay * left.Steps /((CPU_FP32)left.Delay/_ratio);
-
-    }else if(_ratio < 1)
+            right.Delay = 4;
+            right.Steps = 32;
+    }else if (direction == -90)
     {
-        right.Delay = 4;
-        right.Steps = steps;
+            left.Delay = 4;
+            left.Steps = 32;
 
-        left.Delay = (CPU_FP32)((CPU_FP32)right.Delay/_ratio);
-        left.Steps = right.Delay * right.Steps /((CPU_FP32)right.Delay/_ratio);
+            right.Delay = 4;
+            right.Steps = -32;
+    }else
+    {
+        _ratio = angleTOratio((CPU_FP32)direction  );
+        if(_ratio <= 1)
+        {
+            left.Delay = 4;
+            left.Steps = steps;
+
+            right.Delay = (CPU_FP32)((CPU_FP32)left.Delay/_ratio);
+            right.Steps = left.Delay * left.Steps /((CPU_FP32)left.Delay/_ratio);
+
+        }else if(_ratio > 1)
+        {
+            right.Delay = 4;
+            right.Steps = steps;
+            _ratio = 1/_ratio;
+
+            left.Delay = (CPU_FP32)((CPU_FP32)right.Delay/_ratio);
+            left.Steps = right.Delay * right.Steps /((CPU_FP32)right.Delay/_ratio);
+        }
     }
+
+
 
     *p_lmotor = left;
     *p_rmotor = right;

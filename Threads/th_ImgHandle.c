@@ -24,7 +24,7 @@ void* threadImgHandle (void* arg)
     CPU_INT16U i,j,index;
     CPU_CHAR Luminance = 0;
     CPU_INT08U maxvalue;
-	CPU_INT08U enable_out_img = TRUE;
+	CPU_INT08U enable_out_img = FALSE;
 
 	t_pixel tab_pixel[NUMBER_OF_SEGMENT];
 
@@ -48,7 +48,7 @@ void* threadImgHandle (void* arg)
         start = clock();
 
 		if (load_img((CPU_CHAR *)g_nextIMGfilename, &img_in1) != ERR_NONE)
-		{	
+		{
 			//printf("erreur ouverture\n");
 		}else
 		{
@@ -58,14 +58,14 @@ void* threadImgHandle (void* arg)
 				sprintf((char *)outputfilename,"out__gauss_%s",g_nextIMGfilename);
 				write_img(outputfilename,&img_inter1);
 			}
-			
+
 			search_contrast(CONTRAST_TOLERANCE,&img_inter1,&img_out1,SetRGB(255,255,255),GREEN|RED,HOR);
 			if(enable_out_img == TRUE)
 			{
 				sprintf((char *)outputfilename,"out_contdetec_%s",g_nextIMGfilename);
 				write_img(outputfilename,&img_out1);
 			}
-			
+
 			//looking for remarquable point
 			he_of_segement = img_out1.he / (number_of_segment_max+1);
 

@@ -39,7 +39,7 @@ typedef struct
 	CPU_INT08U Manual;
 	CPU_INT08U Auto;
 	CPU_INT16S MoveDirection;
-	CPU_INT08U MoveDuration;
+	CPU_INT16U MoveDuration;
 	CPU_INT08U UDPLiveFeed;
 	CPU_INT08U MotorPSEnable;
 }t_COMMAND_REG;
@@ -49,7 +49,7 @@ typedef struct
 	CPU_INT08U Manual;
 	CPU_INT08U Auto;
 	CPU_INT16S MoveDirection;
-	CPU_INT08U MoveDuration;
+	CPU_INT16U MoveDuration;
 	CPU_INT08U UDPLiveFeed;
 	CPU_INT08U MotorPSEnable;
 }t_STATUS_REG;
