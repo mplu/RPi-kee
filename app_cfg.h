@@ -56,7 +56,7 @@
 #define RPIKEE_ERR_OOB          1   //  Error : Out of Bound
 
 /* TCP Configuration */
-#define DEF_PORT        6523
+#define DEF_PORT        6524
 #define MAX_CLIENTS     1
 #define MAX_TCP_DATA    250
 

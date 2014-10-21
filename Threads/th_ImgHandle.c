@@ -24,6 +24,7 @@ void* threadImgHandle (void* arg)
     CPU_INT16U i,j,index;
     CPU_CHAR Luminance = 0;
     CPU_INT08U maxvalue;
+	CPU_INT08U enable_out_img = TRUE;
 
 	t_pixel tab_pixel[NUMBER_OF_SEGMENT];
 
@@ -52,15 +53,18 @@ void* threadImgHandle (void* arg)
 		}else
 		{
 			apply_linfilter(&img_in1,filter0,GAUSS_SIZE,GREEN|RED,&img_inter1);
-			//sprintf((char *)outputfilename,"out__gauss_%s",g_nextIMGfilename);
-			//write_img(outputfilename,&img_inter1);
-			//printf("apply_linfilter ok\n");
+			if(enable_out_img == TRUE)
+			{
+				sprintf((char *)outputfilename,"out__gauss_%s",g_nextIMGfilename);
+				write_img(outputfilename,&img_inter1);
+			}
 			
 			search_contrast(CONTRAST_TOLERANCE,&img_inter1,&img_out1,SetRGB(255,255,255),GREEN|RED,HOR);
-			//printf("search_contrast ok\n");
-			//sprintf((char *)outputfilename,"out_contdetec_%s",g_nextIMGfilename);
-			//write_img(outputfilename,&img_out1);
-			//printf("write_img ok\n");
+			if(enable_out_img == TRUE)
+			{
+				sprintf((char *)outputfilename,"out_contdetec_%s",g_nextIMGfilename);
+				write_img(outputfilename,&img_out1);
+			}
 			
 			//looking for remarquable point
 			he_of_segement = img_out1.he / (number_of_segment_max+1);
@@ -127,7 +131,7 @@ void* threadImgHandle (void* arg)
 
 			//printf( "%d duration : %f seconds\n", number_of_loop,duration );
 			(void)duration;
-			/*if (Params.Analog_Values.ImgMoveDirection != -43)
+			if (enable_out_img == TRUE)
 			{
 				sprintf((char *)outputfilename,"out%05lu_process_%s_%.2f_%.2f_%d.bmp",number_of_loop
 																				,g_nextIMGfilename
@@ -135,7 +139,7 @@ void* threadImgHandle (void* arg)
 																				,av_x
 																				,Params.Analog_Values.ImgMoveDirection);
 				write_img(outputfilename,&img_in1);
-			}*/
+			}
 			printf("Img treated %d\n",Params.Analog_Values.ImgMoveDirection);
 
 			// suppress file
