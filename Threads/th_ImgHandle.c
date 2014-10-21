@@ -34,7 +34,8 @@ void* threadImgHandle (void* arg)
     init_img(&img_out1);
     init_img(&img_inter1);
 
-	CPU_CHAR outputfilename[32];
+	CPU_CHAR inputfilename[IMG_FILENAME_SIZE];
+	CPU_CHAR outputfilename[IMG_FILENAME_SIZE];
 	CPU_CHAR delele_img_cmd[IMG_FILENAME_SIZE + 10];
 
 
@@ -52,17 +53,20 @@ void* threadImgHandle (void* arg)
 			//printf("erreur ouverture\n");
 		}else
 		{
+		    // saving name
+		    sprintf((char *)inputfilename,"%s",g_nextIMGfilename);
+
 			apply_linfilter(&img_in1,filter0,GAUSS_SIZE,GREEN|RED,&img_inter1);
 			if(enable_out_img == TRUE)
 			{
-				sprintf((char *)outputfilename,"out__gauss_%s",g_nextIMGfilename);
+				sprintf((char *)outputfilename,"out__gauss_%s",inputfilename);
 				write_img(outputfilename,&img_inter1);
 			}
 
 			search_contrast(CONTRAST_TOLERANCE,&img_inter1,&img_out1,SetRGB(255,255,255),GREEN|RED,HOR);
 			if(enable_out_img == TRUE)
 			{
-				sprintf((char *)outputfilename,"out_contdetec_%s",g_nextIMGfilename);
+				sprintf((char *)outputfilename,"out_contdetec_%s",inputfilename);
 				write_img(outputfilename,&img_out1);
 			}
 
@@ -134,7 +138,7 @@ void* threadImgHandle (void* arg)
 			if (enable_out_img == TRUE)
 			{
 				sprintf((char *)outputfilename,"out%05lu_process_%s_%.2f_%.2f_%d.bmp",number_of_loop
-																				,g_nextIMGfilename
+																				,inputfilename
 																				,av_angle
 																				,av_x
 																				,Params.Analog_Values.ImgMoveDirection);
@@ -143,11 +147,11 @@ void* threadImgHandle (void* arg)
 			printf("Img treated %d\n",Params.Analog_Values.ImgMoveDirection);
 
 			// suppress file
-	#if defined (Win32)
-			sprintf((char *)delele_img_cmd,"del %s",g_nextIMGfilename);
-	#elif defined (RPi)
-			sprintf((char *)delele_img_cmd,"rm %s -rf",g_nextIMGfilename);
-	#endif
+#if defined (Win32)
+			sprintf((char *)delele_img_cmd,"del %s",inputfilename);
+#elif defined (RPi)
+			sprintf((char *)delele_img_cmd,"rm %s -rf",inputfilename);
+#endif
 			system((const char *)delele_img_cmd);
 			asm("nop");
 
