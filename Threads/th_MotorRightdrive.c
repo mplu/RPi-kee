@@ -17,10 +17,10 @@ void* threadMotorRightdrive (void* arg)
         m_msSleep(100);
         if(Params.RightMotorCommand.Steps < 0)
 		{
-			turnClockwise(MotorRight, Params.RightMotorCommand.Delay, Params.RightMotorCommand.Steps, &sem_RightMotorEmergencyStop);
+			turnClockwise(MotorRight, Params.RightMotorCommand.Delay, 0-Params.RightMotorCommand.Steps, &sem_RightMotorEmergencyStop);
 		}else if (Params.RightMotorCommand.Steps > 0)
 		{
-			turnCounterClockwise(MotorRight, Params.RightMotorCommand.Delay, 0-Params.RightMotorCommand.Steps, &sem_RightMotorEmergencyStop);
+			turnCounterClockwise(MotorRight, Params.RightMotorCommand.Delay, Params.RightMotorCommand.Steps, &sem_RightMotorEmergencyStop);
 		}else
 		{
 			turnClockwise(MotorRight, 0, 0, &sem_RightMotorEmergencyStop);
