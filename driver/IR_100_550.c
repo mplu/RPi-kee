@@ -66,9 +66,7 @@ CPU_INT16U GetDistancefromFarIR(CPU_INT16U voltage)
 {
     CPU_INT32U distance;
     CPU_FP32 f_voltage = voltage/1000.0;
-#if defined (Win32)
-    f_voltage = 2.81;
-#endif
+
     if(Dist_Volt_RangeCheck(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor100_550,13) == RPIKEE_NO_ERR)
     {
         distance = (CPU_INT32U)Dist_Volt_Interpolation(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor100_550,(CPU_FP32*)&InterpoDistanceTablefor100_550,13);

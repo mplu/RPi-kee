@@ -21,6 +21,10 @@ void* threadADCAcq (void* arg)
         {
             SPI_combuffer[i] = rand()%ADC_MAX_VALUE;
         }
+        SPI_combuffer[Ch0_Vbat] = 900 + (rand()%(100));
+        SPI_combuffer[Ch1_Vmot] = 800 + (rand()%(100));
+        SPI_combuffer[Ch2_NearIR] = 122 + (rand()%(25));
+        SPI_combuffer[Ch3_FarIR] = 500 + (rand()%(50));
 #elif defined (RPi)
         for(i=0;i<ADC_NUMBER_OF_CHANNEL;i++)
         {

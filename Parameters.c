@@ -9,6 +9,7 @@
 /****************************************************************/
 #include "includes.h"
 
+
 const char SOFT_VER[]   = "0.1.0";
 const char PARAM_VER[]  = "1.1";
 
@@ -138,7 +139,9 @@ CPU_VOID Init_Params()
 	strcpy((char *)Params.Info.SoftVersion,SOFT_VER);
 	strcpy((char *)Params.Info.ParamVersion,PARAM_VER);
 
-
+#if defined (Win32)
+    sprintf((char *)Params.Info.SoftVersion,"%s emulator",Params.Info.SoftVersion);
+#endif
 
     Params.Analog_Values.LongIRDistance = 0;
     Params.Analog_Values.ShortIRDistance = 0;

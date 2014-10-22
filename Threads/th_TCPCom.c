@@ -42,7 +42,7 @@ void* threadTCPCom (void* arg)
 #if defined (Win32)
         if(bind(serv_sock,(SOCKADDR *) &serv_sin, sizeof serv_sin) == SOCKET_ERROR)
 #elif defined (RPi)
-		if(bind(serv_sock,(struct sockaddr *) &serv_sin, sizeof serv_sin) == SOCKET_ERROR)	
+		if(bind(serv_sock,(struct sockaddr *) &serv_sin, sizeof serv_sin) == SOCKET_ERROR)
 #endif
         {
             printf("Could not create bind socket\n");
@@ -59,7 +59,7 @@ void* threadTCPCom (void* arg)
                     m_sSleep(1);
                     //Accept and incoming connection
                     printf("Waiting for incoming connections...\n");
-                    
+
 #if defined (Win32)
 					clilen = sizeof(SOCKADDR_IN);
 #elif defined (RPi)
@@ -77,18 +77,19 @@ void* threadTCPCom (void* arg)
                     {
                         data_in_size    = recv(client_sock , (char *) data_in , MAX_TCP_DATA , 0);
 
-                        rpk_err = RPK_Frame_Manage(data_in, data_in_size, &g_rpkframe_in);
-
-                        if(rpk_err == rpkerr_NoError)
+                        if(data_in_size >0)
                         {
-                            rpk_err = RPK_Frame_Process(&g_rpkframe_in,&g_rpkframe_out);
+                            rpk_err = RPK_Frame_Manage(data_in, data_in_size, &g_rpkframe_in);
+                            if(rpk_err == rpkerr_NoError)
+                            {
+                                rpk_err = RPK_Frame_Process(&g_rpkframe_in,&g_rpkframe_out);
+                            }
+
+                            data_out_size = RPK_SendPrepare(&g_rpkframe_out,data_out);
+                            ret_send = send(client_sock,(const char *)data_out,data_out_size,0);
                         }
 
-                        data_out_size = RPK_SendPrepare(&g_rpkframe_out,data_out);
-
-                        ret_send = send(client_sock,(const char *)data_out,data_out_size,0);
-                        asm("nop");
-                    }while((data_in[0]!='q')&&data_in_size>0&&(ret_send>0));
+                    }while(data_in_size>=0&&(ret_send>=0));
                     printf("Client disconnected\n");
 
                 }

@@ -10,6 +10,7 @@ void* threadImgHandle (void* arg)
 	clock_t start, finish;
 	CPU_INT32U number_of_loop = 0;
     double duration;
+    CPU_FP32 vx, vy;
     CPU_FP64 angle;
     CPU_FP64 av_angle = 0;
     CPU_INT16U av_angle_weight = 0;
@@ -100,9 +101,11 @@ void* threadImgHandle (void* arg)
 				if((index >= 1)&&(tab_pixel[index-1].x!=0)&&(tab_pixel[index].x!=0))
 				{
 					highlight_line(&img_in1,tab_pixel[index-1],tab_pixel[index],SetRGB(0,255,0));
-					if((tab_pixel[index].x-tab_pixel[index-1].x)!=0)
+					vy = tab_pixel[index].y - tab_pixel[index-1].y;
+                    vx = tab_pixel[index].x - tab_pixel[index-1].x;
+					if(vx!=0)
 					{
-						angle=atan((CPU_FP32)(tab_pixel[index].y-tab_pixel[index-1].y)/(CPU_FP32)(tab_pixel[index].x-tab_pixel[index-1].x));
+						angle=atan2(vy,vx);
 					}else
 					{
 						angle = PI / 2.0;
