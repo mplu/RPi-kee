@@ -66,19 +66,26 @@ void* threadCtrlCmd (void* arg)
             }
         }else if(Params.StatusReg.Auto == 1)
         {
-            Params.CommandReg.MoveDirection = Params.Analog_Values.ImgMoveDirection;
-            if(Params.Analog_Values.ShortIRDistance > 20)
+            if(Params.Analog_Values.ImgMoveDirection != 32767)
             {
-                Params.CommandReg.MoveDuration = 500;
-            }
-            if(Params.CommandReg.MoveDuration > 0)
-            {
-                MotorInputCommand(&Params.CommandReg,&Params.LeftMotorCommand,&Params.RightMotorCommand);
-                Params.CommandReg.MoveDuration -= 100;
+                Params.CommandReg.MoveDirection = Params.Analog_Values.ImgMoveDirection;
+                if(Params.Analog_Values.ShortIRDistance > 20)
+                {
+                    Params.CommandReg.MoveDuration = 500;
+                }
+                if(Params.CommandReg.MoveDuration > 0)
+                {
+                    MotorInputCommand(&Params.CommandReg,&Params.LeftMotorCommand,&Params.RightMotorCommand);
+                    Params.CommandReg.MoveDuration -= 100;
+                }else
+                {
+                    MotorFullStop();
+                }
             }else
             {
                 MotorFullStop();
             }
+
         }else
         {
             MotorFullStop();

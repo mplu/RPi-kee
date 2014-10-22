@@ -77,6 +77,8 @@ void* threadImgHandle (void* arg)
 			//for each segment
 			av_angle_weight = 0;
 			av_x_weight = 0;
+			av_x = 0;
+			av_angle = 0;
 			number_of_segment_found = 0;
 			for(index = 0 ; index <= number_of_segment_max ; index++)
 			{
@@ -132,7 +134,14 @@ void* threadImgHandle (void* arg)
 			av_x = av_x - img_out1.wi/2 ;
 
 			MotorCommandRatio = CalculateMotorCommandFromLine(av_angle,(CPU_FP32)av_x/(CPU_FP32)img_out1.wi);
-			Params.Analog_Values.ImgMoveDirection = ratioTOangle(MotorCommandRatio) ;
+			if(av_angle_weight != 0)
+            {
+                Params.Analog_Values.ImgMoveDirection = ratioTOangle(MotorCommandRatio) ;
+            }else
+            {
+                Params.Analog_Values.ImgMoveDirection = 32767;
+            }
+
 			finish = clock();
 			duration = (double)(finish - start) / CLOCKS_PER_SEC;
 
