@@ -47,6 +47,7 @@ CPU_VOID turnClockwise(t_Motor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem
 				{
 					i = steps; // Immedialty exit the for loop
 				}
+				//printf("%c %d/%d CW\n",M.id,i,steps);
         }
 }
 
@@ -67,5 +68,6 @@ CPU_VOID turnCounterClockwise(t_Motor M,CPU_INT16U delay, CPU_INT16U steps, sem_
 				{
 					i = steps; // Immedialty exit the for loop
 				}
+				//printf("%c %d/%d CCW\n",M.id,i,steps);
         }
 }

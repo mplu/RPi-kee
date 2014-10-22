@@ -27,6 +27,7 @@
 
 typedef struct
 {
+	CPU_CHAR id;
 	CPU_INT08U Coil_A_1_pin;
 	CPU_INT08U Coil_A_2_pin;
 	CPU_INT08U Coil_B_1_pin;

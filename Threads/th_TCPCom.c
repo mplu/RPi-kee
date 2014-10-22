@@ -70,7 +70,7 @@ void* threadTCPCom (void* arg)
 #if defined (Win32)
 					client_sock = accept(serv_sock, (struct sockaddr *)&cli_sin, (int*)&clilen);
 #elif defined (RPi)
-					client_sock = accept(serv_sock, (struct sockaddr *)&cli_sin, (struct socklen_t *)&clilen);
+					client_sock = accept(serv_sock, (struct sockaddr *)&cli_sin, &clilen);
 #endif
                     printf("Client connected\n");
                     do
