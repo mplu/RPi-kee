@@ -92,17 +92,17 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
 
     if(direction == 90)
     {
-            left.Delay = 4;
+            left.Delay = 2;
             left.Steps = -32;
 
-            right.Delay = 4;
+            right.Delay = 2;
             right.Steps = 32;
     }else if (direction == -90)
     {
-            left.Delay = 4;
+            left.Delay = 2;
             left.Steps = 32;
 
-            right.Delay = 4;
+            right.Delay = 2;
             right.Steps = -32;
     }else
     {
@@ -112,8 +112,8 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
             left.Delay = 4;
             left.Steps = steps;
 
-            right.Delay = (CPU_FP32)((CPU_FP32)left.Delay/_ratio);
-            right.Steps = left.Delay * left.Steps /((CPU_FP32)left.Delay/_ratio);
+            right.Delay = (CPU_FP32)((CPU_FP32)left.Delay/_ratio)/2.0;
+            right.Steps = left.Delay * left.Steps /((CPU_FP32)left.Delay/_ratio * 2.0);
 
         }else if(_ratio > 1)
         {
@@ -121,8 +121,8 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
             right.Steps = steps;
             _ratio = 1/_ratio;
 
-            left.Delay = (CPU_FP32)((CPU_FP32)right.Delay/_ratio);
-            left.Steps = right.Delay * right.Steps /((CPU_FP32)right.Delay/_ratio);
+            left.Delay = (CPU_FP32)((CPU_FP32)right.Delay/_ratio) / 2.0;
+            left.Steps = right.Delay * right.Steps /((CPU_FP32)right.Delay/_ratio * 2.0);
         }
     }
 

@@ -14,7 +14,7 @@ void* threadMotorRightdrive (void* arg)
     MotorGPIOInit(MotorRight);
     while(1) /* Boucle infinie */
     {
-        m_msSleep(100);
+        
         if(Params.RightMotorCommand.Steps < 0)
 		{
 			turnClockwise(MotorRight, Params.RightMotorCommand.Delay, 0-Params.RightMotorCommand.Steps, &sem_RightMotorEmergencyStop);
@@ -24,6 +24,7 @@ void* threadMotorRightdrive (void* arg)
 		}else
 		{
 			turnClockwise(MotorRight, 0, 0, &sem_RightMotorEmergencyStop);
+			m_msSleep(100);
 		}
     }
 
