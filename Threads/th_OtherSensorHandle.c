@@ -39,8 +39,12 @@ void* threadOtherSensorHandle (void* arg)
         {
             while (fgets ((char *)tampon, sizeof tampon, sortie) != NULL){}
             pclose (sortie);
+		erreur = FALSE;
         }
-
+	if(erreur == TRUE)
+	{
+		printf("errer during temperature file read\n");
+	}
 #endif
 
 		Params.Analog_Values.CPUTemperature =

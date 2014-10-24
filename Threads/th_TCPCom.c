@@ -4,8 +4,9 @@
 void* threadTCPCom (void* arg)
 {
     CPU_INT32S port=DEF_PORT;
-    typedef CPU_INT32U socklen_t;
 #if defined (Win32)
+    typedef CPU_INT32U socklen_t;
+
 	SOCKET serv_sock,client_sock;
 	SOCKADDR_IN serv_sin,cli_sin;
 #elif defined (RPi)
