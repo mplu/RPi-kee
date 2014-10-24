@@ -4,12 +4,12 @@
 void* threadImgAcq (void* arg)
 {
 	CPU_INT08S tampon1[250];
-
+    CPU_INT08U erreur = FALSE;
 #if defined (Win32)
     CPU_BOOLEAN firstrun=TRUE;
 #elif defined (RPi)
     FILE *sortie;
-    CPU_INT08U erreur = FALSE;
+
 #endif // defined
     CPU_INT08S number_of_loop = 0;
     CPU_CHAR copy_img_cmd[IMG_FILENAME_SIZE + 10];
@@ -18,6 +18,7 @@ void* threadImgAcq (void* arg)
     {
         m_msSleep(CAPTURE_PERIOD);
 		memset (tampon1,0,sizeof(tampon1));
+		erreur = FALSE;
 		//test if running
 #if defined (Win32)
         if(firstrun == TRUE)
@@ -61,15 +62,21 @@ void* threadImgAcq (void* arg)
             sprintf((char *)copy_img_cmd,"cp %s%s %s",IMG_NAME,IMG_NAME_EXT,g_nextIMGfilename);
             if ((sortie = popen (IMG_CAPTURE, "r")) == NULL)
 			{
-				fprintf (stderr, "erreur");
+				fprintf (stderr, "erreur ");
 				printf("err:capturing img\n");
+				erreur = TRUE;
 			}else
 			{
 				sprintf((char *)copy_img_cmd,"cp %s%s %s",IMG_NAME,IMG_NAME_EXT,g_nextIMGfilename);
+				erreur = FALSE;
 			}
 #endif // defined
-            system((const char *)copy_img_cmd);
-			sem_post(&sem_Img_available);
+            if(erreur == FALSE)
+            {
+                system((const char *)copy_img_cmd);
+                sem_post(&sem_Img_available);
+            }
+
 		}
 		number_of_loop ++;
 		number_of_loop = number_of_loop % 7;

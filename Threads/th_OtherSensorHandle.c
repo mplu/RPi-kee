@@ -9,6 +9,7 @@ void* threadOtherSensorHandle (void* arg)
 
 #elif defined (RPi)
     FILE *sortie;
+    CPU_INT08U erreur;
 #endif
     while(1) /* Boucle infinie */
     {
@@ -26,14 +27,19 @@ void* threadOtherSensorHandle (void* arg)
 		tampon[2] += 0x30;
 		tampon[3] += 0x30;
 #elif defined (RPi)
+        erreur = FALSE;
 							//opt/vc/bin/vcgencmd measure_temp
 							//cat /sys/class/thermal/thermal_zone0/temp
         if ((sortie = popen ("cat /sys/class/thermal/thermal_zone0/temp", "r")) == NULL)
 		{
-                fprintf (stderr, "erreur");
-                printf("err:reading cpu temp\n");
+            fprintf (stderr, "erreur");
+            printf("err:reading cpu temp\n");
+            erreur = TRUE;
+        }else
+        {
+            while (fgets ((char *)tampon, sizeof tampon, sortie) != NULL){}
         }
-		while (fgets ((char *)tampon, sizeof tampon, sortie) != NULL){}
+
 #endif
 
 		Params.Analog_Values.CPUTemperature =
