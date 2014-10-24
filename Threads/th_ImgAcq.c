@@ -70,7 +70,7 @@ void* threadImgAcq (void* arg)
 			{
 				sprintf((char *)copy_img_cmd,"cp %s%s %s",IMG_NAME,IMG_NAME_EXT,g_nextIMGfilename);
 				erreur = FALSE;
-				 pclose (sortie);
+                pclose (sortie);
 			}
 #endif // defined
             if(erreur == FALSE)

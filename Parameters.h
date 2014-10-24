@@ -74,11 +74,11 @@ typedef struct
 
 typedef struct
 {
-	CPU_INT16U unused0:1;
-	CPU_INT16U unused1:1;
-	CPU_INT16U unused2:1;
-	CPU_INT16U unused3:1;
-	CPU_INT16U unused4:1;
+	CPU_INT16U IRDistance:1;
+	CPU_INT16U BatteryVoltageLow:1;
+	CPU_INT16U MotorVoltageLow:1;
+	CPU_INT16U CPU_Temp_High:1;
+	CPU_INT16U Aux_Temp_High:1;
 	CPU_INT16U unused5:1;
 	CPU_INT16U unused6:1;
 	CPU_INT16U unused7:1;

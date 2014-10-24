@@ -68,7 +68,7 @@ void* threadCtrlCmd (void* arg)
             if(Params.Analog_Values.ImgMoveDirection != 32767)
             {
                 Params.CommandReg.MoveDirection = Params.Analog_Values.ImgMoveDirection;
-                //if(Params.Analog_Values.ShortIRDistance > 20)
+                if(Params.FailureReg.global_1.bit.IRDistance == TRUE)
                 {
                     Params.CommandReg.MoveDuration = 500;
                 }
