@@ -25,12 +25,12 @@ void* threadImgHandle (void* arg)
     CPU_INT16U i,j,index;
     CPU_CHAR Luminance = 0;
     CPU_INT08U maxvalue;
-	CPU_INT08U enable_out_img = FALSE;
+	CPU_INT08U enable_out_img = TRUE;
 
 	t_pixel tab_pixel[NUMBER_OF_SEGMENT];
 
 	CPU_FP64 MotorCommandRatio = 0;
-
+    t_simplearea area;
 	init_img(&img_in1);
     init_img(&img_out1);
     init_img(&img_inter1);
@@ -57,19 +57,6 @@ void* threadImgHandle (void* arg)
 		    // saving name
 		    sprintf((char *)inputfilename,"%s",g_nextIMGfilename);
 
-			apply_linfilter(&img_in1,filter0,GAUSS_SIZE,GREEN,&img_inter1);
-			if(enable_out_img == TRUE)
-			{
-				sprintf((char *)outputfilename,"out__gauss_%s",inputfilename);
-				write_img(outputfilename,&img_inter1);
-			}
-
-			search_contrast(CONTRAST_TOLERANCE,&img_inter1,&img_out1,SetRGB(255,255,255),GREEN,HOR);
-			if(enable_out_img == TRUE)
-			{
-				sprintf((char *)outputfilename,"out_contdetec_%s",inputfilename);
-				write_img(outputfilename,&img_out1);
-			}
 
 			//looking for remarquable point
 			he_of_segement = img_out1.he / (number_of_segment_max+1);
@@ -83,10 +70,37 @@ void* threadImgHandle (void* arg)
 			for(index = 0 ; index <= number_of_segment_max ; index++)
 			{
 				i= (index + 1) * he_of_segement;
+
+				area.BotLeft.x = 0;
+                area.BotLeft.y = i;
+                area.TopRight.x = img_in1.wi;
+                area.TopRight.y = i+1;
+
+                apply_linfilter(&img_in1,filter0,GAUSS_SIZE,GREEN,&area,&img_inter1);
+                /*if(enable_out_img == TRUE)
+                {
+                    sprintf((char *)outputfilename,"out__gauss_%s",inputfilename);
+                    write_img(outputfilename,&img_inter1);
+                }*/
+
+                search_contrast(CONTRAST_TOLERANCE,&img_inter1,&area,&img_out1,SetRGB(255,255,255),GREEN,HOR);
+                /*if(enable_out_img == TRUE)
+                {
+                    sprintf((char *)outputfilename,"out_contdetec_%s",inputfilename);
+                    write_img(outputfilename,&img_out1);
+                }*/
+
+
+
+
+
+
+
+
 				tab_pixel[index].y = i;
 				tab_pixel[index].x = 0;
 				maxvalue = 0;
-				for(j=0+margin;j<(img_out1.wi - margin);j++)
+				for(j=area.BotLeft.x+margin;j<(area.TopRight.x - margin);j++)
 				{
 
 					//calcultate luminance Y = 0,299 R + 0,587 G + 0,114 B
@@ -123,6 +137,12 @@ void* threadImgHandle (void* arg)
 
 				}
 			}
+
+
+
+
+
+
 			// Normalize angle and position from vertical center of image
 			if(av_angle>=0)
 			{

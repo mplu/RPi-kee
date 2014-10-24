@@ -653,11 +653,12 @@ CPU_CHAR luminance(t_img * img_in,t_img * img_out)
  * \param tab_filtre CPU_FP64** - pointer to a 2D Table containing the filter
  * \param filtersize CPU_INT16S - size of the matrix representing the filter
  * \param color CPU_INT32U - color that will be impacted by the filter. If not selected, will be set to zero
+ * \param area t_simplearea* - area where filter should be applyied. If null, all img treated
  * \param img_out t_img* - output image
  * \return CPU_CHAR - status of operation
  *
  ***********************************************/
-CPU_CHAR apply_linfilter(t_img * img_in,CPU_FP64 ** tab_filtre,CPU_INT16S filtersize,CPU_INT32U color,t_img * img_out)
+CPU_CHAR apply_linfilter(t_img * img_in,CPU_FP64 ** tab_filtre,CPU_INT16S filtersize,CPU_INT32U color,t_simplearea * area,t_img * img_out)
 {
 
     CPU_CHAR ret = ERR_NONE;
@@ -676,11 +677,30 @@ CPU_CHAR apply_linfilter(t_img * img_in,CPU_FP64 ** tab_filtre,CPU_INT16S filter
     img_out->he = img_in->he;
     img_out->FileHeader_size = img_in->FileHeader_size;
 
+    t_simplearea local;
+    if(area!=NULL)
+    {
+        local.BotLeft.x = area->BotLeft.x;
+        local.BotLeft.y = area->BotLeft.y;
+        local.TopRight.x = area->TopRight.x;
+        local.TopRight.y = area->TopRight.y;
+    }else
+    {
+        local.BotLeft.x = 0;
+        local.BotLeft.y = 0;
+        local.TopRight.x = img_in->wi;
+        local.TopRight.y = img_in->he;
+    }
 
-    for(i_img=0;i_img< (img_in->he ) ;i_img++)
+    if(local.BotLeft.x < 0) local.BotLeft.x = 0;
+    if(local.BotLeft.y < 0) local.BotLeft.y = 0;
+    if(local.TopRight.x > img_in->wi) local.TopRight.x = img_in->wi;
+    if(local.TopRight.y > img_in->he) local.TopRight.y = img_in->he;
+
+    for( i_img=local.BotLeft.y ; i_img< local.TopRight.y ; i_img++)
     {
 
-        for(j_img=0 ; (j_img< img_in->wi );j_img++)
+        for( j_img=local.BotLeft.x ; j_img< local.TopRight.x ; j_img++)
         {
 
             one_pixel[c_Red] = 0;

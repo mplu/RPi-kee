@@ -31,7 +31,7 @@
  * Search constrast between two adjacent pixel on a given
  * direction, according to a color
  ***********************************************/
-CPU_CHAR search_contrast(CPU_CHAR tolerance, t_img * img_in1,t_img * img_out,CPU_INT32U RGB, CPU_INT32U color,CPU_CHAR direction)
+CPU_CHAR search_contrast(CPU_CHAR tolerance, t_img * img_in1,t_simplearea * area,t_img * img_out,CPU_INT32U RGB, CPU_INT32U color,CPU_CHAR direction)
 {
     CPU_CHAR ret = ERR_NONE;
     CPU_INT32S i,j,limit_he,limit_wi;
@@ -77,9 +77,29 @@ CPU_CHAR search_contrast(CPU_CHAR tolerance, t_img * img_in1,t_img * img_out,CPU
         next_j = 0;
     }
 
-    for(i=0;i< (limit_he ) ;i++)
+    t_simplearea local;
+    if(area!=NULL)
     {
-        for(j=0 ; (j< limit_wi );j++)
+        local.BotLeft.x = area->BotLeft.x;
+        local.BotLeft.y = area->BotLeft.y;
+        local.TopRight.x = area->TopRight.x;
+        local.TopRight.y = area->TopRight.y;
+    }else
+    {
+        local.BotLeft.x = 0;
+        local.BotLeft.y = 0;
+        local.TopRight.x = limit_wi;
+        local.TopRight.y = limit_he;
+    }
+
+    if(local.BotLeft.x < 0) local.BotLeft.x = 0;
+    if(local.BotLeft.y < 0) local.BotLeft.y = 0;
+    if(local.TopRight.x > limit_wi) local.TopRight.x = limit_wi;
+    if(local.TopRight.y > limit_he) local.TopRight.y = limit_he;
+
+    for(i=local.BotLeft.y;i< (local.TopRight.y ) ;i++)
+    {
+        for(j=local.BotLeft.x ; (j< local.TopRight.x );j++)
         {
             if ((color & BLUE)!=0)
             {

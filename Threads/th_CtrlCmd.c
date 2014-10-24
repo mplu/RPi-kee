@@ -14,7 +14,6 @@ void* threadCtrlCmd (void* arg)
 {
     Params.CommandReg.MoveDirection = 0;
     Params.CommandReg.MoveDuration = 0;
-
     while(1) /* Boucle infinie */
     {
         if(Params.CommandReg.MotorPSEnable == 1)
