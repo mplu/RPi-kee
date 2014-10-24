@@ -25,7 +25,7 @@ void* threadImgHandle (void* arg)
     CPU_INT16U i,j,index;
     CPU_CHAR Luminance = 0;
     CPU_INT08U maxvalue;
-	CPU_INT08U enable_out_img = TRUE;
+	CPU_INT08U enable_out_img = OUT_IMG_DBG;
 
 	t_pixel tab_pixel[NUMBER_OF_SEGMENT];
 

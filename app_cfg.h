@@ -35,6 +35,7 @@
 #define ERROR_NOTRUNNING	""
 #define ERROR_START 		"* failed to open vchiq instance"
 #define CAPTURE_OK			""
+#define OUT_IMG_DBG		FALSE;
 
 /* Motor driving */
 #define ANGLE_COEF          0.2
