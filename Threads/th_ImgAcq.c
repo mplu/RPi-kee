@@ -25,6 +25,7 @@ void* threadImgAcq (void* arg)
 #elif defined (RPi)
         if ((sortie = popen (IMG_TEST_DAEMON, "r")) == NULL) {
                 fprintf (stderr, "erreur");
+                printf("err:reading img daemon state\n");
         }
 		while (fgets ((char *)tampon1, sizeof tampon1, sortie) != NULL) {}
 #endif
@@ -50,6 +51,7 @@ void* threadImgAcq (void* arg)
             if ((sortie = popen (IMG_CAPTURE, "r")) == NULL)
 			{
 				fprintf (stderr, "erreur");
+				printf("err:capturing img\n");
 			}else
 			{
 				sprintf((char *)copy_img_cmd,"cp %s%s %s",IMG_NAME,IMG_NAME_EXT,g_nextIMGfilename);

@@ -22,6 +22,7 @@
  *
  * \param tolerance CPU_CHAR - tolerance in % between two pixel
  * \param img_in1 t_img* - input image
+ * \param area t_simplearea* - area where filter should be applyied. If null, all img treated
  * \param img_out t_img* - output image
  * \param RGB CPU_INT32U - replacement color for detected pixel
  * \param color CPU_INT32U - range of color to work on

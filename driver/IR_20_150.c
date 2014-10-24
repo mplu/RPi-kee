@@ -52,20 +52,14 @@ const CPU_FP32 InterpoDistanceTablefor20_150[] = {
 } ;
 
 
-/****************************************************************/
-/* GetDistancefromNearIR()                                      */
-/* Description :                                                */
-/*   Calculate distance value from voltage value                */
-/*                                                              */
-/* Input:                                                       */
-/*   voltage - voltage in millivot                              */
-/*                                                              */
-/* Output:                                                      */
-/*   none                                                       */
-/* Return:                                                      */
-/*   distance in cm                                             */
-/*                                                              */
-/****************************************************************/
+
+/********************************************//**
+ * \brief Calculate distance value from voltage value
+ *
+ * \param voltage CPU_INT16U voltage in millivolt
+ * \return CPU_INT16U distance in cm
+ *
+ ***********************************************/
 CPU_INT16U GetDistancefromNearIR(CPU_INT16U voltage)
 {
     CPU_INT32U distance;
