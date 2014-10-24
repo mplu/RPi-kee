@@ -156,7 +156,7 @@ void* threadImgHandle (void* arg)
 																				,Params.Analog_Values.ImgMoveDirection);
 				write_img(outputfilename,&img_in1);
 			}
-			printf("Img treated %d\n",Params.Analog_Values.ImgMoveDirection);
+			printf("Img treated (in %.3f): direction %d, \n",duration,Params.Analog_Values.ImgMoveDirection);
 
 			// suppress file
 #if defined (Win32)
