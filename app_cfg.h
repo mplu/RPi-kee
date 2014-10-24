@@ -25,7 +25,7 @@
 
 #define CAPTURE_WARMUP		2	//in second
 #define CAPTURE_PERIOD		250 //in millisecond
-#define IMG_START 			"/usr/bin/raspistill -q 10 -o capture_.bmp -e bmp -w 240 -h 180 -s -t 3600000 &"
+#define IMG_START 			"/usr/bin/raspistill -q 10 -o capture_.bmp -e bmp -w 400 -h 300 -s -t 3600000 &"
 #define IMG_NAME 			"capture_"
 #define IMG_NAME_EXT        ".bmp"
 #define IMG_FILENAME_SIZE	32
