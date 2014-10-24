@@ -4,10 +4,12 @@
 void* threadImgAcq (void* arg)
 {
 	CPU_INT08S tampon1[250];
+
 #if defined (Win32)
     CPU_BOOLEAN firstrun=TRUE;
 #elif defined (RPi)
     FILE *sortie;
+    CPU_INT08U erreur = FALSE;
 #endif // defined
     CPU_INT08S number_of_loop = 0;
     CPU_CHAR copy_img_cmd[IMG_FILENAME_SIZE + 10];
@@ -23,11 +25,20 @@ void* threadImgAcq (void* arg)
         else
         {tampon1[0] = 1;}
 #elif defined (RPi)
-        if ((sortie = popen (IMG_TEST_DAEMON, "r")) == NULL) {
-                fprintf (stderr, "erreur");
-                printf("err:reading img daemon state\n");
+        if ((sortie = popen (IMG_TEST_DAEMON, "r")) == NULL)
+        {
+            fprintf (stderr, "erreur");
+            printf("err:reading img daemon state\n");
+            erreur = TRUE;
+        }else
+        {
+            erreur = FALSE;
+            while (fgets ((char *)tampon1, sizeof tampon1, sortie) != NULL) {}
         }
-		while (fgets ((char *)tampon1, sizeof tampon1, sortie) != NULL) {}
+        if(erreur == TRUE)
+        {
+            printf("log after error in popen or fgets\n");
+        }
 #endif
 
 		if(strcmp((char *)tampon1,ERROR_NOTRUNNING)==0)

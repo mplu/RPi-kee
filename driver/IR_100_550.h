@@ -12,7 +12,7 @@
 #define __IR_100_550_H
 
 
-CPU_INT16U GetDistancefromFarIR(CPU_INT16U voltage);
+CPU_INT16S GetDistancefromFarIR(CPU_INT16U voltage);
 
 #endif
 

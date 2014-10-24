@@ -35,6 +35,8 @@
 #define ERROR_NOTRUNNING	""
 #define ERROR_START 		"* failed to open vchiq instance"
 #define CAPTURE_OK			""
+//ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10 |grep RPi-kee
+//39.9 23007 root     ./RPi-kee
 #define OUT_IMG_DBG		FALSE;
 
 /* Motor driving */
@@ -55,6 +57,8 @@
 /* Error Management *****/
 #define RPIKEE_NO_ERR           0   //  No error
 #define RPIKEE_ERR_OOB          1   //  Error : Out of Bound
+#define RPIKEE_ERR_OOB_TOO_FAR  11  //  Error : Out of Bound too far
+#define RPIKEE_ERR_OOB_TOO_CLOSE 12 //  Error : Out of Bound too close
 
 /* TCP Configuration */
 #define DEF_PORT        6526

@@ -22,18 +22,18 @@
 /*	OUTPUT:	  	RPIKEE_NO_ERR  	: measure is treatable				        */
 /*				RPIKEE_ERR_OOB 	: measure is out of input range				*/
 /****************************************************************************/
-CPU_INT32S Dist_Volt_RangeCheck(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable, CPU_INT16U size)
+CPU_INT08U Dist_Volt_RangeCheck(CPU_FP32 x,CPU_FP32 * p_InterpoVoltageTable, CPU_INT16U size)
 {
 	CPU_INT16S index_max = size;
-	CPU_INT32S ret;
+	CPU_INT08U ret;
 
 	if (x > p_InterpoVoltageTable[0])
 	{
-		ret = RPIKEE_ERR_OOB;
+		ret = RPIKEE_ERR_OOB_TOO_CLOSE;
 	}
 	else if (x < p_InterpoVoltageTable[index_max-1])
 	{
-		ret = RPIKEE_ERR_OOB;
+		ret = RPIKEE_ERR_OOB_TOO_FAR;
 	}
 	else
 	{

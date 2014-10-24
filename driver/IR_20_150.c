@@ -60,19 +60,30 @@ const CPU_FP32 InterpoDistanceTablefor20_150[] = {
  * \return CPU_INT16U distance in cm
  *
  ***********************************************/
-CPU_INT16U GetDistancefromNearIR(CPU_INT16U voltage)
+CPU_INT16S GetDistancefromNearIR(CPU_INT16U voltage)
 {
-    CPU_INT32U distance;
+    CPU_INT16S distance;
     CPU_FP32 f_voltage = voltage/1000.0;
+    CPU_INT08U check;
 
-    if(Dist_Volt_RangeCheck(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor20_150,15) == RPIKEE_NO_ERR)
+    check = Dist_Volt_RangeCheck(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor20_150,15);
+
+    switch(check)
     {
-        distance = (CPU_INT32U)Dist_Volt_Interpolation(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor20_150,(CPU_FP32*)&InterpoDistanceTablefor20_150,15);
-    }else
-    {
-        distance = 0xFFFF;
+        case RPIKEE_NO_ERR:
+            distance = (CPU_INT16S)Dist_Volt_Interpolation(f_voltage,(CPU_FP32*)&InterpoVoltageTablefor20_150,(CPU_FP32*)&InterpoDistanceTablefor20_150,15);
+            break;
+        case RPIKEE_ERR_OOB_TOO_CLOSE:
+            distance = 0;
+            break;
+        case RPIKEE_ERR_OOB_TOO_FAR:
+            distance = 0x7FFF;
+            break;
+        default:
+            distance = 0xFFFF;
+            break;
     }
 
-    return (CPU_INT16U)distance;
+    return distance;
 }
 

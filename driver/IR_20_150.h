@@ -18,7 +18,7 @@
 
 
 /*** Prototypes ***/
-CPU_INT16U GetDistancefromNearIR(CPU_INT16U voltage);
+CPU_INT16S GetDistancefromNearIR(CPU_INT16U voltage);
 
 #endif
 

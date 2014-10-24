@@ -31,6 +31,7 @@ void* threadOtherSensorHandle (void* arg)
         if ((sortie = popen ("cat /sys/class/thermal/thermal_zone0/temp", "r")) == NULL)
 		{
                 fprintf (stderr, "erreur");
+                printf("err:reading cpu temp\n");
         }
 		while (fgets ((char *)tampon, sizeof tampon, sortie) != NULL){}
 #endif
