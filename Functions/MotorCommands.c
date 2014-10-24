@@ -106,7 +106,29 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
             right.Steps = -32;
     }else
     {
-        _ratio = angleTOratio((CPU_FP32)direction  );
+
+        if(direction>=0)
+        {
+            _ratio = direction*direction*0.0007+0.0796*direction+0.9798;
+            right.Delay = 4;
+            right.Steps = steps;
+
+
+            left.Steps = right.Steps / _ratio;
+            left.Delay = right.Delay * _ratio;
+        }else if(direction<0)
+        {
+            direction = 0 - direction;
+            _ratio = direction*direction*0.0007+0.0796*direction+0.9798;
+            left.Delay = 4;
+            left.Steps = steps;
+
+            right.Steps = left.Steps / ( _ratio);
+            right.Delay = left.Delay * ( _ratio);
+        }
+
+
+        /*_ratio = angleTOratio((CPU_FP32)direction  );
         if(_ratio <= 1)
         {
             left.Delay = 4;
@@ -123,7 +145,7 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
 
             left.Delay = (CPU_FP32)((CPU_FP32)right.Delay/_ratio) / 2.0;
             left.Steps = right.Delay * right.Steps /((CPU_FP32)right.Delay/_ratio * 2.0);
-        }
+        }*/
     }
 
 
@@ -164,3 +186,5 @@ CPU_FP32 angleTOratio(CPU_FP32 angle)
 
     return _ratio;
 }
+
+
