@@ -35,6 +35,7 @@ void* threadImgAcq (void* arg)
         {
             erreur = FALSE;
             while (fgets ((char *)tampon1, sizeof tampon1, sortie) != NULL) {}
+            pclose (sortie);
         }
         if(erreur == TRUE)
         {
@@ -69,6 +70,7 @@ void* threadImgAcq (void* arg)
 			{
 				sprintf((char *)copy_img_cmd,"cp %s%s %s",IMG_NAME,IMG_NAME_EXT,g_nextIMGfilename);
 				erreur = FALSE;
+				 pclose (sortie);
 			}
 #endif // defined
             if(erreur == FALSE)

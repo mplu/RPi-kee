@@ -38,6 +38,7 @@ void* threadOtherSensorHandle (void* arg)
         }else
         {
             while (fgets ((char *)tampon, sizeof tampon, sortie) != NULL){}
+            pclose (sortie);
         }
 
 #endif
@@ -47,9 +48,7 @@ void* threadOtherSensorHandle (void* arg)
 				+(tampon[2]-0x30)*10
 				+(tampon[1]-0x30)*100
 				+(tampon[0]-0x30)*1000;
-#if defined (RPi)
-        pclose (sortie);
-#endif
+
     }
 
     pthread_exit(NULL); /* Fin du thread */
