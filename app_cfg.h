@@ -24,7 +24,7 @@
 #define CONTRAST_TOLERANCE  2
 
 #define CAPTURE_WARMUP		2	//in second
-#define CAPTURE_PERIOD		1000 //in millisecond
+#define CAPTURE_PERIOD		250 //in millisecond
 #define IMG_START 			"/usr/bin/raspistill -q 10 -o capture_.bmp -e bmp -w 240 -h 180 -s -t 3600000 &"
 #define IMG_NAME 			"capture_"
 #define IMG_NAME_EXT        ".bmp"
@@ -56,7 +56,7 @@
 #define RPIKEE_ERR_OOB          1   //  Error : Out of Bound
 
 /* TCP Configuration */
-#define DEF_PORT        6524
+#define DEF_PORT        6526
 #define MAX_CLIENTS     1
 #define MAX_TCP_DATA    250
 
