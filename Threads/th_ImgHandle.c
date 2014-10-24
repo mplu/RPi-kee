@@ -57,14 +57,14 @@ void* threadImgHandle (void* arg)
 		    // saving name
 		    sprintf((char *)inputfilename,"%s",g_nextIMGfilename);
 
-			apply_linfilter(&img_in1,filter0,GAUSS_SIZE,GREEN|RED,&img_inter1);
+			apply_linfilter(&img_in1,filter0,GAUSS_SIZE,GREEN,&img_inter1);
 			if(enable_out_img == TRUE)
 			{
 				sprintf((char *)outputfilename,"out__gauss_%s",inputfilename);
 				write_img(outputfilename,&img_inter1);
 			}
 
-			search_contrast(CONTRAST_TOLERANCE,&img_inter1,&img_out1,SetRGB(255,255,255),GREEN|RED,HOR);
+			search_contrast(CONTRAST_TOLERANCE,&img_inter1,&img_out1,SetRGB(255,255,255),GREEN,HOR);
 			if(enable_out_img == TRUE)
 			{
 				sprintf((char *)outputfilename,"out_contdetec_%s",inputfilename);
