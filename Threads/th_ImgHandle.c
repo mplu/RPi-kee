@@ -162,8 +162,7 @@ void* threadImgHandle (void* arg)
                 Params.Analog_Values.ImgMoveDirection = 32767;
             }
 
-			finish = clock();
-			duration = (double)(finish - start) / CLOCKS_PER_SEC;
+			
 
 			//printf( "%d duration : %f seconds\n", number_of_loop,duration );
 			(void)duration;
@@ -176,6 +175,8 @@ void* threadImgHandle (void* arg)
 																				,Params.Analog_Values.ImgMoveDirection);
 				write_img(outputfilename,&img_in1);
 			}
+			finish = clock();
+			duration = (double)(finish - start) / CLOCKS_PER_SEC;
 			printf("Img treated (in %.3f): direction %d, \n",duration,Params.Analog_Values.ImgMoveDirection);
 
 			// suppress file

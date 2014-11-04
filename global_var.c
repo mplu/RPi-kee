@@ -27,3 +27,5 @@ sem_t sem_RightMotorEmergencyStop; // Indicate to abort rotation
 /*** Shared Variable ***/
 CPU_INT16U g_Raw_AdcValue[ADC_NUMBER_OF_CHANNEL];
 CPU_CHAR g_nextIMGfilename[IMG_FILENAME_SIZE];
+t_Motor MotorLeft;
+t_Motor MotorRight;

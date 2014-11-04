@@ -19,6 +19,16 @@ CPU_VOID MotorGPIOInit(t_Motor M)
 #endif
 }
 
+CPU_VOID MotorGPIOStop(t_Motor M)
+{
+#if defined (RPi)
+    pinMode (M.Coil_A_1_pin, INPUT) ;
+    pinMode (M.Coil_A_2_pin, INPUT) ;
+    pinMode (M.Coil_B_1_pin, INPUT) ;
+    pinMode (M.Coil_B_2_pin, INPUT) ;
+#endif
+}
+
 CPU_VOID setStep(t_Motor M,CPU_INT08U w1, CPU_INT08U w2, CPU_INT08U w3, CPU_INT08U w4)
 {
 #if defined (RPi)

@@ -110,21 +110,21 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
         if(direction>=0)
         {
             _ratio = direction*direction*0.0007+0.0796*direction+0.9798;
-            right.Delay = 4;
+            right.Delay = 2;
             right.Steps = steps;
 
 
             left.Steps = right.Steps / _ratio;
-            left.Delay = right.Delay * _ratio;
+            left.Delay = right.Delay * _ratio + 1;
         }else if(direction<0)
         {
             direction = 0 - direction;
             _ratio = direction*direction*0.0007+0.0796*direction+0.9798;
-            left.Delay = 4;
+            left.Delay = 2;
             left.Steps = steps;
 
             right.Steps = left.Steps / ( _ratio);
-            right.Delay = left.Delay * ( _ratio);
+            right.Delay = left.Delay * ( _ratio) +1;
         }
 
 

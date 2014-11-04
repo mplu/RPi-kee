@@ -4,14 +4,14 @@
 
 void* threadMotorLeftdrive (void* arg)
 {
-    t_Motor MotorLeft;
+    
 	MotorLeft.id = 'L';
     MotorLeft.Coil_A_1_pin = COIL_A_1_PIN_L ;
     MotorLeft.Coil_A_2_pin = COIL_A_2_PIN_L ;
     MotorLeft.Coil_B_1_pin = COIL_B_1_PIN_L ;
     MotorLeft.Coil_B_2_pin = COIL_B_2_PIN_L ;
 
-    MotorGPIOInit(MotorLeft);
+    
     while(1) /* Boucle infinie */
     {
     	
