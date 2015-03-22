@@ -97,6 +97,9 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
 
             right.Delay = 2;
             right.Steps = 32;
+            //DCturnClockwise(DCMotorLeft,10);
+            //DCturnCounterClockwise(DCMotorRight,10);
+
     }else if (direction == -90)
     {
             left.Delay = 2;
@@ -104,7 +107,27 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
 
             right.Delay = 2;
             right.Steps = -32;
-    }else
+			//DCturnCounterClockwise(DCMotorLeft,10);
+            //DCturnClockwise(DCMotorRight,10);
+    }/*else if (direction == 180)
+    {
+            left.Delay = 2;
+            left.Steps = 32;
+
+            right.Delay = 2;
+            right.Steps = -32;
+			DCturnCounterClockwise(DCMotorLeft,10);
+            DCturnCounterClockwise(DCMotorRight,10);
+    }else if (direction == 0)
+    {
+            left.Delay = 2;
+            left.Steps = 32;
+
+            right.Delay = 2;
+            right.Steps = -32;
+			DCturnClockwise(DCMotorLeft,10);
+            DCturnClockwise(DCMotorRight,10);
+    }*/else
     {
 
         if(direction>=0)
