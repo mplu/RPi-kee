@@ -174,31 +174,41 @@
 1413969622 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\parameters.c
 	"includes.h"
 
-1411145589 source:c:\users\matthieu\documents\dev_soft\rpi-kee\global_var.c
+1411141989 source:c:\users\matthieu\documents\dev_soft\rpi-kee\global_var.c
 	"includes.h"
 
-1411149157 c:\users\matthieu\documents\dev_soft\rpi-kee\includes.h
+1427046968 c:\users\matthieu\documents\dev_soft\rpi-kee\includes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
 	<pthread.h>
 	<semaphore.h>
-	<windows.h>
 	<unistd.h>
+	<windows.h>
+	<winsock2.h>
+	<unistd.h>
+	<pigpio.h>
 	<wiringPi.h>
 	<mcp3004.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<unistd.h>
+	<netdb.h>
 	"llips/llips_includes.h"
 	"app_cfg.h"
+	"driver/DCMotor.h"
+	"driver/StepperMotor.h"
 	"global_var.h"
 	"Parameters.h"
 	"driver/ADC.h"
-	"driver/Motor.h"
 	"driver/IR_Common.h"
 	"driver/IR_100_550.h"
 	"driver/IR_20_150.h"
 	"Functions/functions.h"
 	"Functions/MotorCommands.h"
+	"Functions/RPK_Protocol.h"
 	"Threads/th_ADC_Acq.h"
 	"Threads/th_ADC_Data_Handle.h"
 	"Threads/th_CtrlCmd.h"
@@ -211,7 +221,7 @@
 	"Threads/th_Protections.h"
 	"Threads/th_TCPCom.h"
 
-1410675890 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_includes.h
+1412266993 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_includes.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -223,39 +233,39 @@
 	"llips_motiondetect.h"
 	"llips_contrastdetect.h"
 
-1410675889 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_cfg.h
+1412266993 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_cfg.h
 
-1410675890 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_type.h
+1412266993 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_type.h
 
-1410675890 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_functions.h
+1412266993 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_functions.h
 
-1410675890 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_io.h
+1412266993 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_io.h
 
-1410675890 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_general.h
+1427046551 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_general.h
 
-1410675890 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_motiondetect.h
+1412266993 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_motiondetect.h
 
-1410675890 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_contrastdetect.h
+1427046551 c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_contrastdetect.h
 
-1411146299 c:\users\matthieu\documents\dev_soft\rpi-kee\app_cfg.h
+1427046549 c:\users\matthieu\documents\dev_soft\rpi-kee\app_cfg.h
 
-1411145837 c:\users\matthieu\documents\dev_soft\rpi-kee\global_var.h
+1427046924 c:\users\matthieu\documents\dev_soft\rpi-kee\global_var.h
 
-1411150000 c:\users\matthieu\documents\dev_soft\rpi-kee\parameters.h
+1427046546 c:\users\matthieu\documents\dev_soft\rpi-kee\parameters.h
 
 1410471202 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_alarm.h
 
 1410471202 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_compteur.h
 
-1410675879 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_ctrlcmd.h
+1410672279 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_ctrlcmd.h
 
-1410675879 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_imgacq.h
+1410672279 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_imgacq.h
 
-1410675879 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_imghandle.h
+1410672279 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_imghandle.h
 
-1410675879 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_motorleftdrive.h
+1410672279 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_motorleftdrive.h
 
-1410675879 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_motorrightdrive.h
+1410672279 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_motorrightdrive.h
 
 1410471202 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_sensoracq.h
 
@@ -263,42 +273,42 @@
 
 1410471202 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_sensorotherhandle.h
 
-1410675879 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_tcpcom.h
+1410672279 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_tcpcom.h
 
-1410675890 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_contrastdetect.c
+1412266993 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_contrastdetect.c
 	"llips_includes.h"
 
-1410675890 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_functions.c
+1412266993 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_functions.c
 	"llips_includes.h"
 
-1411110440 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_general.c
+1412266993 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_general.c
 	"llips_includes.h"
 
-1411110440 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_io.c
+1412266993 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_io.c
 	"llips_includes.h"
 
-1411110564 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_motiondetect.c
+1412266993 source:c:\users\matthieu\documents\dev_soft\rpi-kee\llips\llips_motiondetect.c
 	"llips_includes.h"
 
-1410676710 source:c:\users\matthieu\documents\dev_soft\rpi-kee\main.c
+1427045332 source:c:\users\matthieu\documents\dev_soft\rpi-kee\main.c
 	"includes.h"
 
-1410675878 source:c:\users\matthieu\documents\dev_soft\rpi-kee\parameters.c
+1413714145 source:c:\users\matthieu\documents\dev_soft\rpi-kee\parameters.c
 	"includes.h"
 
-1410675878 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_ctrlcmd.c
+1413714146 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_ctrlcmd.c
 	"../includes.h"
 
-1410675879 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_imgacq.c
+1413718896 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_imgacq.c
 	"../includes.h"
 
-1411109981 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_imghandle.c
+1413718661 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_imghandle.c
 	"../includes.h"
 
-1411146879 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_motorleftdrive.c
+1427045011 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_motorleftdrive.c
 	"../includes.h"
 
-1411147002 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_motorrightdrive.c
+1427045011 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_motorrightdrive.c
 	"../includes.h"
 
 1410471202 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_sensoracq.c
@@ -310,7 +320,7 @@
 1410471202 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_sensorotherhandle.c
 	"../includes.h"
 
-1410675879 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_tcpcom.c
+1413718661 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_tcpcom.c
 	"../includes.h"
 
 1410502933 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_alarm.c
@@ -366,62 +376,62 @@
 1414153069 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\ir_20_150.c
 	"../includes.h"
 
-1410675884 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\adc.c
+1410672284 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\adc.c
 	"../includes.h"
 
-1411146279 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\adc.h
+1411142679 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\adc.h
 
 1411146178 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\motor.h
 
-1411321452 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_common.h
+1427046549 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_common.h
 
-1410675884 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_100_550.h
+1427046549 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_100_550.h
 
-1410675884 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_20_150.h
+1427046549 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_20_150.h
 
-1410675878 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_adc_acq.h
+1413714146 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_adc_acq.h
 
-1410675878 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_adc_data_handle.h
+1410672278 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_adc_data_handle.h
 
-1410675879 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_debug.h
+1410672279 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_debug.h
 
-1410675879 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_othersensorhandle.h
+1410672279 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_othersensorhandle.h
 
-1410675879 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_protections.h
+1427046548 c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_protections.h
 
-1411149344 c:\users\matthieu\documents\dev_soft\rpi-kee\functions\functions.h
+1413714143 c:\users\matthieu\documents\dev_soft\rpi-kee\functions\functions.h
 
-1411146108 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\motor.c
+1413717746 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\motor.c
 	"../includes.h"
 
-1410675875 source:c:\users\matthieu\documents\dev_soft\rpi-kee\functions\functions.c
+1413714143 source:c:\users\matthieu\documents\dev_soft\rpi-kee\functions\functions.c
 	"../includes.h"
 
-1411110202 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_adc_acq.c
+1411580208 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_adc_acq.c
 	"../includes.h"
 
-1410675879 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_debug.c
+1413714146 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_debug.c
 	"../includes.h"
 
-1410675879 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_othersensorhandle.c
+1413718661 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_othersensorhandle.c
 	"../includes.h"
 
-1411110018 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_protections.c
+1411106418 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_protections.c
 	"../includes.h"
 
-1411321782 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_100_550.c
+1427046549 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_100_550.c
 	"../includes.h"
 
-1411109616 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_20_150.c
+1427046549 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_20_150.c
 	"../includes.h"
 
-1411108846 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_common.c
+1427046549 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\ir_common.c
 	"../includes.h"
 
-1411109639 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_adc_data_handle.c
+1411580208 source:c:\users\matthieu\documents\dev_soft\rpi-kee\threads\th_adc_data_handle.c
 	"../includes.h"
 
-1411150453 c:\users\matthieu\documents\dev_soft\rpi-kee\functions\motorcommands.h
+1413714142 c:\users\matthieu\documents\dev_soft\rpi-kee\functions\motorcommands.h
 
 1414153057 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\driver\ir_common.h
 
@@ -441,5 +451,23 @@
 1412769316 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\functions\rpk_protocol.h
 
 1412769421 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\functions\rpk_protocol.c
+	"../includes.h"
+
+1413714142 c:\users\matthieu\documents\dev_soft\rpi-kee\functions\rpk_protocol.h
+
+1427046542 source:c:\users\matthieu\documents\dev_soft\rpi-kee\functions\motorcommands.c
+	"../includes.h"
+
+1413714142 source:c:\users\matthieu\documents\dev_soft\rpi-kee\functions\rpk_protocol.c
+	"../includes.h"
+
+1427045737 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\dcmotor.h
+
+1427047010 c:\users\matthieu\documents\dev_soft\rpi-kee\driver\steppermotor.h
+
+1427047044 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\steppermotor.c
+	"../includes.h"
+
+1427045726 source:c:\users\matthieu\documents\dev_soft\rpi-kee\driver\dcmotor.c
 	"../includes.h"
 

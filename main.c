@@ -41,8 +41,18 @@ int main (void)
 		printf ("wiringPiSetup () failed \n") ;
 		exit (1) ;
 	}
+	if (gpioInitialise() < 0)
+	{
+	   // pigpio initialisation failed.
+	   printf("pigpio initialisation failed\n");
+	}
+	else
+	{
+	   // pigpio initialised okay.
+	   printf("pigpio initialised okay\n");
+	}
 #endif
-	
+
     // Data Initialization
     Init_Params();
     sem_init(&sem_Img_available,SHARED_ONLY_INSIDE,PEND_BEFORE_POST);

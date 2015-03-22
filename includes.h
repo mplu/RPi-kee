@@ -26,6 +26,7 @@
     #include <winsock2.h>
 #elif defined (RPi)
     #include <unistd.h>
+    #include <pigpio.h>
     #include <wiringPi.h>
 	#include <mcp3004.h>
 	#include <sys/socket.h>
@@ -42,7 +43,8 @@
 
 /* RPi-kee configuration */
 #include "app_cfg.h"
-#include "driver/Motor.h"
+#include "driver/DCMotor.h"
+#include "driver/StepperMotor.h"
 
 /* Global data */
 #include "global_var.h"
