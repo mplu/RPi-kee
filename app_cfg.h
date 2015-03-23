@@ -61,7 +61,7 @@
 #define RPIKEE_ERR_OOB_TOO_CLOSE 12 //  Error : Out of Bound too close
 
 /* TCP Configuration */
-#define DEF_PORT        6526
+#define DEF_PORT        6524
 #define MAX_CLIENTS     1
 #define MAX_TCP_DATA    250
 

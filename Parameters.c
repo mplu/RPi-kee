@@ -11,7 +11,7 @@
 
 
 const char SOFT_VER[]   = "0.1.0";
-const char PARAM_VER[]  = "1.1";
+const char PARAM_VER[]  = "1.2";
 
 t_Param Params;
 
@@ -51,7 +51,7 @@ static t_paramblock const p_rec_CommandReg =
 {
                         5,  /* Parameter ID */
        &Params.CommandReg,  /* Pointer to parameter value(s) in table 1 */
-                        8, /* Size in bytes */
+                        10, /* Size in bytes */
                         0,  /* Security and storage flags */
 };
 
@@ -59,7 +59,7 @@ static t_paramblock const p_rec_StatusReg =
 {
                         6,  /* Parameter ID */
      &Params.StatusReg,  /* Pointer to parameter value(s) in table 1 */
-                        8,  /* Size in bytes */
+                        10,  /* Size in bytes */
                         0,  /* Security and storage flags */
 };
 
@@ -157,18 +157,22 @@ CPU_VOID Init_Params()
     Params.RightMotorCommand.Delay = 0;
 
     Params.CommandReg.Manual = 0;
-    Params.CommandReg.Auto = 0;
-    Params.CommandReg.MoveDirection = 0;
-    Params.CommandReg.MoveDuration = 0;
-    Params.CommandReg.UDPLiveFeed = 0;
-    Params.CommandReg.MotorPSEnable = 0;
+	Params.CommandReg.LineFollow = 0;
+    Params.CommandReg.Survey = 0;
+	Params.CommandReg.UDPLiveFeed = 0;
+	Params.CommandReg.MovementMotorEnable = 0;
+	Params.CommandReg.TurretMotorEnable = 0;
+	Params.CommandReg.MoveDirection = 0;
+	Params.CommandReg.MoveDuration = 0;
 
     Params.StatusReg.Manual = 0;
-    Params.StatusReg.Auto = 0;
-    Params.StatusReg.MoveDirection = 0;
-    Params.StatusReg.MoveDuration = 0;
-    Params.StatusReg.UDPLiveFeed = 0;
-    Params.StatusReg.MotorPSEnable = 0;
+	Params.StatusReg.LineFollow = 0;
+    Params.StatusReg.Survey = 0;
+	Params.StatusReg.UDPLiveFeed = 0;
+	Params.StatusReg.MovementMotorEnable = 0;
+	Params.StatusReg.TurretMotorEnable = 0;
+	Params.StatusReg.MoveDirection = 0;
+	Params.StatusReg.MoveDuration = 0;
 
     Params.FailureReg.global_1.all = 0;
 

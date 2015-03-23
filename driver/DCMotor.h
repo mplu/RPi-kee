@@ -29,6 +29,7 @@ typedef struct
 }t_DCMotor;
 
 CPU_VOID DCMotorGPIOInit(t_DCMotor M);
+CPU_VOID DCMotorGPIOStop(t_DCMotor M);
 CPU_VOID DCturnClockwise(t_DCMotor M,CPU_INT16U speed);
 CPU_VOID DCturnCounterClockwise(t_DCMotor M,CPU_INT16U speed);
 

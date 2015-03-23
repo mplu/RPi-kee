@@ -9,7 +9,7 @@
 /****************************************************************/
 #include "../includes.h"
 
-CPU_VOID MotorGPIOInit(t_StepperMotor M)
+CPU_VOID StepperMotorGPIOInit(t_StepperMotor M)
 {
 #if defined (RPi)
     pinMode (M.Coil_A_1_pin, OUTPUT) ;
@@ -19,7 +19,7 @@ CPU_VOID MotorGPIOInit(t_StepperMotor M)
 #endif
 }
 
-CPU_VOID MotorGPIOStop(t_StepperMotor M)
+CPU_VOID StepperMotorGPIOStop(t_StepperMotor M)
 {
 #if defined (RPi)
     pinMode (M.Coil_A_1_pin, INPUT) ;
@@ -39,7 +39,7 @@ CPU_VOID setStep(t_StepperMotor M,CPU_INT08U w1, CPU_INT08U w2, CPU_INT08U w3, C
 #endif
 }
 
-CPU_VOID turnClockwise(t_StepperMotor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem_Abort)
+CPU_VOID StepperTurnClockwise(t_StepperMotor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem_Abort)
 {
         CPU_INT16U i;
 
@@ -61,7 +61,7 @@ CPU_VOID turnClockwise(t_StepperMotor M,CPU_INT16U delay, CPU_INT16U steps, sem_
         }
 }
 
-CPU_VOID turnCounterClockwise(t_StepperMotor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem_Abort)
+CPU_VOID StepperTurnCounterClockwise(t_StepperMotor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem_Abort)
 {
         CPU_INT16U i;
         for (i = 0 ; i < steps; i++)

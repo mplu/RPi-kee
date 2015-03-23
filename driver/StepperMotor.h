@@ -34,11 +34,11 @@ typedef struct
 	CPU_INT08U Coil_B_2_pin;
 }t_StepperMotor;
 
-CPU_VOID MotorGPIOInit(t_StepperMotor M);
-CPU_VOID MotorGPIOStop(t_StepperMotor M);
+CPU_VOID StepperMotorGPIOInit(t_StepperMotor M);
+CPU_VOID StepperMotorGPIOStop(t_StepperMotor M);
 CPU_VOID setStep(t_StepperMotor M,CPU_INT08U w1, CPU_INT08U w2, CPU_INT08U w3, CPU_INT08U w4);
-CPU_VOID turnClockwise(t_StepperMotor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem_Abort);
-CPU_VOID turnCounterClockwise(t_StepperMotor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem_Abort);
+CPU_VOID StepperTurnClockwise(t_StepperMotor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem_Abort);
+CPU_VOID StepperTurnCounterClockwise(t_StepperMotor M,CPU_INT16U delay, CPU_INT16U steps, sem_t * sem_Abort);
 
 
 #endif

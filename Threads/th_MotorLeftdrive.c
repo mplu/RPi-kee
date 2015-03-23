@@ -13,33 +13,25 @@ void* threadMotorLeftdrive (void* arg)
     MotorLeft.Coil_B_2_pin = COIL_B_2_PIN_L ;
     */
 
-    t_DCMotor DCMotorLeft;
     DCMotorLeft.EN1_pin = PIN_M1_EN1;
     DCMotorLeft.EN2_pin = PIN_M1_EN2;
     DCMotorLeft.PWM_pin = PIN_M1_PWM;
     DCMotorGPIOInit(DCMotorLeft);
+
     while(1) /* Boucle infinie */
     {
-		
+
         if(Params.LeftMotorCommand.Steps > 0)
 		{
-			//turnClockwise(MotorLeft, Params.LeftMotorCommand.Delay, Params.LeftMotorCommand.Steps, &sem_LeftMotorEmergencyStop);
 			DCturnClockwise(DCMotorLeft,70);
-			printf("step > 0\n");
 		}else if (Params.LeftMotorCommand.Steps < 0)
 		{
-			//turnCounterClockwise(MotorLeft, Params.LeftMotorCommand.Delay, 0-Params.LeftMotorCommand.Steps, &sem_LeftMotorEmergencyStop);
 			DCturnCounterClockwise(DCMotorLeft,70);
-			printf("step < 0\n");
 		}else
 		{
-			//turnClockwise(MotorLeft, 0, 0, &sem_LeftMotorEmergencyStop);
 			DCturnCounterClockwise(DCMotorLeft,0);
-			printf("step = 0\n");
-			//m_msSleep(100);
 		}
-		//DCturnClockwise(DCMotorLeft,20);
-		m_msSleep(1000);
+		m_msSleep(500);
     }
 
     pthread_exit(NULL); /* Fin du thread */

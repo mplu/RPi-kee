@@ -90,6 +90,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="driver/ADC.h" />
+		<Unit filename="driver/DCMotor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="driver/DCMotor.h" />
 		<Unit filename="driver/IR_100_550.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -102,10 +106,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="driver/IR_Common.h" />
-		<Unit filename="driver/Motor.c">
+		<Unit filename="driver/StepperMotor.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="driver/Motor.h" />
+		<Unit filename="driver/StepperMotor.h" />
 		<Unit filename="global_var.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -12,21 +12,28 @@
 
 void* threadCtrlCmd (void* arg)
 {
-	CPU_INT08U MotorPSEnable_1 = 0;
+	CPU_INT08U MovementMotorEnable_1 = 0;
+	CPU_INT08U TurretMotorEnable_1 = 0;
     Params.CommandReg.MoveDirection = 0;
     Params.CommandReg.MoveDuration = 0;
-	Params.CommandReg.MotorPSEnable = 0;
-	
+	Params.CommandReg.MovementMotorEnable = 0;
+
     while(1) /* Boucle infinie */
     {
-        if(Params.CommandReg.MotorPSEnable == 1)
+        if(Params.CommandReg.MovementMotorEnable == 1)
         {
-            Params.StatusReg.MotorPSEnable = 1;
-            // Enable pin driving 12V
+            Params.StatusReg.MovementMotorEnable = 1;
         }else
         {
-            Params.StatusReg.MotorPSEnable = 0;
-            // Disable pin driving 12V
+            Params.StatusReg.MovementMotorEnable = 0;
+        }
+
+        if(Params.CommandReg.TurretMotorEnable == 1)
+        {
+            Params.StatusReg.TurretMotorEnable = 1;
+        }else
+        {
+            Params.StatusReg.TurretMotorEnable = 0;
         }
 
         if(Params.CommandReg.UDPLiveFeed != 0)
@@ -40,39 +47,57 @@ void* threadCtrlCmd (void* arg)
         if(Params.CommandReg.Manual == 1)
         {
             Params.StatusReg.Manual = 1;
-            Params.StatusReg.Auto = 0;
+            Params.StatusReg.LineFollow = 0;
         }else
         {
             Params.StatusReg.Manual = 0;
         }
 
-        if((Params.CommandReg.Auto == 1) && (Params.StatusReg.Manual == 0))
+        if((Params.CommandReg.LineFollow == 1) && (Params.StatusReg.Manual == 0))
         {
-            Params.StatusReg.Auto = 1;
+            Params.StatusReg.LineFollow = 1;
         }else
         {
-            Params.StatusReg.Auto = 0;
+            Params.StatusReg.LineFollow = 0;
         }
-		
-		
-		
-		if(Params.StatusReg.MotorPSEnable != MotorPSEnable_1)
+
+        if(Params.CommandReg.Survey != 0)
+        {
+            Params.StatusReg.Survey = 1;
+        }else
+        {
+            Params.StatusReg.Survey = 0;
+        }
+
+
+
+		if(Params.StatusReg.MovementMotorEnable != MovementMotorEnable_1)
 		{
-			if (Params.StatusReg.MotorPSEnable == 1)
+			if (Params.StatusReg.MovementMotorEnable == 1)
 			{
-				MotorGPIOInit(MotorLeft);
-				MotorGPIOInit(MotorRight);
-			}else if (Params.StatusReg.MotorPSEnable == 0)
+				DCMotorGPIOInit(DCMotorLeft);
+				DCMotorGPIOInit(DCMotorRight);
+			}else if (Params.StatusReg.MovementMotorEnable == 0)
 			{
-				MotorGPIOStop(MotorLeft);
-				MotorGPIOStop(MotorRight);
+				DCMotorGPIOStop(DCMotorLeft);
+				DCMotorGPIOStop(DCMotorRight);
 			}
-			
 		}
-		
-		
-		
-		MotorPSEnable_1 = Params.StatusReg.MotorPSEnable;
+		MovementMotorEnable_1 = Params.StatusReg.MovementMotorEnable;
+
+        if(Params.StatusReg.TurretMotorEnable != TurretMotorEnable_1)
+		{
+			if (Params.StatusReg.TurretMotorEnable == 1)
+			{
+				StepperMotorGPIOInit(StepperMotor1);
+				StepperMotorGPIOInit(StepperMotor2);
+			}else if (Params.StatusReg.TurretMotorEnable == 0)
+			{
+				StepperMotorGPIOStop(StepperMotor1);
+				StepperMotorGPIOStop(StepperMotor2);
+			}
+		}
+		TurretMotorEnable_1 = Params.StatusReg.TurretMotorEnable;
 
         // Manage Manual command case
         if(Params.StatusReg.Manual == 1)
@@ -85,7 +110,7 @@ void* threadCtrlCmd (void* arg)
             {
                 MotorFullStop();
             }
-        }else if(Params.StatusReg.Auto == 1)
+        }else if(Params.StatusReg.LineFollow == 1)
         {
             if(Params.Analog_Values.ImgMoveDirection != 32767)
             {

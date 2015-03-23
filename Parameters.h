@@ -37,21 +37,25 @@ typedef struct
 typedef struct
 {
 	CPU_INT08U Manual;
-	CPU_INT08U Auto;
+	CPU_INT08U LineFollow;
+    CPU_INT08U Survey;
+	CPU_INT08U UDPLiveFeed;
+	CPU_INT08U MovementMotorEnable;
+	CPU_INT08U TurretMotorEnable;
 	CPU_INT16S MoveDirection;
 	CPU_INT16U MoveDuration;
-	CPU_INT08U UDPLiveFeed;
-	CPU_INT08U MotorPSEnable;
 }t_COMMAND_REG;
 
 typedef struct
 {
 	CPU_INT08U Manual;
-	CPU_INT08U Auto;
+	CPU_INT08U LineFollow;
+    CPU_INT08U Survey;
+	CPU_INT08U UDPLiveFeed;
+	CPU_INT08U MovementMotorEnable;
+	CPU_INT08U TurretMotorEnable;
 	CPU_INT16S MoveDirection;
 	CPU_INT16U MoveDuration;
-	CPU_INT08U UDPLiveFeed;
-	CPU_INT08U MotorPSEnable;
 }t_STATUS_REG;
 
 typedef struct

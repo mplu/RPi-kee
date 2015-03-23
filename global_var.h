@@ -21,8 +21,10 @@ extern sem_t sem_RightMotorEmergencyStop; // Indicate to abort rotation
 
 extern CPU_INT16U g_Raw_AdcValue[ADC_NUMBER_OF_CHANNEL];
 extern CPU_CHAR g_nextIMGfilename[IMG_FILENAME_SIZE];
-extern t_StepperMotor MotorLeft;
-extern t_StepperMotor MotorRight;
+extern t_StepperMotor StepperMotor1;
+extern t_StepperMotor StepperMotor2;
+extern t_DCMotor DCMotorLeft;
+extern t_DCMotor DCMotorRight;
 #endif
 
 
