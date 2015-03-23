@@ -17,8 +17,8 @@
 #define PIN_M1_EN2	28// 20 use wiringpi name
 #define PIN_M1_PWM	21
 
-#define PIN_M2_EN1	5// 24 use wiringpi name
-#define PIN_M2_EN2	3// 22 use wiringpi name
+#define PIN_M2_EN1	3// 22 use wiringpi name
+#define PIN_M2_EN2	5// 24 use wiringpi name
 #define PIN_M2_PWM	25
 
 typedef struct
