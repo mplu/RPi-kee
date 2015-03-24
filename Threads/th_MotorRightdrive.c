@@ -22,12 +22,12 @@ void* threadMotorRightdrive (void* arg)
     while(1) /* Boucle infinie */
     {
 
-        if(Params.RightMotorCommand.Steps < 0)
+        if(Params.RightMotorCommand.Speed > 0)
 		{
-			DCturnClockwise(DCMotorRight,70);
-		}else if (Params.RightMotorCommand.Steps > 0)
+			DCturnClockwise(DCMotorRight,Params.RightMotorCommand.Speed);
+		}else if (Params.RightMotorCommand.Speed < 0)
 		{
-			DCturnCounterClockwise(DCMotorRight,70);
+			DCturnCounterClockwise(DCMotorRight,0 - Params.RightMotorCommand.Speed);
 		}else
 		{
 			DCturnCounterClockwise(DCMotorRight,0);

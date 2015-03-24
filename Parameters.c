@@ -150,11 +150,11 @@ CPU_VOID Init_Params()
     Params.Analog_Values.CPUTemperature = 0;
     Params.Analog_Values.AuxTemperature = 0;
 
-    Params.LeftMotorCommand.Steps = 0;
-    Params.LeftMotorCommand.Delay = 0;
+    Params.LeftMotorCommand.Speed = 0;
+    Params.LeftMotorCommand.Unused = 0;
 
-    Params.RightMotorCommand.Steps = 0;
-    Params.RightMotorCommand.Delay = 0;
+    Params.RightMotorCommand.Speed = 0;
+    Params.RightMotorCommand.Unused = 0;
 
     Params.CommandReg.Manual = 0;
 	Params.CommandReg.LineFollow = 0;

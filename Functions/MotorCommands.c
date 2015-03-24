@@ -22,10 +22,10 @@
 CPU_VOID MotorEmergencyFullStop()
 {
     Params.CommandReg.MoveDuration = 0;
-	Params.LeftMotorCommand.Delay = 0;
-	Params.LeftMotorCommand.Steps = 0;
-	Params.RightMotorCommand.Delay = 0;
-	Params.RightMotorCommand.Steps = 0;
+	Params.LeftMotorCommand.Unused = 0;
+	Params.LeftMotorCommand.Speed = 0;
+	Params.RightMotorCommand.Unused = 0;
+	Params.RightMotorCommand.Speed = 0;
 	sem_post(&sem_LeftMotorEmergencyStop);
 	sem_post(&sem_RightMotorEmergencyStop);
 }
@@ -40,10 +40,10 @@ CPU_VOID MotorEmergencyFullStop()
 CPU_VOID MotorFullStop()
 {
     Params.CommandReg.MoveDuration = 0;
-	Params.LeftMotorCommand.Delay = 0;
-	Params.LeftMotorCommand.Steps = 0;
-	Params.RightMotorCommand.Delay = 0;
-	Params.RightMotorCommand.Steps = 0;
+	Params.LeftMotorCommand.Unused = 0;
+	Params.LeftMotorCommand.Speed = 0;
+	Params.RightMotorCommand.Unused = 0;
+	Params.RightMotorCommand.Speed = 0;
 }
 
 /********************************************//**
@@ -58,96 +58,73 @@ CPU_VOID MotorFullStop()
  ***********************************************/
 CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_lmotor,t_MOTOR_COMMAND * p_rmotor)
 {
-	t_MOTOR_COMMAND right,left;
-	CPU_FP32 _ratio ;
+	t_MOTOR_COMMAND right ={0};
+	t_MOTOR_COMMAND left ={0};
 
-	CPU_INT16S steps;
+    CPU_INT16S Forward = 1;
+    CPU_INT16S Backward = -1;
+    CPU_INT16S Sense = 0;
+	CPU_INT16S Speed_min = 70;
+	CPU_INT16S Speed_nom = 2 * Speed_min;
+	CPU_FP32 _ratio = 1;
 
     CPU_INT16S direction = p_inputCommands->MoveDirection % 360;
 
     if((direction > -360)&&(direction <= -270))
     {
         direction = direction + 360;
-        steps = 32;
+        //forward
+        Sense = Forward;
+
     }else if((direction > -270)&&(direction < -90))
     {
         direction = direction + 180;
-        steps = -32;
+        //backward
+        Sense = Backward;
+
     }else if((direction > -90)&&(direction < 90))
     {
-        steps = 32;
+        //forward
+        Sense = Forward;
     }else if((direction > 90)&&(direction <= 270))
     {
         direction = direction - 180;
-        steps = -32;
+        //backward
+        Sense = Backward;
     }else if((direction > 270)&&(direction < 360))
     {
         direction = direction - 360;
-        steps = 32;
+        //forward
+        Sense = Forward;
     }else
     {
         // not possible
+        Sense = Forward;
     }
 
+    _ratio = (CPU_FP32)1 + (CPU_FP32)abs(direction) / (CPU_FP32)30;
 
     if(direction == 90)
     {
-            left.Delay = 2;
-            left.Steps = -32;
-
-            right.Delay = 2;
-            right.Steps = 32;
-
+        right.Speed = Speed_min * Sense;
+        left.Speed = (-Speed_min) * Sense;
     }else if (direction == -90)
     {
-            left.Delay = 2;
-            left.Steps = 32;
-
-            right.Delay = 2;
-            right.Steps = -32;
-
+        right.Speed = (-Speed_min)*Sense;
+        left.Speed = (Speed_min)*Sense;
     }else
     {
 
         if(direction>=0)
         {
-            _ratio = direction*direction*0.0007+0.0796*direction+0.9798;
-            right.Delay = 2;
-            right.Steps = steps;
+            left.Speed = (Speed_min ) * Sense;
+            right.Speed = ((CPU_FP32)Speed_min * _ratio )* (CPU_FP32)Sense;
 
-
-            left.Steps = right.Steps / _ratio;
-            left.Delay = right.Delay * _ratio + 1;
         }else if(direction<0)
         {
-            direction = 0 - direction;
-            _ratio = direction*direction*0.0007+0.0796*direction+0.9798;
-            left.Delay = 2;
-            left.Steps = steps;
-
-            right.Steps = left.Steps / ( _ratio);
-            right.Delay = left.Delay * ( _ratio) +1;
+            right.Speed = (Speed_min ) * Sense;
+            left.Speed = ((CPU_FP32)Speed_min * _ratio )* Sense;
         }
-
-
-        /*_ratio = angleTOratio((CPU_FP32)direction  );
-        if(_ratio <= 1)
-        {
-            left.Delay = 4;
-            left.Steps = steps;
-
-            right.Delay = (CPU_FP32)((CPU_FP32)left.Delay/_ratio)/2.0;
-            right.Steps = left.Delay * left.Steps /((CPU_FP32)left.Delay/_ratio * 2.0);
-
-        }else if(_ratio > 1)
-        {
-            right.Delay = 4;
-            right.Steps = steps;
-            _ratio = 1/_ratio;
-
-            left.Delay = (CPU_FP32)((CPU_FP32)right.Delay/_ratio) / 2.0;
-            left.Steps = right.Delay * right.Steps /((CPU_FP32)right.Delay/_ratio * 2.0);
-        }*/
     }
 
 

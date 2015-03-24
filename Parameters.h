@@ -13,8 +13,8 @@
 
 typedef struct
 {
-	CPU_INT16S Steps;
-	CPU_INT16U Delay;
+	CPU_INT16S Speed;
+	CPU_INT16U Unused;
 }t_MOTOR_COMMAND;
 
 typedef struct

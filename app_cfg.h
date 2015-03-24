@@ -22,6 +22,7 @@
 #define SIGMA               3.5
 #define NUMBER_OF_SEGMENT   8
 #define CONTRAST_TOLERANCE  2
+#define OUT_IMG_DBG		    FALSE;
 
 #define CAPTURE_WARMUP		2	//in second
 #define CAPTURE_PERIOD		250 //in millisecond
@@ -37,7 +38,7 @@
 #define CAPTURE_OK			""
 //ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10 |grep RPi-kee
 //39.9 23007 root     ./RPi-kee
-#define OUT_IMG_DBG		FALSE;
+
 
 /* Motor driving */
 #define ANGLE_COEF          0.2
@@ -61,7 +62,7 @@
 #define RPIKEE_ERR_OOB_TOO_CLOSE 12 //  Error : Out of Bound too close
 
 /* TCP Configuration */
-#define DEF_PORT        6524
+#define DEF_PORT        6528
 #define MAX_CLIENTS     1
 #define MAX_TCP_DATA    250
 
