@@ -53,7 +53,16 @@ void* threadCtrlCmd (void* arg)
             Params.StatusReg.Manual = 0;
         }
 
-        if((Params.CommandReg.LineFollow == 1) && (Params.StatusReg.Manual == 0))
+        if(Params.CommandReg.Survey != 0)
+        {
+            Params.StatusReg.Survey = 1;
+            Params.StatusReg.LineFollow = 0;
+        }else
+        {
+            Params.StatusReg.Survey = 0;
+        }
+
+        if((Params.CommandReg.LineFollow == 1) && (Params.StatusReg.Manual == 0)&& (Params.StatusReg.Survey == 0))
         {
             Params.StatusReg.LineFollow = 1;
         }else
@@ -61,13 +70,7 @@ void* threadCtrlCmd (void* arg)
             Params.StatusReg.LineFollow = 0;
         }
 
-        if(Params.CommandReg.Survey != 0)
-        {
-            Params.StatusReg.Survey = 1;
-        }else
-        {
-            Params.StatusReg.Survey = 0;
-        }
+
 
 
 
