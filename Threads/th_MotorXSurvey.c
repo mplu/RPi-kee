@@ -17,10 +17,10 @@ void* threadMotorXSurvey (void* arg)
 
         if(Params.XMotorCommand.Unused > 0)
 		{
-			StepperTurnClockwise(MotorX_LR, Params.XMotorCommand.Speed, Params.XMotorCommand.Unused, &sem_XMotorEmergencyStop);
+			StepperTurnCounterClockwise(MotorX_LR, Params.XMotorCommand.Speed, Params.XMotorCommand.Unused, &sem_XMotorEmergencyStop);
 		}else if (Params.XMotorCommand.Unused < 0)
 		{
-			StepperTurnCounterClockwise(MotorX_LR, Params.XMotorCommand.Speed, 0-Params.XMotorCommand.Unused, &sem_XMotorEmergencyStop);
+			StepperTurnClockwise(MotorX_LR, Params.XMotorCommand.Speed, 0-Params.XMotorCommand.Unused, &sem_XMotorEmergencyStop);
 		}else
 		{
 			StepperTurnClockwise(MotorX_LR, 0, 0, &sem_XMotorEmergencyStop);
