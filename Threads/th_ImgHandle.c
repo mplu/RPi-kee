@@ -45,11 +45,12 @@ void* threadImgHandle (void* arg)
 	create_gauss_filter(filter0,GAUSS_SIZE,SIGMA);
 
 	//variable for motion detection and tracking
-	CPU_CHAR Got_first_frame = FALSE;
+	CPU_CHAR Got_first_frame = FALSE,move_detected=FALSE;
 	CPU_CHAR img_diff_1_2=0;
 	t_area change_1_2;
 	CPU_INT16S mouvementx = 0;
 	CPU_INT16S mouvementy = 0;
+	CPU_INT32S ttt = 0;
 
 	while(1) /* Boucle infinie */
     {
@@ -231,7 +232,9 @@ void* threadImgHandle (void* arg)
                     //mouvementx on left is positive
                     mouvementx = (((change_1_2.BotLeft.x/2 + change_1_2.BotRight.x/2)*100)/img_in1.wi)-50 ;
                     mouvementy = (((change_1_2.BotLeft.y/2 + change_1_2.TopLeft.y/2)*100)/img_in1.he)-50 ;
-
+					move_detected = TRUE;
+					ttt = (CPU_INT32S)clock(); 
+					sprintf((char *)outputfilename,"out_survey_%ld.bmp",ttt);
                 }else
                 {
 
@@ -253,8 +256,11 @@ void* threadImgHandle (void* arg)
                 Params.YMotorCommand.Unused = mouvementy/5;
 
                 printf("Img treated (in %.3f), x_move : %d, y_move : %d\n",duration,mouvementx,mouvementy);
-                write_img((CPU_CHAR *)"plop.bmp",&img_out1);
-                asm("nop");
+				if(move_detected == TRUE)
+				{
+					write_img((CPU_CHAR *)outputfilename,&img_out1);
+				}
+				move_detected = FALSE;
             }
             // suppress file
 #if defined (Win32)
