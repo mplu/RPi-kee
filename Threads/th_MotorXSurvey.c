@@ -10,7 +10,8 @@ void* threadMotorXSurvey (void* arg)
     MotorX_LR.Coil_A_2_pin = COIL_A_2_PIN_LR ;
     MotorX_LR.Coil_B_1_pin = COIL_B_1_PIN_LR ;
     MotorX_LR.Coil_B_2_pin = COIL_B_2_PIN_LR ;
-
+    StepperMotorGPIOInit(MotorY_UD);
+    StepperMotorGPIOStop(MotorY_UD);
 
     while(1) /* Boucle infinie */
     {

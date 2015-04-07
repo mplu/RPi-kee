@@ -8,6 +8,7 @@ void* threadMotorRightdrive (void* arg)
     DCMotorRight.EN2_pin = PIN_M2_EN2;
     DCMotorRight.PWM_pin = PIN_M2_PWM;
     DCMotorGPIOInit(DCMotorRight);
+    DCMotorGPIOStop(DCMotorRight);
 
     while(1) /* Boucle infinie */
     {
