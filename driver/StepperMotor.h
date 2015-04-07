@@ -15,15 +15,15 @@
 
 /* *** Motor GPIO Coil definition *** */
 
-#define COIL_A_1_PIN_L 1
-#define COIL_A_2_PIN_L 26
-#define COIL_B_1_PIN_L 27
-#define COIL_B_2_PIN_L 25
+#define COIL_A_1_PIN_LR 1
+#define COIL_A_2_PIN_LR 26
+#define COIL_B_1_PIN_LR 27
+#define COIL_B_2_PIN_LR 25
 
-#define COIL_A_1_PIN_R 23
-#define COIL_A_2_PIN_R 22
-#define COIL_B_1_PIN_R 21
-#define COIL_B_2_PIN_R 2
+#define COIL_A_1_PIN_UD 23
+#define COIL_A_2_PIN_UD 22
+#define COIL_B_1_PIN_UD 21
+#define COIL_B_2_PIN_UD 2
 
 typedef struct
 {

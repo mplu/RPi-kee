@@ -13,7 +13,7 @@
 /* Prototypes ***/
 
 CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_lmotor,t_MOTOR_COMMAND * p_rmotor);
-CPU_VOID MotorEmergencyFullStop();
-CPU_VOID MotorFullStop();
+CPU_VOID StepperMotorFullStop();
+CPU_VOID DCMotorFullStop();
 CPU_FP32 ratioTOangle(CPU_FP32 _ratio);
 CPU_FP32 angleTOratio(CPU_FP32 angle);

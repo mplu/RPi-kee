@@ -95,12 +95,12 @@ void* threadCtrlCmd (void* arg)
 		{
 			if (Params.StatusReg.TurretMotorEnable == 1)
 			{
-				StepperMotorGPIOInit(StepperMotor1);
-				StepperMotorGPIOInit(StepperMotor2);
+				StepperMotorGPIOInit(MotorY_UD);
+				StepperMotorGPIOInit(MotorX_LR);
 			}else if (Params.StatusReg.TurretMotorEnable == 0)
 			{
-				StepperMotorGPIOStop(StepperMotor1);
-				StepperMotorGPIOStop(StepperMotor2);
+				StepperMotorGPIOStop(MotorY_UD);
+				StepperMotorGPIOStop(MotorX_LR);
 			}
 		}
 		TurretMotorEnable_1 = Params.StatusReg.TurretMotorEnable;
@@ -114,7 +114,7 @@ void* threadCtrlCmd (void* arg)
                 Params.CommandReg.MoveDuration -= 100;
             }else
             {
-                MotorFullStop();
+                DCMotorFullStop();
             }
         }else if(Params.StatusReg.LineFollow == 1)
         {
@@ -131,16 +131,16 @@ void* threadCtrlCmd (void* arg)
                     Params.CommandReg.MoveDuration -= 100;
                 }else
                 {
-                    MotorFullStop();
+                    DCMotorFullStop();
                 }
             }else
             {
-                MotorFullStop();
+                DCMotorFullStop();
             }
 
         }else
         {
-            MotorFullStop();
+            DCMotorFullStop();
         }
 
         m_msSleep(100);

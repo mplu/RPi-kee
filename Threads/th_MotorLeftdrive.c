@@ -4,15 +4,6 @@
 
 void* threadMotorLeftdrive (void* arg)
 {
-    /*
-	t_StepperMotor MotorLeft;
-	MotorLeft.id = 'L';
-    MotorLeft.Coil_A_1_pin = COIL_A_1_PIN_L ;
-    MotorLeft.Coil_A_2_pin = COIL_A_2_PIN_L ;
-    MotorLeft.Coil_B_1_pin = COIL_B_1_PIN_L ;
-    MotorLeft.Coil_B_2_pin = COIL_B_2_PIN_L ;
-    */
-
     DCMotorLeft.EN1_pin = PIN_M1_EN1;
     DCMotorLeft.EN2_pin = PIN_M1_EN2;
     DCMotorLeft.PWM_pin = PIN_M1_PWM;

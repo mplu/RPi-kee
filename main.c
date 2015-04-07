@@ -33,6 +33,8 @@ int main (void)
     pthread_t desc_ThreadOtherSensorHandle;
     pthread_t desc_ThreadProtections;
     pthread_t desc_ThreadTCPCom;
+    pthread_t desc_ThreadMotorXSurvey;
+    pthread_t desc_ThreadMotorYSurvey;
 
 	// Driver Initialization
 #if defined (RPi)
@@ -70,6 +72,8 @@ int main (void)
     pthread_create (&desc_ThreadOtherSensorHandle, NULL, threadOtherSensorHandle, (void*)NULL);
     pthread_create (&desc_ThreadProtections, NULL, threadProtections, (void*)NULL);
     pthread_create (&desc_ThreadTCPCom, NULL, threadTCPCom, (void*)NULL);
+    pthread_create (&desc_ThreadMotorXSurvey, NULL, threadMotorXSurvey, (void*)NULL);
+    pthread_create (&desc_ThreadMotorYSurvey, NULL, threadMotorYSurvey, (void*)NULL);
 
 
     /* Attente de la fin des threads */
@@ -84,6 +88,8 @@ int main (void)
     pthread_join (desc_ThreadOtherSensorHandle, NULL);
     pthread_join (desc_ThreadProtections, NULL);
     pthread_join (desc_ThreadTCPCom, NULL);
+    pthread_join (desc_ThreadMotorXSurvey, NULL);
+    pthread_join (desc_ThreadMotorYSurvey, NULL);
     return 0;
 }
 

@@ -111,6 +111,22 @@ static t_paramblock const p_rec_PConfAuxTemperatureDetect =
                         0,  /* Security and storage flags */
 };
 
+static t_paramblock const p_rec_XMotorCommand =
+{
+                        13,  /* Parameter ID */
+ &Params.XMotorCommand,  /* Pointer to parameter value(s) in table 1 */
+                        4,  /* Size in bytes */
+                        0,  /* Security and storage flags */
+};
+
+static t_paramblock const p_rec_YMotorCommand =
+{
+                        14,  /* Parameter ID */
+ &Params.YMotorCommand,  /* Pointer to parameter value(s) in table 1 */
+                        4,  /* Size in bytes */
+                        0,  /* Security and storage flags */
+};
+
 
 
 
@@ -127,6 +143,8 @@ const t_paramblock* ParamMap[] = {
 	&p_rec_PConfVoltage12VDetect,
 	&p_rec_PConfCPUTemperatureDetect,
 	&p_rec_PConfAuxTemperatureDetect,
+	&p_rec_XMotorCommand,
+	&p_rec_YMotorCommand,
     NULL
 };
 
@@ -200,6 +218,12 @@ CPU_VOID Init_Params()
     Params.ProtectionConf.AuxTemperatureDetect.CompDirection = 1;
     Params.ProtectionConf.AuxTemperatureDetect.TimeWindow = 1000;
     Params.ProtectionConf.AuxTemperatureDetect.ConfThreshold = 800;
+
+    Params.XMotorCommand.Speed = 5;
+    Params.XMotorCommand.Unused = 0;
+
+    Params.YMotorCommand.Speed = 5;
+    Params.YMotorCommand.Unused = 0;
 
 }
 

@@ -73,6 +73,8 @@
 #include "Threads/th_OtherSensorHandle.h"
 #include "Threads/th_Protections.h"
 #include "Threads/th_TCPCom.h"
+#include "Threads/th_MotorXSurvey.h"
+#include "Threads/th_MotorYSurvey.h"
 
 
 #endif

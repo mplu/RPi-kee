@@ -19,15 +19,10 @@
  *
  *	By reseting command and aborting ongoing rotation (valable when droven by stepper)
  ***********************************************/
-CPU_VOID MotorEmergencyFullStop()
+CPU_VOID StepperMotorFullStop()
 {
-    Params.CommandReg.MoveDuration = 0;
-	Params.LeftMotorCommand.Unused = 0;
-	Params.LeftMotorCommand.Speed = 0;
-	Params.RightMotorCommand.Unused = 0;
-	Params.RightMotorCommand.Speed = 0;
-	sem_post(&sem_LeftMotorEmergencyStop);
-	sem_post(&sem_RightMotorEmergencyStop);
+	sem_post(&sem_XMotorEmergencyStop);
+	sem_post(&sem_YMotorEmergencyStop);
 }
 
 /********************************************//**
@@ -37,7 +32,7 @@ CPU_VOID MotorEmergencyFullStop()
  *
  * By reseting command
  ***********************************************/
-CPU_VOID MotorFullStop()
+CPU_VOID DCMotorFullStop()
 {
     Params.CommandReg.MoveDuration = 0;
 	Params.LeftMotorCommand.Unused = 0;

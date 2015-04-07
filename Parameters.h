@@ -14,7 +14,7 @@
 typedef struct
 {
 	CPU_INT16S Speed;
-	CPU_INT16U Unused;
+	CPU_INT16S Unused;
 }t_MOTOR_COMMAND;
 
 typedef struct
@@ -120,6 +120,8 @@ typedef struct
     t_STATUS_REG StatusReg;
     t_FAILURE_REG FailureReg;
     t_PROTECTION_CONF ProtectionConf;
+    t_MOTOR_COMMAND XMotorCommand;
+    t_MOTOR_COMMAND YMotorCommand;
 } t_Param;
 
 /****************************************************************************
