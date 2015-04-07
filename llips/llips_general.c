@@ -857,7 +857,7 @@ CPU_VOID create_average_filter(CPU_FP64 ** tab_filtre,CPU_INT16S filtersize)
  ***********************************************/
 CPU_INT16S create_laplacian_filter(CPU_FP64 ** tab_filtre,CPU_INT08U filtertype)
 {
-    CPU_INT16S filtersize;
+    CPU_INT16S filtersize=0;
     CPU_INT16S i,j;
     switch(filtertype)
     {

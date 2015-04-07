@@ -17,6 +17,7 @@ void* threadCtrlCmd (void* arg)
     Params.CommandReg.MoveDirection = 0;
     Params.CommandReg.MoveDuration = 0;
 	Params.CommandReg.MovementMotorEnable = 0;
+	Params.CommandReg.TurretMotorEnable = 1;
 	Params.CommandReg.Survey = 1;
 
 

@@ -30,7 +30,7 @@ CPU_VOID DCMotorGPIOStop(t_DCMotor M)
     pinMode (M.EN2_pin, INPUT) ;
 
 // Pin used with PiGPIO
-    gpioSetMode(M.PWM_pin, PI_INPUT)
+   gpioSetMode(M.PWM_pin, PI_INPUT);
 #endif
 }
 

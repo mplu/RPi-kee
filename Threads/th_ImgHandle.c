@@ -249,7 +249,7 @@ void* threadImgHandle (void* arg)
                 finish = clock();
                 duration = (double)(finish - start) / CLOCKS_PER_SEC;
                 printf("Img treated (in %.3f), x_move : %d, y_move : %d\n",duration,mouvementx,mouvementy);
-                write_img((CPU_CHAR *)"plop.bmp",&img_out1);
+                //write_img((CPU_CHAR *)"plop.bmp",&img_out1);
             }
             // suppress file
 #if defined (Win32)

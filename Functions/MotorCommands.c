@@ -65,7 +65,7 @@ CPU_VOID MotorInputCommand(t_COMMAND_REG * p_inputCommands,t_MOTOR_COMMAND * p_l
     CPU_INT16S Backward = -1;
     CPU_INT16S Sense = 0;
 	CPU_INT16S Speed_min = 70;
-	CPU_INT16S Speed_nom = 2 * Speed_min;
+	//CPU_INT16S Speed_nom = 2 * Speed_min;
 	CPU_FP32 _ratio = 1;
 
     CPU_INT16S direction = p_inputCommands->MoveDirection % 360;

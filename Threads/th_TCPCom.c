@@ -25,7 +25,7 @@ void* threadTCPCom (void* arg)
 	CPU_INT08U data_in[MAX_TCP_DATA];
 	CPU_INT08U data_out[MAX_TCP_DATA];
 	CPU_INT16S data_in_size;
-	CPU_INT16S data_out_size,ret_send;
+	CPU_INT16S data_out_size,ret_send=0;
 
     e_RPK_Error rpk_err;
 
