@@ -219,10 +219,10 @@ CPU_VOID Init_Params()
     Params.ProtectionConf.AuxTemperatureDetect.TimeWindow = 1000;
     Params.ProtectionConf.AuxTemperatureDetect.ConfThreshold = 800;
 
-    Params.XMotorCommand.Speed = 5;
+    Params.XMotorCommand.Speed = 10;
     Params.XMotorCommand.Unused = 0;
 
-    Params.YMotorCommand.Speed = 5;
+    Params.YMotorCommand.Speed = 10;
     Params.YMotorCommand.Unused = 0;
 
 }

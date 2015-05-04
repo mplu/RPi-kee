@@ -236,7 +236,6 @@ void* threadImgHandle (void* arg)
                     mouvementy = (((change_1_2.BotLeft.y/2 + change_1_2.TopLeft.y/2)*100)/img_in1.he)-50 ;
 					move_detected = TRUE;
 					ttt = (CPU_INT32S)clock();
-					sprintf((char *)outputfilename,"out_survey_%ld.bmp",ttt);
                 }else
                 {
 
@@ -244,30 +243,54 @@ void* threadImgHandle (void* arg)
                     mouvementy = 0;
                 }
 
-                //drive motor according to diff
-
-                //store img_in2 in img_in1
-
-                copy_img( &img_in2, &img_in1);
-
                 //dislay treatment time
                 finish = clock();
                 duration = (double)(finish - start) / CLOCKS_PER_SEC;
-
+				
+				//drive motor according to diff
                 if((abs(mouvementx) > mouvementx_threshold)||(abs(mouvementy) > mouvementy_threshold))
                 {
                     Params.XMotorCommand.Unused = (CPU_INT16S)((CPU_FP32)mouvementx/(CPU_FP32)5);
+					
+					printf("Params.XMotorCommand.Unused %d\n",Params.XMotorCommand.Unused);
+					if(Params.XMotorCommand.Unused > 0)
+					StepperTurnCounterClockwise(MotorX_LR, Params.XMotorCommand.Speed, Params.XMotorCommand.Unused, &sem_XMotorEmergencyStop);
+					else
+					StepperTurnClockwise(MotorX_LR, Params.XMotorCommand.Speed, 0-Params.XMotorCommand.Unused, &sem_XMotorEmergencyStop);
+					
                     Params.YMotorCommand.Unused = (CPU_INT16S)((CPU_FP32)mouvementy/(CPU_FP32)5);
+					if(Params.YMotorCommand.Unused > 0)
+					StepperTurnCounterClockwise(MotorY_UD, Params.YMotorCommand.Speed, Params.YMotorCommand.Unused, &sem_YMotorEmergencyStop);
+					else
+					StepperTurnClockwise(MotorY_UD, Params.YMotorCommand.Speed, 0-Params.YMotorCommand.Unused, &sem_YMotorEmergencyStop);
+					
+					
+					//Params.YMotorCommand.Unused = 0;
                     Got_first_frame = FALSE;
-                }
+                }else
+				{
+					Params.XMotorCommand.Unused = 0;
+					Params.YMotorCommand.Unused = 0;
+				}
 
 
                 printf("Img treated (in %.3f), x_move : %d, y_move : %d\n",duration,mouvementx,mouvementy);
 				if(move_detected == TRUE)
 				{
+					
+					
+					sprintf((char *)outputfilename,"out_survey_%ld_diff.bmp",ttt);
 					write_img((CPU_CHAR *)outputfilename,&img_out1);
+					sprintf((char *)outputfilename,"out_survey_%ld_1.bmp",ttt);
+					write_img((CPU_CHAR *)outputfilename,&img_in1);
+					sprintf((char *)outputfilename,"out_survey_%ld_2.bmp",ttt);
+					write_img((CPU_CHAR *)outputfilename,&img_in2);
+					/**/
 				}
 				move_detected = FALSE;
+				
+				//store img_in2 in img_in1
+                copy_img( &img_in2, &img_in1);
             }
             // suppress file
 #if defined (Win32)

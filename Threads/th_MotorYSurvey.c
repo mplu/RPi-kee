@@ -18,15 +18,16 @@ void* threadMotorYSurvey (void* arg)
 
         if(Params.RightMotorCommand.Unused < 0)
 		{
-			StepperTurnCounterClockwise(MotorY_UD, Params.RightMotorCommand.Speed, 0-Params.RightMotorCommand.Unused, &sem_YMotorEmergencyStop);
+			//StepperTurnCounterClockwise(MotorY_UD, Params.RightMotorCommand.Speed, 0-Params.RightMotorCommand.Unused, &sem_YMotorEmergencyStop);
 		}else if (Params.RightMotorCommand.Unused > 0)
 		{
-			StepperTurnClockwise(MotorY_UD, Params.RightMotorCommand.Speed, Params.RightMotorCommand.Unused, &sem_YMotorEmergencyStop);
+			//StepperTurnClockwise(MotorY_UD, Params.RightMotorCommand.Speed, Params.RightMotorCommand.Unused, &sem_YMotorEmergencyStop);
 		}else
 		{
-			StepperTurnClockwise(MotorY_UD, 0, 0, &sem_YMotorEmergencyStop);
-			m_msSleep(100);
+			//StepperTurnClockwise(MotorY_UD, 0, 0, &sem_YMotorEmergencyStop);
+			//m_msSleep(100);
 		}
+		m_msSleep(100);
     }
 
     pthread_exit(NULL); /* Fin du thread */

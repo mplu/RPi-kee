@@ -18,7 +18,7 @@ void* threadCtrlCmd (void* arg)
     Params.CommandReg.MoveDuration = 0;
 	Params.CommandReg.MovementMotorEnable = 0;
 	Params.CommandReg.TurretMotorEnable = 0;
-	Params.CommandReg.Survey = 1;
+	Params.CommandReg.Survey = 0;
 
 
     while(1) /* Boucle infinie */
