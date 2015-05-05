@@ -25,6 +25,7 @@
     #include <windows.h>
     #include <winsock2.h>
 #elif defined (RPi)
+	#include <errno.h>
     #include <unistd.h>
     #include <pigpio.h>
     #include <wiringPi.h>

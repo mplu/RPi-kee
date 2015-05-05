@@ -39,7 +39,8 @@ void* threadImgHandle (void* arg)
 	CPU_CHAR inputfilename[IMG_FILENAME_SIZE];
 	CPU_CHAR outputfilename[IMG_FILENAME_SIZE];
 	CPU_CHAR delele_img_cmd[IMG_FILENAME_SIZE + 10];
-
+	CPU_CHAR temporary_cmd[100];
+	CPU_CHAR * pch;
 
 	filter0 = createTableFP64(GAUSS_SIZE,GAUSS_SIZE);
 	create_gauss_filter(filter0,GAUSS_SIZE,SIGMA);
@@ -52,7 +53,7 @@ void* threadImgHandle (void* arg)
 	CPU_INT16S mouvementx_threshold = 5;
 	CPU_INT16S mouvementy = 0;
 	CPU_INT16S mouvementy_threshold = 5;
-	CPU_INT32S ttt = 0;
+	time_t ttt = 0;
 
 	while(1) /* Boucle infinie */
     {
@@ -236,6 +237,7 @@ void* threadImgHandle (void* arg)
                     mouvementy = (((change_1_2.BotLeft.y/2 + change_1_2.TopLeft.y/2)*100)/img_in1.he)-50 ;
 					move_detected = TRUE;
 					ttt = (CPU_INT32S)clock();
+					time ( &ttt );
                 }else
                 {
 
@@ -251,19 +253,21 @@ void* threadImgHandle (void* arg)
                 if((abs(mouvementx) > mouvementx_threshold)||(abs(mouvementy) > mouvementy_threshold))
                 {
                     pthread_mutex_lock(&mtx_LockCamera);
+					
                     Params.XMotorCommand.Steps = (CPU_INT16S)((CPU_FP32)mouvementx/(CPU_FP32)5);
-					printf("Params.XMotorCommand.Unused %d\n",Params.XMotorCommand.Steps);
+					Params.YMotorCommand.Steps = (CPU_INT16S)((CPU_FP32)mouvementy/(CPU_FP32)5);
+					printf("X-Steps:%d Y-Steps:%d \n",Params.XMotorCommand.Steps,Params.YMotorCommand.Steps);
 					if(Params.XMotorCommand.Steps > 0)
 					StepperTurnCounterClockwise(MotorX_LR, Params.XMotorCommand.Speed, Params.XMotorCommand.Steps, &sem_XMotorEmergencyStop);
 					else
 					StepperTurnClockwise(MotorX_LR, Params.XMotorCommand.Speed, 0-Params.XMotorCommand.Steps, &sem_XMotorEmergencyStop);
 
-                    Params.YMotorCommand.Steps = (CPU_INT16S)((CPU_FP32)mouvementy/(CPU_FP32)5);
 					if(Params.YMotorCommand.Steps > 0)
 					StepperTurnCounterClockwise(MotorY_UD, Params.YMotorCommand.Speed, Params.YMotorCommand.Steps, &sem_YMotorEmergencyStop);
 					else
 					StepperTurnClockwise(MotorY_UD, Params.YMotorCommand.Speed, 0-Params.YMotorCommand.Steps, &sem_YMotorEmergencyStop);
-                    pthread_mutex_unlock(&mtx_LockCamera);
+                    
+					pthread_mutex_unlock(&mtx_LockCamera);
 
 					//Params.YMotorCommand.Unused = 0;
                     Got_first_frame = FALSE;
@@ -279,14 +283,28 @@ void* threadImgHandle (void* arg)
 				{
 
 
-					sprintf((char *)outputfilename,"out_survey_%ld_diff.bmp",ttt);
-					write_img((CPU_CHAR *)outputfilename,&img_out1);
-					/*
-					sprintf((char *)outputfilename,"out_survey_%ld_1.bmp",ttt);
+					//sprintf((char *)outputfilename,"out_survey_%ld_diff.bmp",(CPU_INT32U)ttt);
+					//write_img((CPU_CHAR *)outputfilename,&img_out1);
+					sprintf((char *)outputfilename,"out_survey_%ld_1.bmp",(CPU_INT32U)ttt);
 					write_img((CPU_CHAR *)outputfilename,&img_in1);
-					sprintf((char *)outputfilename,"out_survey_%ld_2.bmp",ttt);
-					write_img((CPU_CHAR *)outputfilename,&img_in2);
-					*/
+					//sprintf((char *)outputfilename,"out_survey_%ld_2.bmp",(CPU_INT32U)ttt);
+					//write_img((CPU_CHAR *)outputfilename,&img_in2);
+					#if defined (RPi)
+					sprintf((char *)temporary_cmd,"gm mogrify -format jpg %s",outputfilename);
+					system((const char *)temporary_cmd);
+					sprintf((char *)temporary_cmd,"rm %s -f",outputfilename);
+					system((const char *)temporary_cmd);
+					pch=(CPU_CHAR *)strchr((const char *)outputfilename,'.');
+					if(pch!=NULL)
+					{
+						outputfilename[pch-outputfilename+1] = 'j';
+						outputfilename[pch-outputfilename+2] = 'p';
+						outputfilename[pch-outputfilename+3] = 'g';
+					}
+					sprintf((char *)temporary_cmd,"cp %s /media/motiondetect_imgrepo/small/image_small.jpg -f",outputfilename);
+					system((const char *)temporary_cmd);
+					#endif
+					
 				}
 				move_detected = FALSE;
 
