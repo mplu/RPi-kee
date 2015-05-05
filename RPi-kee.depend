@@ -24,7 +24,7 @@
 
 1414135651 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_general.h
 
-1411551456 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_motiondetect.h
+1430829069 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_motiondetect.h
 
 1414136569 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_contrastdetect.h
 
@@ -37,13 +37,13 @@
 1413807703 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_io.c
 	"llips_includes.h"
 
-1411551484 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_motiondetect.c
+1430829181 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\llips\llips_motiondetect.c
 	"llips_includes.h"
 
 1430810925 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\main.c
 	"includes.h"
 
-1430811744 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\includes.h
+1430827242 c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\includes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -53,6 +53,7 @@
 	<unistd.h>
 	<windows.h>
 	<winsock2.h>
+	<errno.h>
 	<unistd.h>
 	<pigpio.h>
 	<wiringPi.h>
@@ -139,7 +140,7 @@
 1430809395 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_imgacq.c
 	"../includes.h"
 
-1430812117 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_imghandle.c
+1430829256 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_imghandle.c
 	"../includes.h"
 
 1410423499 source:c:\users\pluvinage\documents\developpement\source\_perso\rpi-kee\threads\th_motordrive.c

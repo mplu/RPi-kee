@@ -24,6 +24,8 @@
  *
  * \param tolerance CPU_INT16U - tolerance in % between two pixel
  * \param quantity CPU_INT16U - quantity of pixel change to evaluate change
+ * \param inputstep CPU_INT16U - if non zero, represent ratio of tested pixel ( 1 / inputstep)
+ * \param color CPU_INT32U - range of color to work on
  * \param img_in1 t_img* - first image
  * \param img_in2 t_img* - second image
  * \param img_out t_img* - img_in2 including area of change
@@ -39,16 +41,20 @@
  *  DIFF_HIGH_QUANTITY  globally high quantity of change
  *
  ***********************************************/
-CPU_CHAR search_diff(CPU_INT16U tolerance,CPU_INT16U quantity, t_img * img_in1,t_img * img_in2,t_img * img_out,t_area * change_img)
+CPU_CHAR search_diff(CPU_INT16U tolerance,CPU_INT16U quantity,CPU_INT16U inputstep, CPU_INT32U color, t_img * img_in1,t_img * img_in2,t_img * img_out,t_area * change_img)
 {
     CPU_CHAR ret = NO_DIFF;
     CPU_INT16S i,j;
     CPU_INT16U raw_tolerance,raw_quantity;
     CPU_INT16U quantity_of_diff_pixel = 0;
 
-    // calculte raw tolerance and quantity
+    // calculte raw tolerance, quantity, stepping
     raw_quantity = ((img_in1->he * img_in1->wi)*quantity)/1000;
     raw_tolerance = ((PIXEL_8bit_RANGE)*tolerance)/100;
+    if(inputstep==0)
+    {
+        inputstep = 1;
+    }
 
     if((img_in1->he == img_in2->he) && (img_in1->wi == img_in2->wi))
     {
@@ -66,26 +72,45 @@ CPU_CHAR search_diff(CPU_INT16U tolerance,CPU_INT16U quantity, t_img * img_in1,t
         img_out->FileHeader_size = img_in2->FileHeader_size;
 
         //same size
-        for(i=0;i< img_in1->he ;i++)
+        //for(i=0;i< img_in1->he ;i++)
+        for(i=0;i< img_in1->he ;i=i+inputstep)
         {
-            for(j=0 ; j< img_in1->wi ;j++)
+            //for(j=0 ; j< img_in1->wi ;j++)
+            for(j=0 ; j< img_in1->wi ;j=j+inputstep)
             {
-                img_out->Blue[i][j]  = abs((CPU_INT16S)(img_in1->Blue[i][j])  - (CPU_INT16S)(img_in2->Blue[i][j]));
-                if (img_out->Blue[i][j] > raw_tolerance)
+                if ((color & BLUE)!=0)
                 {
-                    ret |= DIFF_BLUE;
-                }
-                img_out->Green[i][j] = abs((CPU_INT16S)(img_in1->Green[i][j]) - (CPU_INT16S)(img_in2->Green[i][j]));
-                if (img_out->Green[i][j] > raw_tolerance)
+                    img_out->Blue[i][j]  = abs((CPU_INT16S)(img_in1->Blue[i][j])  - (CPU_INT16S)(img_in2->Blue[i][j]));
+                    if (img_out->Blue[i][j] > raw_tolerance)
+                    {
+                        ret |= DIFF_BLUE;
+                    }
+                }else
                 {
-                    ret |= DIFF_GREEN;
+                    img_out->Blue[i][j] = 0;
                 }
-                img_out->Red[i][j]   = abs((CPU_INT16S)(img_in1->Red[i][j])   - (CPU_INT16S)(img_in2->Red[i][j]));
-                if (img_out->Red[i][j] > raw_tolerance)
+                if ((color & GREEN)!=0)
                 {
-                    ret |= DIFF_RED;
+                    img_out->Green[i][j] = abs((CPU_INT16S)(img_in1->Green[i][j]) - (CPU_INT16S)(img_in2->Green[i][j]));
+                    if (img_out->Green[i][j] > raw_tolerance)
+                    {
+                        ret |= DIFF_GREEN;
+                    }
+                }else
+                {
+                    img_out->Green[i][j] = 0;
                 }
-
+                if ((color & RED)!=0)
+                {
+                    img_out->Red[i][j]   = abs((CPU_INT16S)(img_in1->Red[i][j])   - (CPU_INT16S)(img_in2->Red[i][j]));
+                    if (img_out->Red[i][j] > raw_tolerance)
+                    {
+                        ret |= DIFF_RED;
+                    }
+                }else
+                {
+                    img_out->Red[i][j] = 0;
+                }
                 if ((img_out->Blue[i][j] > raw_tolerance) || (img_out->Green[i][j] > raw_tolerance) || (img_out->Red[i][j] > raw_tolerance))
                 {
                     img_out->Green[i][j] = (CPU_CHAR)(CPU_FP32)img_in2->Blue[i][j]*2.5;

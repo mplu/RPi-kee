@@ -227,7 +227,7 @@ void* threadImgHandle (void* arg)
                 // subsample image
 
                 //compare two image img_in1 et img_in2
-                img_diff_1_2 = search_diff(11,1,&img_in1,&img_in2,&img_out1,&change_1_2);
+                img_diff_1_2 = search_diff(11,1,4,GREEN,&img_in1,&img_in2,&img_out1,&change_1_2);
                 if((img_diff_1_2 & DIFF_HIGH_QUANTITY)!=0)
                 {
                     //calculate center of diff aera, relatively to image center
@@ -253,7 +253,7 @@ void* threadImgHandle (void* arg)
                 if((abs(mouvementx) > mouvementx_threshold)||(abs(mouvementy) > mouvementy_threshold))
                 {
                     pthread_mutex_lock(&mtx_LockCamera);
-					
+
                     Params.XMotorCommand.Steps = (CPU_INT16S)((CPU_FP32)mouvementx/(CPU_FP32)5);
 					Params.YMotorCommand.Steps = (CPU_INT16S)((CPU_FP32)mouvementy/(CPU_FP32)5);
 					printf("X-Steps:%d Y-Steps:%d \n",Params.XMotorCommand.Steps,Params.YMotorCommand.Steps);
@@ -266,7 +266,7 @@ void* threadImgHandle (void* arg)
 					StepperTurnCounterClockwise(MotorY_UD, Params.YMotorCommand.Speed, Params.YMotorCommand.Steps, &sem_YMotorEmergencyStop);
 					else
 					StepperTurnClockwise(MotorY_UD, Params.YMotorCommand.Speed, 0-Params.YMotorCommand.Steps, &sem_YMotorEmergencyStop);
-                    
+
 					pthread_mutex_unlock(&mtx_LockCamera);
 
 					//Params.YMotorCommand.Unused = 0;
@@ -282,6 +282,7 @@ void* threadImgHandle (void* arg)
 				if(move_detected == TRUE)
 				{
 
+                    highlight_area(&img_in1,&change_1_2,SetRGB(255,0,0));
 
 					//sprintf((char *)outputfilename,"out_survey_%ld_diff.bmp",(CPU_INT32U)ttt);
 					//write_img((CPU_CHAR *)outputfilename,&img_out1);
@@ -289,7 +290,7 @@ void* threadImgHandle (void* arg)
 					write_img((CPU_CHAR *)outputfilename,&img_in1);
 					//sprintf((char *)outputfilename,"out_survey_%ld_2.bmp",(CPU_INT32U)ttt);
 					//write_img((CPU_CHAR *)outputfilename,&img_in2);
-					#if defined (RPi)
+#if defined (RPi)
 					sprintf((char *)temporary_cmd,"gm mogrify -format jpg %s",outputfilename);
 					system((const char *)temporary_cmd);
 					sprintf((char *)temporary_cmd,"rm %s -f",outputfilename);
@@ -303,8 +304,8 @@ void* threadImgHandle (void* arg)
 					}
 					sprintf((char *)temporary_cmd,"cp %s /media/motiondetect_imgrepo/small/image_small.jpg -f",outputfilename);
 					system((const char *)temporary_cmd);
-					#endif
-					
+#endif
+
 				}
 				move_detected = FALSE;
 

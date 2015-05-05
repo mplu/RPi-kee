@@ -56,22 +56,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Threads/th_ImgHandle.h" />
-		<Unit filename="Threads/th_MotorLeftdrive.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Threads/th_MotorLeftdrive.h" />
-		<Unit filename="Threads/th_MotorRightdrive.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Threads/th_MotorRightdrive.h" />
-		<Unit filename="Threads/th_MotorXSurvey.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Threads/th_MotorXSurvey.h" />
-		<Unit filename="Threads/th_MotorYSurvey.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Threads/th_MotorYSurvey.h" />
 		<Unit filename="Threads/th_Protections.c">
 			<Option compilerVar="CC" />
 		</Unit>
