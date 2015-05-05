@@ -63,18 +63,18 @@
 
 /* Thread Include */
 #include "Threads/th_ADC_Acq.h"
-#include "Threads/th_ADC_Data_Handle.h"
+//#include "Threads/th_ADC_Data_Handle.h"
 #include "Threads/th_CtrlCmd.h"
 #include "Threads/th_debug.h"
 #include "Threads/th_ImgAcq.h"
 #include "Threads/th_ImgHandle.h"
-#include "Threads/th_MotorLeftdrive.h"
-#include "Threads/th_MotorRightdrive.h"
-#include "Threads/th_OtherSensorHandle.h"
+//#include "Threads/th_MotorLeftdrive.h"
+//#include "Threads/th_MotorRightdrive.h"
+//#include "Threads/th_OtherSensorHandle.h"
 #include "Threads/th_Protections.h"
 #include "Threads/th_TCPCom.h"
-#include "Threads/th_MotorXSurvey.h"
-#include "Threads/th_MotorYSurvey.h"
+//#include "Threads/th_MotorXSurvey.h"
+//#include "Threads/th_MotorYSurvey.h"
 
 
 #endif

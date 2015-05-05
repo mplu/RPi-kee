@@ -17,8 +17,8 @@ void* threadCtrlCmd (void* arg)
     Params.CommandReg.MoveDirection = 0;
     Params.CommandReg.MoveDuration = 0;
 	Params.CommandReg.MovementMotorEnable = 0;
-	Params.CommandReg.TurretMotorEnable = 0;
-	Params.CommandReg.Survey = 0;
+	Params.CommandReg.TurretMotorEnable = 1;
+	Params.CommandReg.Survey = 1;
 
 
     while(1) /* Boucle infinie */
@@ -76,7 +76,7 @@ void* threadCtrlCmd (void* arg)
 
 
 
-
+        // Manage On / Off for DC Motor
 		if(Params.StatusReg.MovementMotorEnable != MovementMotorEnable_1)
 		{
 			if (Params.StatusReg.MovementMotorEnable == 1)
@@ -91,6 +91,7 @@ void* threadCtrlCmd (void* arg)
 		}
 		MovementMotorEnable_1 = Params.StatusReg.MovementMotorEnable;
 
+        // Manage On / Off for Stepper Motor
         if(Params.StatusReg.TurretMotorEnable != TurretMotorEnable_1)
 		{
 			if (Params.StatusReg.TurretMotorEnable == 1)
@@ -108,6 +109,7 @@ void* threadCtrlCmd (void* arg)
         // Manage Manual command case
         if(Params.StatusReg.Manual == 1)
         {
+            // Process Input Data to DCMotorCommand
             if(Params.CommandReg.MoveDuration > 0)
             {
                 MotorInputCommand(&Params.CommandReg,&Params.LeftMotorCommand,&Params.RightMotorCommand);
@@ -116,9 +118,38 @@ void* threadCtrlCmd (void* arg)
             {
                 DCMotorFullStop();
             }
+
+            // Send Processed Command to motor
+            if(Params.RightMotorCommand.Speed > 0)
+            {
+                DCturnClockwise(DCMotorRight,Params.RightMotorCommand.Speed);
+            }else if (Params.RightMotorCommand.Speed < 0)
+            {
+                DCturnCounterClockwise(DCMotorRight,0 - Params.RightMotorCommand.Speed);
+            }else
+            {
+                DCturnCounterClockwise(DCMotorRight,0);
+            }
+
+            if(Params.LeftMotorCommand.Speed > 0)
+            {
+                DCturnClockwise(DCMotorLeft,Params.LeftMotorCommand.Speed);
+            }else if (Params.LeftMotorCommand.Speed < 0)
+            {
+                DCturnCounterClockwise(DCMotorLeft,0 - Params.LeftMotorCommand.Speed);
+            }else
+            {
+                DCturnCounterClockwise(DCMotorLeft,0);
+            }
+
+
+
+
+
+
         }else if(Params.StatusReg.LineFollow == 1)
         {
-            if(Params.Analog_Values.ImgMoveDirection != 32767)
+            /*if(Params.Analog_Values.ImgMoveDirection != 32767)
             {
                 Params.CommandReg.MoveDirection = Params.Analog_Values.ImgMoveDirection;
                 //if(Params.FailureReg.global_1.bit.IRDistance == TRUE)
@@ -137,6 +168,7 @@ void* threadCtrlCmd (void* arg)
             {
                 DCMotorFullStop();
             }
+            */
 
         }else
         {

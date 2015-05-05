@@ -12,14 +12,13 @@
 #define __GLOBAL_VAR_H
 
 extern pthread_cond_t condition;    /* Création de la condition */
-extern pthread_mutex_t mutex ;      /* Création du mutex */
+extern pthread_mutex_t mtx_LockCamera ;      /* Création du mutex */
 extern pthread_mutex_t mtx_AccessRawAnalog ;//Protect Raw Analog data buffer
 extern sem_t sem_Img_available; // Indicate new image to handle
-extern sem_t sem_ADCData_available; // Indicate new IR data to handle
+//extern sem_t sem_ADCData_available; // Indicate new IR data to handle
 extern sem_t sem_XMotorEmergencyStop; // Indicate to abort rotation
 extern sem_t sem_YMotorEmergencyStop; // Indicate to abort rotation
 
-extern CPU_INT16U g_Raw_AdcValue[ADC_NUMBER_OF_CHANNEL];
 extern CPU_CHAR g_nextIMGfilename[IMG_FILENAME_SIZE];
 extern t_StepperMotor MotorY_UD;
 extern t_StepperMotor MotorX_LR;

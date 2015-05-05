@@ -35,9 +35,9 @@ CPU_VOID StepperMotorFullStop()
 CPU_VOID DCMotorFullStop()
 {
     Params.CommandReg.MoveDuration = 0;
-	Params.LeftMotorCommand.Unused = 0;
+	Params.LeftMotorCommand.Steps = 0;
 	Params.LeftMotorCommand.Speed = 0;
-	Params.RightMotorCommand.Unused = 0;
+	Params.RightMotorCommand.Steps = 0;
 	Params.RightMotorCommand.Speed = 0;
 }
 

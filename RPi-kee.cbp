@@ -44,10 +44,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Threads/th_ADC_Acq.h" />
-		<Unit filename="Threads/th_ADC_Data_Handle.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Threads/th_ADC_Data_Handle.h" />
 		<Unit filename="Threads/th_CtrlCmd.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -68,10 +64,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Threads/th_MotorRightdrive.h" />
-		<Unit filename="Threads/th_OtherSensorHandle.c">
+		<Unit filename="Threads/th_MotorXSurvey.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Threads/th_OtherSensorHandle.h" />
+		<Unit filename="Threads/th_MotorXSurvey.h" />
+		<Unit filename="Threads/th_MotorYSurvey.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Threads/th_MotorYSurvey.h" />
 		<Unit filename="Threads/th_Protections.c">
 			<Option compilerVar="CC" />
 		</Unit>

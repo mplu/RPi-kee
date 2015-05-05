@@ -14,7 +14,7 @@
 typedef struct
 {
 	CPU_INT16S Speed;
-	CPU_INT16S Unused;
+	CPU_INT16S Steps;
 }t_MOTOR_COMMAND;
 
 typedef struct

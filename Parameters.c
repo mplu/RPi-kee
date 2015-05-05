@@ -169,10 +169,10 @@ CPU_VOID Init_Params()
     Params.Analog_Values.AuxTemperature = 0;
 
     Params.LeftMotorCommand.Speed = 0;
-    Params.LeftMotorCommand.Unused = 0;
+    Params.LeftMotorCommand.Steps = 0;
 
     Params.RightMotorCommand.Speed = 0;
-    Params.RightMotorCommand.Unused = 0;
+    Params.RightMotorCommand.Steps = 0;
 
     Params.CommandReg.Manual = 0;
 	Params.CommandReg.LineFollow = 0;
@@ -220,10 +220,10 @@ CPU_VOID Init_Params()
     Params.ProtectionConf.AuxTemperatureDetect.ConfThreshold = 800;
 
     Params.XMotorCommand.Speed = 10;
-    Params.XMotorCommand.Unused = 0;
+    Params.XMotorCommand.Steps = 0;
 
     Params.YMotorCommand.Speed = 10;
-    Params.YMotorCommand.Unused = 0;
+    Params.YMotorCommand.Steps = 0;
 
 }
 
