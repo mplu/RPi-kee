@@ -7,8 +7,8 @@ void* threadImgAcq (void* arg)
     CPU_INT08U erreur = FALSE;
     struct timespec m_timeout;
     CPU_INT32U m_error = 0;
-    m_timeout.tv_sec=  (time_t)(1);
-    m_timeout.tv_nsec = 0;
+	clock_t start, finish;
+    double duration;
 
 #if defined (Win32)
     CPU_BOOLEAN firstrun=TRUE;
@@ -18,10 +18,19 @@ void* threadImgAcq (void* arg)
 #endif // defined
     CPU_INT08S number_of_loop = 0;
     CPU_CHAR copy_img_cmd[IMG_FILENAME_SIZE + 10];
-
+	
+	m_timeout.tv_sec=  (time_t)(1);
+    m_timeout.tv_nsec = 0;
+	start = clock();
 	while(1) /* Boucle infinie */
     {
+		finish = clock();
+		duration = (double)(finish - start) / CLOCKS_PER_SEC;
+		printf("Acq period  %.3f\n",duration);
         m_msSleep(CAPTURE_PERIOD);
+		start = clock();
+		
+		
         m_error = pthread_mutex_timedlock(&mtx_LockCamera,&m_timeout);
         if(m_error != ETIMEDOUT)
         {

@@ -5,11 +5,12 @@ void* threadImgHandle (void* arg)
 {
 	t_img img_in1,img_in2;
     t_img img_inter1;
-    t_img img_out1;
+    t_img img_out1,img_out2;
 	CPU_FP64 ** filter0;
-	clock_t start, finish;
 	CPU_INT32U number_of_loop = 0;
-    double duration;
+	clock_t start, finish;
+	clock_t loop_start, loop_finish;
+    double duration_loop=0,duration_process=0,duration_move=0,duration_io=0,duration_net=0;
     CPU_FP32 vx, vy;
     CPU_FP64 angle;
     CPU_FP64 av_angle = 0;
@@ -34,6 +35,7 @@ void* threadImgHandle (void* arg)
 	init_img(&img_in1);
 	init_img(&img_in2);
     init_img(&img_out1);
+	init_img(&img_out2);
     init_img(&img_inter1);
 
 	CPU_CHAR inputfilename[IMG_FILENAME_SIZE];
@@ -54,11 +56,15 @@ void* threadImgHandle (void* arg)
 	CPU_INT16S mouvementy = 0;
 	CPU_INT16S mouvementy_threshold = 5;
 	time_t ttt = 0;
-
+	loop_start = clock();
 	while(1) /* Boucle infinie */
     {
+		loop_finish = clock();
+		duration_loop = (double)(loop_finish - loop_start) / CLOCKS_PER_SEC;
+		printf("Loop %.3f\t(process %.3f + move %.3f + io %.3f + net %.3f \n",duration_loop,duration_process,duration_move,duration_io,duration_net);
         sem_wait(&sem_Img_available); //waiting for new img to treat
-
+		loop_start = clock();
+	
         start = clock();
 
         if((Params.StatusReg.LineFollow == 1)&&(Params.StatusReg.Survey == 0))
@@ -171,12 +177,8 @@ void* threadImgHandle (void* arg)
                 {
                     Params.Analog_Values.ImgMoveDirection = 32767;
                 }
-
-
-
-                //printf( "%d duration : %f seconds\n", number_of_loop,duration );
-                (void)duration;
-                if (enable_out_img == TRUE)
+				
+				if (enable_out_img == TRUE)
                 {
                     sprintf((char *)outputfilename,"out%05lu_process_%s_%.2f_%.2f_%d.bmp",number_of_loop
                                                                                     ,inputfilename
@@ -186,8 +188,8 @@ void* threadImgHandle (void* arg)
                     write_img(outputfilename,&img_in1);
                 }
                 finish = clock();
-                duration = (double)(finish - start) / CLOCKS_PER_SEC;
-                printf("Img treated (in %.3f): direction %d, \n",duration,Params.Analog_Values.ImgMoveDirection);
+                duration_process = (double)(finish - start) / CLOCKS_PER_SEC;
+                printf("Img treated (in %.3f): direction %d, \n",duration_process,Params.Analog_Values.ImgMoveDirection);
 
                 // suppress file
     #if defined (Win32)
@@ -227,7 +229,7 @@ void* threadImgHandle (void* arg)
                 // subsample image
 
                 //compare two image img_in1 et img_in2
-                img_diff_1_2 = search_diff(11,1,4,GREEN,&img_in1,&img_in2,&img_out1,&change_1_2);
+                img_diff_1_2 = search_diff(11,1,1,GREEN|RED|BLUE,&img_in1,&img_in2,&img_out1,&change_1_2);
                 if((img_diff_1_2 & DIFF_HIGH_QUANTITY)!=0)
                 {
                     //calculate center of diff aera, relatively to image center
@@ -245,10 +247,11 @@ void* threadImgHandle (void* arg)
                     mouvementy = 0;
                 }
 
-                //dislay treatment time
+                //calculate treatment time
                 finish = clock();
-                duration = (double)(finish - start) / CLOCKS_PER_SEC;
-
+                duration_process = (double)(finish - start) / CLOCKS_PER_SEC;
+				
+				start = clock();
 				//drive motor according to diff
                 if((abs(mouvementx) > mouvementx_threshold)||(abs(mouvementy) > mouvementy_threshold))
                 {
@@ -276,21 +279,27 @@ void* threadImgHandle (void* arg)
 					Params.XMotorCommand.Steps = 0;
 					Params.YMotorCommand.Steps = 0;
 				}
+				//calculate move time
+                finish = clock();
+                duration_move = (double)(finish - start) / CLOCKS_PER_SEC;
 
-
-                printf("Img treated (in %.3f), x_move : %d, y_move : %d\n",duration,mouvementx,mouvementy);
-				if(move_detected == TRUE)
+				start = clock();
+                //printf("Img treated (in %.3f), x_move : %d, y_move : %d\n",duration,mouvementx,mouvementy);
+				//if(move_detected == TRUE)
 				{
-
-                    highlight_area(&img_in1,&change_1_2,SetRGB(255,0,0));
-
+					copy_img( &img_in2, &img_out2);
+                    highlight_area(&img_out2,&change_1_2,SetRGB(255,0,0));
+#if defined (RPi)
 					//sprintf((char *)outputfilename,"out_survey_%ld_diff.bmp",(CPU_INT32U)ttt);
 					//write_img((CPU_CHAR *)outputfilename,&img_out1);
-					sprintf((char *)outputfilename,"out_survey_%ld_1.bmp",(CPU_INT32U)ttt);
-					write_img((CPU_CHAR *)outputfilename,&img_in1);
+					//sprintf((char *)outputfilename,"out_survey_%ld_1.bmp",(CPU_INT32U)ttt);
+					//write_img((CPU_CHAR *)outputfilename,&img_in1);
 					//sprintf((char *)outputfilename,"out_survey_%ld_2.bmp",(CPU_INT32U)ttt);
 					//write_img((CPU_CHAR *)outputfilename,&img_in2);
-#if defined (RPi)
+					sprintf((char *)outputfilename,"out_survey_%ld_2_diff.bmp",(CPU_INT32U)ttt);
+					write_img((CPU_CHAR *)outputfilename,&img_out2);
+					
+
 					sprintf((char *)temporary_cmd,"gm mogrify -format jpg %s",outputfilename);
 					system((const char *)temporary_cmd);
 					sprintf((char *)temporary_cmd,"rm %s -f",outputfilename);
@@ -302,7 +311,19 @@ void* threadImgHandle (void* arg)
 						outputfilename[pch-outputfilename+2] = 'p';
 						outputfilename[pch-outputfilename+3] = 'g';
 					}
+					//calculate io time
+					finish = clock();
+					duration_io = (double)(finish - start) / CLOCKS_PER_SEC;
+					
+					start = clock();
 					sprintf((char *)temporary_cmd,"cp %s /media/motiondetect_imgrepo/small/image_small.jpg -f",outputfilename);
+					system((const char *)temporary_cmd);
+					
+					//calculate io time
+					finish = clock();
+					duration_net = (double)(finish - start) / CLOCKS_PER_SEC;
+					
+					sprintf((char *)temporary_cmd,"rm %s -f",outputfilename);
 					system((const char *)temporary_cmd);
 #endif
 
@@ -311,6 +332,8 @@ void* threadImgHandle (void* arg)
 
 				//store img_in2 in img_in1
                 copy_img( &img_in2, &img_in1);
+				
+				
             }
             // suppress file
 #if defined (Win32)

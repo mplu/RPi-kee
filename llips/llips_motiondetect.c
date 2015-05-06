@@ -49,12 +49,13 @@ CPU_CHAR search_diff(CPU_INT16U tolerance,CPU_INT16U quantity,CPU_INT16U inputst
     CPU_INT16U quantity_of_diff_pixel = 0;
 
     // calculte raw tolerance, quantity, stepping
-    raw_quantity = ((img_in1->he * img_in1->wi)*quantity)/1000;
-    raw_tolerance = ((PIXEL_8bit_RANGE)*tolerance)/100;
-    if(inputstep==0)
+	if(inputstep==0)
     {
         inputstep = 1;
     }
+    raw_quantity = ((img_in1->he * img_in1->wi)*quantity)/1000/inputstep/inputstep;
+    raw_tolerance = ((PIXEL_8bit_RANGE)*tolerance)/100;
+    
 
     if((img_in1->he == img_in2->he) && (img_in1->wi == img_in2->wi))
     {
@@ -145,6 +146,9 @@ CPU_CHAR search_diff(CPU_INT16U tolerance,CPU_INT16U quantity,CPU_INT16U inputst
     {
         ret |= DIFF_HIGH_QUANTITY;
     }
+	
+	printf("%d / %d @ %d\n",quantity_of_diff_pixel, raw_quantity,raw_tolerance);
+
 
     highlight_area(img_out,change_img,SetRGB(255,0,0));
 
