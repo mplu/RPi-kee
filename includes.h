@@ -35,6 +35,7 @@
     #include <arpa/inet.h>
     #include <unistd.h> /* close */
     #include <netdb.h> /* gethostbyname */
+	#include <wand/magick_wand.h>
 #else
     #error "No OS defined"
 #endif

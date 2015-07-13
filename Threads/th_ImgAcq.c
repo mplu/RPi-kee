@@ -26,7 +26,7 @@ void* threadImgAcq (void* arg)
     {
 		finish = clock();
 		duration = (double)(finish - start) / CLOCKS_PER_SEC;
-		printf("Acq period  %.3f\n",duration);
+		printf("Acq period\t%.3f\n",duration);
         m_msSleep(CAPTURE_PERIOD);
 		start = clock();
 		

@@ -41,8 +41,21 @@ void* threadImgHandle (void* arg)
 	CPU_CHAR inputfilename[IMG_FILENAME_SIZE];
 	CPU_CHAR outputfilename[IMG_FILENAME_SIZE];
 	CPU_CHAR delele_img_cmd[IMG_FILENAME_SIZE + 10];
-	CPU_CHAR temporary_cmd[100];
-	CPU_CHAR * pch;
+	//CPU_CHAR temporary_cmd[100];
+	//CPU_CHAR * pch;
+	
+	CPU_INT08U *blob;
+	CPU_INT32U blob_size;
+	CPU_INT08U blob_init = FALSE;
+	CPU_INT32U offset,ptr;
+	MagickWand *magick_wand;
+	//MagickPassFail status = MagickPass;
+	//ExceptionInfo exception;
+	
+	// Initialize GraphicsMagick API
+	InitializeMagick(NULL);
+	// Allocate Wand handle
+	magick_wand=NewMagickWand();
 
 	filter0 = createTableFP64(GAUSS_SIZE,GAUSS_SIZE);
 	create_gauss_filter(filter0,GAUSS_SIZE,SIGMA);
@@ -61,7 +74,7 @@ void* threadImgHandle (void* arg)
     {
 		loop_finish = clock();
 		duration_loop = (double)(loop_finish - loop_start) / CLOCKS_PER_SEC;
-		printf("Loop %.3f\t(process %.3f + move %.3f + io %.3f + net %.3f \n",duration_loop,duration_process,duration_move,duration_io,duration_net);
+		printf("Loop \t%.3f\t(process %.3f + move %.3f + io %.3f + net %.3f \n",duration_loop,duration_process,duration_move,duration_io,duration_net);
         sem_wait(&sem_Img_available); //waiting for new img to treat
 		loop_start = clock();
 	
@@ -226,10 +239,14 @@ void* threadImgHandle (void* arg)
                     // saving name
                     sprintf((char *)inputfilename,"%s",g_nextIMGfilename);
                 }
-                // subsample image
+                if(blob_init == FALSE)
+				{
+					blob_size = img_in1.wi*img_in1.he*3+img_in1.FileHeader_size;
+					blob = (CPU_INT08U *)malloc(sizeof(CPU_INT08U)*(blob_size));
+				}
 
                 //compare two image img_in1 et img_in2
-                img_diff_1_2 = search_diff(11,1,1,GREEN|RED|BLUE,&img_in1,&img_in2,&img_out1,&change_1_2);
+                img_diff_1_2 = search_diff(11,1,1,GREEN,&img_in1,&img_in2,&img_out1,&change_1_2);
                 if((img_diff_1_2 & DIFF_HIGH_QUANTITY)!=0)
                 {
                     //calculate center of diff aera, relatively to image center
@@ -285,7 +302,7 @@ void* threadImgHandle (void* arg)
 
 				start = clock();
                 //printf("Img treated (in %.3f), x_move : %d, y_move : %d\n",duration,mouvementx,mouvementy);
-				//if(move_detected == TRUE)
+				if(move_detected == TRUE)
 				{
 					copy_img( &img_in2, &img_out2);
                     highlight_area(&img_out2,&change_1_2,SetRGB(255,0,0));
@@ -296,35 +313,66 @@ void* threadImgHandle (void* arg)
 					//write_img((CPU_CHAR *)outputfilename,&img_in1);
 					//sprintf((char *)outputfilename,"out_survey_%ld_2.bmp",(CPU_INT32U)ttt);
 					//write_img((CPU_CHAR *)outputfilename,&img_in2);
-					sprintf((char *)outputfilename,"out_survey_%ld_2_diff.bmp",(CPU_INT32U)ttt);
-					write_img((CPU_CHAR *)outputfilename,&img_out2);
-					
-
+					//sprintf((char *)outputfilename,"out_survey_%ld_2_diff.bmp",(CPU_INT32U)ttt);
+					//write_img((CPU_CHAR *)outputfilename,&img_out2);
+					//Write Header
+					ptr = 0;
+					for(i=0;i<img_out2.FileHeader_size;i++)
+					{
+						blob[ptr] = img_out2.FileHeader[i];
+						ptr++;
+					}
+					//Write color
+					offset = 0;
+					for(i=0;i< img_out2.he ;i++)
+					{
+						for(j=0 ; j< img_out2.wi ;j++)
+						{
+							blob[ptr] = img_out2.Blue[i][j];
+							ptr++;
+							blob[ptr] = img_out2.Green[i][j];
+							ptr++;
+							blob[ptr] = img_out2.Red[i][j];
+							ptr++;
+							offset ++;
+						}
+						while(offset%4 != 0)
+						{
+							blob[ptr] = 0;
+							ptr++;
+							offset ++;
+						}
+					}
+					/*
 					sprintf((char *)temporary_cmd,"gm mogrify -format jpg %s",outputfilename);
 					system((const char *)temporary_cmd);
 					sprintf((char *)temporary_cmd,"rm %s -f",outputfilename);
 					system((const char *)temporary_cmd);
-					pch=(CPU_CHAR *)strchr((const char *)outputfilename,'.');
+					*/
+					
+					/*pch=(CPU_CHAR *)strchr((const char *)outputfilename,'.');
 					if(pch!=NULL)
 					{
 						outputfilename[pch-outputfilename+1] = 'j';
 						outputfilename[pch-outputfilename+2] = 'p';
 						outputfilename[pch-outputfilename+3] = 'g';
-					}
+					}*/
+					MagickReadImageBlob( magick_wand, (const unsigned char*) blob,(const size_t) blob_size );	
+					
 					//calculate io time
 					finish = clock();
 					duration_io = (double)(finish - start) / CLOCKS_PER_SEC;
 					
 					start = clock();
-					sprintf((char *)temporary_cmd,"cp %s /media/motiondetect_imgrepo/small/image_small.jpg -f",outputfilename);
-					system((const char *)temporary_cmd);
-					
+					//sprintf((char *)temporary_cmd,"cp %s /media/motiondetect_imgrepo/small/image_small.jpg -f",outputfilename);
+					//system((const char *)temporary_cmd);
+					MagickWriteImage(magick_wand, "/media/motiondetect_imgrepo/small/image_small.jpg" );
 					//calculate io time
 					finish = clock();
 					duration_net = (double)(finish - start) / CLOCKS_PER_SEC;
 					
-					sprintf((char *)temporary_cmd,"rm %s -f",outputfilename);
-					system((const char *)temporary_cmd);
+					//sprintf((char *)temporary_cmd,"rm %s -f",outputfilename);
+					//system((const char *)temporary_cmd);
 #endif
 
 				}
@@ -332,7 +380,7 @@ void* threadImgHandle (void* arg)
 
 				//store img_in2 in img_in1
                 copy_img( &img_in2, &img_in1);
-				
+				(void)move_detected;
 				
             }
             // suppress file

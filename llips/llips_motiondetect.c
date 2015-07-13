@@ -147,7 +147,7 @@ CPU_CHAR search_diff(CPU_INT16U tolerance,CPU_INT16U quantity,CPU_INT16U inputst
         ret |= DIFF_HIGH_QUANTITY;
     }
 	
-	printf("%d / %d @ %d\n",quantity_of_diff_pixel, raw_quantity,raw_tolerance);
+	//printf("%d / %d @ %d\n",quantity_of_diff_pixel, raw_quantity,raw_tolerance);
 
 
     highlight_area(img_out,change_img,SetRGB(255,0,0));
