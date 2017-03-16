@@ -1,5 +1,5 @@
 # RPi-kee
-A moving stuff with an RPi
+A cool moving stuff with an RPi
 
 Use: 
 
